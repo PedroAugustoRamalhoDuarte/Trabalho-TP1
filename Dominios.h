@@ -183,4 +183,81 @@ public:
     }
 };
 
+
+class FaixaEtaria {
+private:
+    char valor[2];
+
+    void validar(char[2]) throw (invalid_argument);
+
+public:
+    void setValor(char[2]) throw (invalid_argument);
+
+    const char *getValor() const {
+        return valor;
+    }
+};
+
+class CPF {
+private:
+    string valor;
+
+    // validacao de cpf
+    void validar(string) throw (invalid_argument);
+
+public:
+    void setValor(string) throw (invalid_argument);
+
+    const string &getValor() const {
+        return valor;
+    }
+};
+
+class Senha {
+private:
+    string valor;
+
+    // 6 digitos (A – Z a – z), dígito (0 a 9).Nao pode haver caracteres repetidos, pelo menos uma letra maiuscula minuscula e um digito
+    void validar(string) throw (invalid_argument);
+
+public:
+    void setValor(string) throw (invalid_argument);
+
+    const string &getValor() const {
+        return valor;
+    }
+};
+
+
+class NumeroDeCartaoDeCredito {
+private:
+    string valor;
+
+    // 16 caracteres segundo o https://en.wikipedia.org/wiki/Luhn_algorithm
+    void validar(string) throw (invalid_argument);
+
+public:
+    void setValor(string) throw (invalid_argument);
+
+    const string &getValor() const {
+        return valor;
+    }
+};
+
+
+class DataDeValidade{
+private:
+    string valor;
+
+    // XX/YY XX de 0 a 12 YY de 00 a 99
+    void validar(string) throw (invalid_argument);
+
+public:
+    void setValor(string) throw (invalid_argument);
+
+    const string &getValor() const {
+        return valor;
+    }
+};
+
 #endif //TRABALHOTP1_DOMINIOS_H
