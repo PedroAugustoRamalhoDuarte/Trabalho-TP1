@@ -1,7 +1,3 @@
-//
-// Created by pedro on 28/03/19.
-//
-
 #ifndef TRABALHOTP1_DOMINIOS_H
 #define TRABALHOTP1_DOMINIOS_H
 
@@ -10,21 +6,31 @@
 
 using namespace std;
 
-class Codigo {
-private:
-    int valor;
+class Dominio {
+protected:
+    string valor;
 
-    const int TAMANHO_CODIGO;
-
-    void validar(int) throw (invalid_argument);
+    virtual void validar(string entrada) throw (invalid_argument) = 0;
 
 public:
+    void setValor(string entrada) throw (invalid_argument){
+        validar(entrada);
+        this->valor = entrada;
+    }
 
-    void setValor(int) throw (invalid_argument);
-
-    int getValor() const {
+    const string &getValor() const {
         return valor;
     }
+};
+
+
+class Codigo : public Dominio {
+private:
+
+    const int TAMANHO_CODIGO = -1;
+
+    void validar(string entrada) throw (invalid_argument);
+
 };
 
 class CodigoDeEvento : public Codigo {
@@ -48,216 +54,99 @@ private:
 };
 
 
-class NomeDeEvento {
+class NomeDeEvento : public Dominio {
 private:
-    string valor;
-
     /* 20 digitos, podem ser letras,numero ou espaço, pelo menos 1 letra
      * , não pode existir 2 ou mais espaços seguidos*/
-    void validar(string) throw (invalid_argument);
-
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
+    void validar(string entrada) throw (invalid_argument);
 };
 
 
-class Data {
+class Data : public Dominio{
 private:
-    string valor;
-
     // Dia (1 ~ 31) - Mês (1 ~ 12) - Ano (00 ~ 99). Considerar anos bissextos
-    void validar(string) throw (invalid_argument);
+    void validar(string entrada) throw (invalid_argument);
 
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
 };
 
-class Horario {
-
+class Horario : public Dominio{
 private:
-    string valor;
-
     // HH:MM - HH (07 ~ 22) e MM(00, 15, 30 ou 45)
-    void validar(string) throw (invalid_argument);
+    void validar(string entrada) throw (invalid_argument);
 
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
 };
 
-class Preco {
+class Preco : public Dominio {
 private:
-    double valor;
+    // 0 - 1000(double)
+    void validar(string entrada) throw (invalid_argument);
 
-    void validar(double) throw (invalid_argument);
-
-public:
-    void setValor(double) throw (invalid_argument);
-
-    double getValor() const {
-        return valor;
-    }
 };
 
-class NumeroDeSala {
+class NumeroDeSala : public Dominio {
 private:
-    short int valor;
-
     // 1 a 10
-    void validar(short) throw (invalid_argument);
-
-public:
-    void setValor(short) throw (invalid_argument);
-
-    short int getValor() const {
-        return valor;
-    }
+    void validar(string entrada) throw (invalid_argument);
 };
 
-class Cidade {
+class Cidade : public Dominio {
 private:
-    string valor;
-
     // 16 caracteres. Pode ser letra, espaço ou ponto. Pelo menos 1 letra, sem espaço seguido. 1 ponto é precedido por letra
-    void validar(string) throw (invalid_argument);
-
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
+    void validar(string entrada) throw (invalid_argument);
 };
 
-class Estado {
+class Estado : public Dominio {
 private:
-    char valor[2];
+    // AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE,
+    //PI, RJ, RN, RS, RO, RR, SC, SP, SE, TO
+    void validar(string entrada) throw (invalid_argument);
 
-    void validar(char[2]) throw (invalid_argument);
-
-public:
-    void setValor(char[2]) throw (invalid_argument);
-
-    const char *getValor() const {
-        return valor;
-    }
 };
 
-class Disponibilidade {
+class Disponibilidade: public Dominio {
 private:
-    short int valor;
+    void validar(string entrada) throw (invalid_argument);
 
-    void validar(short) throw (invalid_argument);
-
-public:
-    void setValor(short) throw (invalid_argument);
-
-    short getValor() const {
-        return valor;
-    }
 };
 
-class ClasseDeEvento {
+class ClasseDeEvento : public Dominio {
 private:
-    char valor;
-
     // 1 - teatro | 2 - esporte | 3 - show nacional | 4 - show internacional
-    void validar(char) throw (invalid_argument);
-
-public:
-    void setValor(char) throw (invalid_argument);
-
-    char getValor() const {
-        return valor;
-    }
+    void validar(string entrada) throw (invalid_argument);
 };
 
 
-class FaixaEtaria {
+class FaixaEtaria : public Dominio{
 private:
-    char valor[2];
-
-    void validar(char[2]) throw (invalid_argument);
-
-public:
-    void setValor(char[2]) throw (invalid_argument);
-
-    const char *getValor() const {
-        return valor;
-    }
+    // L, 10, 12, 14, 16 ou 18
+    void validar(string entrada) throw (invalid_argument);
 };
 
-class CPF {
+class CPF : public Dominio{
 private:
-    string valor;
-
     // validacao de cpf
-    void validar(string) throw (invalid_argument);
+    void validar(string entrada) throw (invalid_argument);
 
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
 };
 
-class Senha {
+class Senha : public Dominio{
 private:
-    string valor;
-
     // 6 digitos (A – Z a – z), dígito (0 a 9).Nao pode haver caracteres repetidos, pelo menos uma letra maiuscula minuscula e um digito
-    void validar(string) throw (invalid_argument);
-
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
+    void validar(string entrada) throw (invalid_argument);
 };
 
 
-class NumeroDeCartaoDeCredito {
+class NumeroDeCartaoDeCredito : public Dominio {
 private:
-    string valor;
-
     // 16 caracteres segundo o https://en.wikipedia.org/wiki/Luhn_algorithm
-    void validar(string) throw (invalid_argument);
-
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
+    void validar(string entrada) throw (invalid_argument);
 };
 
 
-class DataDeValidade{
+class DataDeValidade : public Dominio{
 private:
-    string valor;
-
     // XX/YY XX de 0 a 12 YY de 00 a 99
-    void validar(string) throw (invalid_argument);
-
-public:
-    void setValor(string) throw (invalid_argument);
-
-    const string &getValor() const {
-        return valor;
-    }
+    void validar(string entrada) throw (invalid_argument);
 };
 
 #endif //TRABALHOTP1_DOMINIOS_H

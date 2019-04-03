@@ -1,0 +1,27 @@
+# Gerais
+
+- Organizar o codigo(Dominios.h)
+- Analisar ome do argumento da validar
+- Doxygen Classes
+- Doxygen validar
+- Analisar qual biblioteca de testes
+
+# Pedro
+Fazer os metodos de validar:
+- Codigo
+- NomeDoEvento
+- Preco
+- Cidade
+- ClasseDeEvento
+- Senha
+- NumeroDoCartao
+- NumeroDeSala
+
+# Waliff
+- DataDeValidade
+- CPF
+- FaixaEtaria
+- Disponibilidade
+- Estado
+- Data
+- Horario
