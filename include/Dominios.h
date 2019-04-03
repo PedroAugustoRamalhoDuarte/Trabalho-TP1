@@ -3,6 +3,7 @@
 
 #include <stdexcept>
 #include <string>
+#include <string.h>
 
 using namespace std;
 
@@ -125,6 +126,7 @@ private:
 class CPF : public Dominio{
 private:
     // validacao de cpf
+    int const TAMANHO_CPF = 14;
     void validar(string entrada) throw (invalid_argument);
 
 };
