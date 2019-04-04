@@ -2,9 +2,10 @@
 #define TRABALHOTP1_DOMINIOS_H
 
 #include <stdexcept>
+#include <iostream>
 #include <string>
 #include <string.h>
-
+#include <stdlib.h>
 using namespace std;
 
 class Dominio {
@@ -140,6 +141,7 @@ private:
 
 class NumeroDeCartaoDeCredito : public Dominio {
 private:
+    int const TAMANHO_NUMERODECARTAO = 16;
     // 16 caracteres segundo o https://en.wikipedia.org/wiki/Luhn_algorithm
     void validar(string entrada) throw (invalid_argument);
 };

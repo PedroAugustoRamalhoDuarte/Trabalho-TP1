@@ -1,57 +1,41 @@
-#include "Teste.h"
+//
+// Created by waliffcordeiro on 03/04/19.
+//
 
-//Definições de constantes.
+#define CATCH_CONFIG_MAIN
+#include "../include/catch.hpp"
+#include "../include/Dominios.h"
 
-//const int teste_chacon::SUCESSO;
-//const int teste_chacon::FALHA;
-//const string teste_chacon::VALOR_VALIDO;
-//const string teste_chacon::VALOR_INVALIDO;
+TEST_CASE("Teste CPF"){
+    CPF cpf;
 
-// EXEMPLO
-// --------------------------------------------------------
-
-// Definições de métodos da classe teste_chacon.
-
-void TesteCPF::setUp(){
-    objeto = new CPF();
-    estado = SUCESSO;
-}
-
-void Teste::setUp(){
-    objeto = new CPF();
-    estado = SUCESSO;
-}
-
-void Teste::tearDown(){
-    delete objeto;
-}
-
-void Teste::testarCenarioSucesso(){
-    try{
-        objeto->setValor(VALOR_VALIDO);
-        if (objeto->getValor() != VALOR_VALIDO)
-            estado = FALHA;
+    SECTION("CPF invalido"){
+        string cpfInvalido = "088.106.744-01";
+        CHECK_THROWS(cpf.setValor(cpfInvalido));
     }
-    catch(invalid_argument excecao){
-        estado = FALHA;
+
+    SECTION("CPF valido"){
+        string cpfValido = "088.106.744-05";
+        REQUIRE_NOTHROW(cpf.setValor(cpfValido));
+        CHECK(cpf.getValor() ==  cpfValido);
     }
+
 }
 
-void Teste::testarCenarioFalha(){
-    try{
-        objeto->setValor(VALOR_INVALIDO);
-        estado = FALHA;
-    }
-    catch(invalid_argument excecao){
-        return;
-    }
-}
 
-int Teste::run(){
-    setUp();
-    //testarCenarioSucesso();
-    testarCenarioFalha();
-    tearDown();
-    return estado;
-}
+TEST_CASE("Teste NumeroDeCartao"){
+    NumeroDeCartaoDeCredito numeroDeCartaoDeCredito;
 
+    SECTION("Numero invalido"){
+        string NumeroInvalido = "4984088007587532";
+        CHECK_THROWS(numeroDeCartaoDeCredito.setValor(NumeroInvalido));
+    }
+
+    SECTION("Numero valido"){
+        string NumeroValido = "4984088007587535";
+        REQUIRE_NOTHROW(numeroDeCartaoDeCredito.setValor(NumeroValido));
+        CHECK(numeroDeCartaoDeCredito.getValor() ==  NumeroValido);
+    }
+
+
+}
