@@ -219,20 +219,22 @@ void Data::validar(string entrada){
     }
 
     // Janeiro no máximo 29
-    if(dia <= "29" && mes == "02") {
+    if (dia > "29" && mes == "02") {
+        throw invalid_argument("Não pode ter fevereiro com dia maior que 29");
+    } else if(dia <= "29" && mes == "02") {
         // Só é 29 se for ano bissexto
-        if(dia == "29" && ((stoi(mes) % 4) != 0)) {
+        if(dia == "29" && ((stoi(ano) % 4) != 0)) {
             throw invalid_argument("dia e 29 mas nao e ano bissexto");
         }
     }
 
     // Dia ate 30 mas nao são os meses de 30
-    if ((dia <= "30") && (!(mes == "04" || mes == "06" || mes == "09" || mes == "11"))) {
-        throw invalid_argument("data errada dia <= 30");
-    }
-        // Dia ate 31 mas nao são os meses de ate 31
-    else if ((dia <= "31") && (!(mes == "01" || mes == "03" || mes == "05" || mes == "07" || mes == "08" || mes == "10" || mes == "12"))){
-        throw invalid_argument("data errada dia <= 31");
+    if ((dia <= "30") && (mes == "02" || mes == "04" || mes == "06" || mes == "09" || mes == "11")) {
+
+    } else if ((dia <= "31") && (mes == "01" || mes == "03" || mes == "05" || mes == "07" || mes == "08" || mes == "10" || mes == "12")) {
+
+    } else {
+        throw invalid_argument("data invalida");
     }
 
 }
