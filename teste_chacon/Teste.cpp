@@ -10,14 +10,16 @@ TEST_CASE("Teste NumeroDeCartao"){
     NumeroDeCartaoDeCredito numeroDeCartaoDeCredito;
 
     SECTION("Numero invalido"){
-        string NumeroInvalido = "4984088007587532";
-        CHECK_THROWS(numeroDeCartaoDeCredito.setValor(NumeroInvalido));
+        string numeroInvalido = "4984088007587532";
+        string numeroAnterior = numeroDeCartaoDeCredito.getValor();
+        CHECK_THROWS(numeroDeCartaoDeCredito.setValor(numeroInvalido));
+        REQUIRE(numeroDeCartaoDeCredito.getValor() == numeroAnterior);
     }
 
     SECTION("Numero valido"){
-        string NumeroValido = "4984088007587535";
-        REQUIRE_NOTHROW(numeroDeCartaoDeCredito.setValor(NumeroValido));
-        CHECK(numeroDeCartaoDeCredito.getValor() ==  NumeroValido);
+        string numeroValido = "4984088007587535";
+        REQUIRE_NOTHROW(numeroDeCartaoDeCredito.setValor(numeroValido));
+        CHECK(numeroDeCartaoDeCredito.getValor() ==  numeroValido);
     }
 
 
@@ -27,8 +29,10 @@ TEST_CASE("Teste CodigoDeEvento") {
     CodigoDeEvento codigoDeEvento;
 
     SECTION("Codigo Invalido") {
-        string codigoInvalido = "22";
+        string codigoInvalido = "2432";
+        string codigoAnterior = codigoDeEvento.getValor();
         REQUIRE_THROWS(codigoDeEvento.setValor(codigoInvalido));
+        REQUIRE(codigoDeEvento.getValor() == codigoAnterior);
     }
 
     SECTION("Codigo valido"){
@@ -42,10 +46,20 @@ TEST_CASE("Teste CodigoDeApresentacao") {
     CodigoDeApresentacao codigoDeApresentacao;
 
     SECTION("Codigo Invalido") {
-        string codigoInvalido = "22";
-        string codigoInvalidoLetra = "AAAA";
-        REQUIRE_THROWS(codigoDeApresentacao.setValor(codigoInvalido));
-        REQUIRE_THROWS(codigoDeApresentacao.setValor(codigoInvalidoLetra));
+        string codigoInvalido, codigoAnterior;
+        SECTION("Com numero diferente de digitos"){
+            codigoInvalido = "22222";
+            codigoAnterior = codigoDeApresentacao.getValor();
+            REQUIRE_THROWS(codigoDeApresentacao.setValor(codigoInvalido));
+            REQUIRE(codigoDeApresentacao.getValor() == codigoAnterior);
+        }
+
+        SECTION("Com letras"){
+            codigoInvalido = "AAAA";
+            codigoAnterior = codigoDeApresentacao.getValor();
+            REQUIRE_THROWS(codigoDeApresentacao.setValor(codigoInvalido));
+            REQUIRE(codigoDeApresentacao.getValor() == codigoAnterior);
+        }
     }
 
     SECTION("Codigo valido"){
@@ -59,8 +73,10 @@ TEST_CASE("Teste CodigoDeIngresso") {
     CodigoDeIngresso codigoDeIngresso;
 
     SECTION("Codigo Invalido") {
-        string codigoInvalido = "22";
+        string codigoInvalido = "222222";
+        string codigoAnterior = codigoDeIngresso.getValor();
         REQUIRE_THROWS(codigoDeIngresso.setValor(codigoInvalido));
+        REQUIRE(codigoDeIngresso.getValor() == codigoAnterior);
     }
 
     SECTION("Codigo valido"){
@@ -74,8 +90,10 @@ TEST_CASE("Teste CodigoDeSeguranca") {
     CodigoDeSeguranca codigoDeSeguranca;
 
     SECTION("Codigo Invalido") {
-        string codigoInvalido = "22";
+        string codigoInvalido = "2222";
+        string codigoAnterior = codigoDeSeguranca.getValor();
         REQUIRE_THROWS(codigoDeSeguranca.setValor(codigoInvalido));
+        REQUIRE(codigoDeSeguranca.getValor() == codigoAnterior);
     }
 
     SECTION("Codigo valido"){
@@ -91,7 +109,9 @@ TEST_CASE("Teste Classe De Evento") {
 
     SECTION("Classe Invalida") {
         string classeInvalida = "5";
+        string classeAnterior = classeDeEvento.getValor();
         REQUIRE_THROWS(classeDeEvento.setValor(classeInvalida));
+        REQUIRE(classeDeEvento.getValor() == classeAnterior);
     }
 
     SECTION("Classe valida"){
@@ -106,7 +126,9 @@ TEST_CASE("Teste Numero de Sala") {
 
     SECTION("Numero Invalido") {
         string numeroInvalido = "34";
+        string numeroAnterior = numeroDeSala.getValor();
         REQUIRE_THROWS(numeroDeSala.setValor(numeroInvalido));
+        REQUIRE(numeroAnterior == numeroDeSala.getValor());
     }
 
     SECTION("Numero valido"){
@@ -121,7 +143,9 @@ TEST_CASE("Teste Preco") {
 
     SECTION("Preco Invalido") {
         string precoInvalido = "1031,2";
+        string precoAnterior = preco.getValor();
         REQUIRE_THROWS(preco.setValor(precoInvalido));
+        REQUIRE(precoAnterior == preco.getValor());
     }
 
     SECTION("Preco valido"){
@@ -135,31 +159,43 @@ TEST_CASE("Senha") {
     Senha senha;
 
     SECTION("Senha Invalida:") {
-        string senhaInvalida;
+        string senhaInvalida, senhaAnterior;
         senhaInvalida.resize(6);
         SECTION("Com numero diferente de digitos") {
             senhaInvalida = "1Aa45";
+            senhaAnterior = senha.getValor();
             REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
         }
         SECTION("Com caracter repetido") {
             senhaInvalida = "12aB55";
+            senhaAnterior = senha.getValor();
             REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
         }
         SECTION("Somente letra") {
             senhaInvalida = "AbCdEF";
+            senhaAnterior = senha.getValor();
             REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
         }
         SECTION("Somente numero") {
             senhaInvalida = "123456";
+            senhaAnterior = senha.getValor();
             REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
         }
         SECTION("Sem letras maisculas") {
             senhaInvalida = "12345a";
+            senhaAnterior = senha.getValor();
             REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
         }
         SECTION("Sem letras minusculas") {
             senhaInvalida = "12345A";
+            senhaAnterior = senha.getValor();
             REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
         }
     }
 
@@ -193,32 +229,40 @@ TEST_CASE("Cidade") {
     SECTION("Cidade Valida"){
         string cidadeValida = "Campinas Grande";
         REQUIRE_NOTHROW(cidade.setValor(cidadeValida));
+        REQUIRE(cidade.getValor() == cidadeValida);
     }
 }
 
 TEST_CASE("Nome de evento") {
     NomeDeEvento nomeDeEvento;
 
-    SECTION("Nome de evento valido"){
-        string nomeInvalido;
+    SECTION("Nome de evento invalido"){
+        string nomeInvalido, nomeAnterior;
         nomeInvalido.resize(20);
         SECTION("Com numero diferentes de digitos") {
             nomeInvalido = "Calangada";
+            nomeAnterior = nomeDeEvento.getValor();
             REQUIRE_THROWS(nomeDeEvento.setValor(nomeInvalido));
+            REQUIRE(nomeDeEvento.getValor() == nomeAnterior);
         }
         SECTION("2 espacos seguidos") {
             nomeInvalido = "Calangada  ";
+            nomeAnterior = nomeDeEvento.getValor();
             REQUIRE_THROWS(nomeDeEvento.setValor(nomeInvalido));
+            REQUIRE(nomeDeEvento.getValor() == nomeAnterior);
         }
         SECTION("sem letras") {
             nomeInvalido = "1 2312 312 312231232";
+            nomeAnterior = nomeDeEvento.getValor();
             REQUIRE_THROWS(nomeDeEvento.setValor(nomeInvalido));
+            REQUIRE(nomeDeEvento.getValor() == nomeAnterior);
         }
     }
 
-    SECTION("Nome de evento Valido"){
+    SECTION("Nome de evento valido"){
         string nomeValido = "Calangada 14 Med UnB";
         REQUIRE_NOTHROW(nomeDeEvento.setValor(nomeValido));
+        REQUIRE(nomeDeEvento.getValor() == nomeValido);
     }
 }
 
@@ -479,7 +523,7 @@ TEST_CASE("Data") {
         REQUIRE_NOTHROW(data.setValor(dataValida1));
         REQUIRE(data.getValor() == dataValida1);
 
-        REQUIRE_NOTHROW(data.setValor(dataValida2));;
+        REQUIRE_NOTHROW(data.setValor(dataValida2));
         REQUIRE(data.getValor() == dataValida2);
 
         REQUIRE_NOTHROW(data.setValor(dataValida3));

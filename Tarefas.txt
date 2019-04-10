@@ -1,27 +1,16 @@
 # Gerais
 
-- Organizar o codigo(Dominios.h)
-- Analisar ome do argumento da validar
-- Doxygen Classes
-- Doxygen validar
-- Analisar qual biblioteca de testes
+- Rodar cpplint
+- Doxygen Dominio
+- Doxygen Unidades
+- Codificar Unidades.cpp
 
 # Pedro
-Fazer os metodos de validar:
-- Codigo
-- NomeDoEvento
-- Preco
-- Cidade
-- ClasseDeEvento
-- Senha
-- NumeroDoCartao
-- NumeroDeSala
+- Modificar funcoes de nome para ser ate tal digito
+- Analisar se o usuario precisa colocar extamente a quantidade de digitos do codigo
+- Testar todos os casos de classeDeEvento
 
 # Waliff
-- DataDeValidade
-- CPF
-- FaixaEtaria
-- Disponibilidade
-- Estado
-- Data
-- Horario
+
+- Goiano Ver se nao fica melhor nos testes ao inves de por dataValidade por exemplo por dataAnterior para melhor entendi-
+mento dos testes
