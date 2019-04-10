@@ -154,7 +154,7 @@ private:
 
     /** @brief Metodo que valida se a entrada esta de acordo com o formato do nomeDeEvento.
      *
-     * O Metodo verifica se na string de entrada há 2 espaços consecutivos, se o tamanho é igual ao TAMANHO_NOME_EVENTO
+     * O Metodo verifica se na string de entrada há 2 espaços consecutivos, se o tamanho é menor ao TAMANHO_NOME_EVENTO
      * , se contém pelo menos uma letra, e se os caracteres da string não são letras,digitos ou espaços. Se uma das
      * condições anteriores forem descumpridas a string entrada não está no padrão estabelecido e é lançada uma exceção
      * do tipo invalid_argument.
@@ -211,7 +211,7 @@ private:
 
     /**@brief Método que avalia se a entrada está no formato da Cidade.
      *
-     * O método verifica se a string entrada é do tamanho do TAMANHO_CIDADE, Se cada caractere da entrada é letra,
+     * O método verifica se a string entrada menor do que TAMANHO_CIDADE, Se cada caractere da entrada é letra,
      * espaço ou ponto, se não há espaços seguidos e se cada ponto é precedido por uma letra.Se uma das condições
      * anteriores forem descumpridas a string entrada não está no padrão estabelecido e é lançada uma exceção
      * do tipo invalid_argument.

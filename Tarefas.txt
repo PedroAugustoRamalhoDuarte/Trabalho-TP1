@@ -1,16 +1,8 @@
 # Gerais
 
 - Rodar cpplint
-- Doxygen Dominio
-- Doxygen Unidades
-- Codificar Unidades.cpp
 
 # Pedro
-- Modificar funcoes de nome para ser ate tal digito
-- Analisar se o usuario precisa colocar extamente a quantidade de digitos do codigo
-- Testar todos os casos de classeDeEvento
+
 
 # Waliff
-
-- Goiano Ver se nao fica melhor nos testes ao inves de por dataValidade por exemplo por dataAnterior para melhor entendi-
-mento dos testes

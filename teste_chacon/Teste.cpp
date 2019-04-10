@@ -160,7 +160,6 @@ TEST_CASE("Senha") {
 
     SECTION("Senha Invalida:") {
         string senhaInvalida, senhaAnterior;
-        senhaInvalida.resize(6);
         SECTION("Com numero diferente de digitos") {
             senhaInvalida = "1Aa45";
             senhaAnterior = senha.getValor();
@@ -211,9 +210,8 @@ TEST_CASE("Cidade") {
 
     SECTION("Cidade Invalida"){
         string cidadeInvalida;
-        cidadeInvalida.resize(15);
-        SECTION("Com numero diferentes de digitos") {
-            cidadeInvalida = "Campinas";
+        SECTION("Com numero maior de digitos") {
+            cidadeInvalida = "Campinas Muito Grande em quantidade";
             REQUIRE_THROWS(cidade.setValor(cidadeInvalida));
         }
         SECTION("2 espacos seguidos") {
@@ -238,9 +236,8 @@ TEST_CASE("Nome de evento") {
 
     SECTION("Nome de evento invalido"){
         string nomeInvalido, nomeAnterior;
-        nomeInvalido.resize(20);
-        SECTION("Com numero diferentes de digitos") {
-            nomeInvalido = "Calangada";
+        SECTION("Com numero maior de digitos") {
+            nomeInvalido = "Calangada Evento de Medicina da Unb";
             nomeAnterior = nomeDeEvento.getValor();
             REQUIRE_THROWS(nomeDeEvento.setValor(nomeInvalido));
             REQUIRE(nomeDeEvento.getValor() == nomeAnterior);
