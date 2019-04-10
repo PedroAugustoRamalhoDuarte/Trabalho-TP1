@@ -4,24 +4,55 @@
 #include <stdexcept>
 #include <iostream>
 #include <string>
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 #include <cctype>
 #include <list>
 using namespace std;
 
+/** @brief Classe pai de todos os domínios da biblioteca
+ *
+ * Esta classe passa de herança para as classes filhas os métodos set, get e um método virtual validar,
+ * assim como o atributo valor
+ *
+ * */
 class Dominio {
 protected:
-    string valor;
+    string valor; /**< Atributo no qual é armazenado a informação da classe.*/
 
+    /** @brief Método virtual validar
+     *
+     * Método de validação de formato, no qual varia de acordo com o domínio, em caso de formato inválido
+     * é retornado throw
+     *
+     * @param entrada string que será validada
+     * @throw invalid_argument caso não esteja no formato desejado
+     *
+     * */
     virtual void validar(string entrada) = 0;
 
 public:
-    void setValor(string entrada) {
+    /**@brief Método Set.
+     *
+     * Método responsável pela atribuição do valor, nele é chamado o método validar que verifica se o valor está
+     * no formato correto, se estiver será atribuido, caso contrário será retornado throw.
+     *
+     * @param entrada string que será validada para atribuição.
+     * @throw invalid_argument caso não esteja no formato desejado.
+     *
+     * @see validar()
+     */
+    void setValor(const string& entrada) {
         validar(entrada);
         this->valor = entrada;
     }
 
+    /**@brief Método Get
+     *
+     * Método responsável por retornar o valor
+     *
+     * @return valor
+     */
     const string &getValor() const {
         return valor;
     }
@@ -140,7 +171,7 @@ private:
  * */
 class Preco : public Dominio {
 private:
-    /**@ brief Método que avalia se a entrada está no formato de Preço.
+    /**@brief Método que avalia se a entrada está no formato de Preço.
      *
      * O método verifica se a string entrada está em uma intervalo de 0 a 1000, caso não estiver, será lançada uma
      * exceção do tipo invalid_argument
@@ -159,7 +190,7 @@ private:
 class NumeroDeSala : public Dominio {
 private:
 
-    /**@ brief Método que avalia se a entrada está no formato do NumeroDeSala.
+    /**@brief Método que avalia se a entrada está no formato do NumeroDeSala.
     *
     * O método verifica se a string entrada esta no intervalo de [1, 10], se não estiver é lançada uma exceção do tipo
     * invalid_argument
@@ -178,7 +209,7 @@ class Cidade : public Dominio {
 private:
     const int TAMANHO_CIDADE = 15; /**< const que define o tamanho da Cidade.*/
 
-    /**@ brief Método que avalia se a entrada está no formato da Cidade.
+    /**@brief Método que avalia se a entrada está no formato da Cidade.
      *
      * O método verifica se a string entrada é do tamanho do TAMANHO_CIDADE, Se cada caractere da entrada é letra,
      * espaço ou ponto, se não há espaços seguidos e se cada ponto é precedido por uma letra.Se uma das condições
@@ -197,7 +228,7 @@ private:
  * */
 class ClasseDeEvento : public Dominio {
 private:
-    /**@ brief Método que avalia se a entrada está no formato da ClasseDeEvento.
+    /**@brief Método que avalia se a entrada está no formato da ClasseDeEvento.
      *
      * O método verifica se a string entrada é 1,2,3 ou 4. Sendo que O dígito 1 identifica TEATRO, 2identifica ESPORTE,
      * 3 identifica SHOW NACIONAL e 4 identifica SHOW INTERNACIONAL.
@@ -216,7 +247,7 @@ private:
 class Senha : public Dominio{
 private:
     int const TAMANHO_SENHA = 6; /**< const que define o tamanho da Senha */
-    /**@ brief Método que avalia se a entrada está no formato da Senha.
+    /**@brief Método que avalia se a entrada está no formato da Senha.
     *
     * O método verifica se a string entrada é do tamanho do TAMANHO_SENHA, Se cada caractere da entrada é letra,
     * ou digito,se não há caracteres repetidos e se há pelo menos uma letra maiuscula, minuscula e um digito.Se uma das
@@ -238,7 +269,7 @@ class NumeroDeCartaoDeCredito : public Dominio {
 private:
     int const TAMANHO_NUMERODECARTAO = 16;
 
-    /**@ brief Método que avalia se a entrada está no formato do NumeroDeCartaoDeCredito.
+    /**@brief Método que avalia se a entrada está no formato do NumeroDeCartaoDeCredito.
     *
     * O método verifica se a string entrada é do tamanho do TAMANHO_NUMERODECARTAO e se obedece o algoritmo de Luhn
     *
