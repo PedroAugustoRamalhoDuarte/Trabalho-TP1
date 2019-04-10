@@ -268,6 +268,7 @@ TEST_CASE("Nome de evento") {
 
 TEST_CASE("Teste CPF"){
     CPF cpf;
+    string cpfAnterior;
 
     SECTION("CPF valido"){
         string cpfValido1 = "088.106.744-05", cpfValido2 = "498.633.310-07", cpfValido3 = "071.063.140-56";
@@ -283,39 +284,49 @@ TEST_CASE("Teste CPF"){
     }
 
     SECTION("CPF invalido - digito verificador incoerente"){
-        string cpfInvalido = "088.106.744-01", cpfValido;
-        cpfValido = cpf.getValor();
+        string cpfInvalido = "088.106.744-01";
+
+        cpfAnterior = cpf.getValor();
         REQUIRE_THROWS(cpf.setValor(cpfInvalido));
-        REQUIRE(cpfValido == cpf.getValor());
+        REQUIRE(cpf.getValor() == cpfAnterior);
     }
 
     SECTION("CPF invalido - não é totalmente numérico") {
-        string cpfInvalido = "03X.321.D34-53", cpfValido;
+        string cpfInvalido = "03X.321.D34-53";
+
+        cpfAnterior = cpf.getValor();
         REQUIRE_THROWS(cpf.setValor(cpfInvalido));
-        REQUIRE(cpfValido == cpf.getValor());
+        REQUIRE(cpf.getValor() == cpfAnterior);
     }
 
     SECTION("CPF invalido - sem os separadores") {
-        string cpfInvalido = "32451231234578", cpfValido;
+        string cpfInvalido = "32451231234578";
+
+        cpfAnterior = cpf.getValor();
         REQUIRE_THROWS(cpf.setValor(cpfInvalido));
-        REQUIRE(cpfValido == cpf.getValor());
+        REQUIRE(cpf.getValor() == cpfAnterior);
     }
 
     SECTION("CPF invalido - mais caracteres que o permitido") {
-        string cpfInvalido = "123.456.789-697", cpfValido;
+        string cpfInvalido = "123.456.789-697";
+
+        cpfAnterior = cpf.getValor();
         REQUIRE_THROWS(cpf.setValor(cpfInvalido));
-        REQUIRE(cpfValido == cpf.getValor());
+        REQUIRE(cpf.getValor() == cpfAnterior);
     }
 
     SECTION("CPF invalido - menos caracteres que o permitido") {
-        string cpfInvalido = "123.456.789-6", cpfValido;
+        string cpfInvalido = "123.456.789-6";
+
+        cpfAnterior = cpf.getValor();
         REQUIRE_THROWS(cpf.setValor(cpfInvalido));
-        REQUIRE(cpfValido == cpf.getValor());
+        REQUIRE(cpf.getValor() == cpfAnterior);
     }
 }
 
 TEST_CASE("Teste FaixaEtaria") {
     FaixaEtaria faixaEtaria;
+    string faixaAnterior;
 
     SECTION("Faixa etaria valida") {
         string faixaValida1 = "L", faixaValida2 = "10";
@@ -326,22 +337,27 @@ TEST_CASE("Teste FaixaEtaria") {
         REQUIRE_NOTHROW(faixaEtaria.setValor(faixaValida2));
         REQUIRE(faixaEtaria.getValor() == faixaValida2);
     }
+
     SECTION("Faixa etaria invalida - caracter não permitido") {
-        string faixaInvalida = "M", faixaValida;
-        faixaValida = faixaEtaria.getValor();
+        string faixaInvalida = "M";
+
+        faixaAnterior = faixaEtaria.getValor();
         REQUIRE_THROWS(faixaEtaria.setValor(faixaInvalida));
-        REQUIRE(faixaEtaria.getValor() == faixaValida);
+        REQUIRE(faixaEtaria.getValor() == faixaAnterior);
     }
+
     SECTION("Faixa etaria invalida - valor não permitido") {
-        string faixaInvalida = "13", faixaValida;
-        faixaValida = faixaEtaria.getValor();
+        string faixaInvalida = "13";
+
+        faixaAnterior = faixaEtaria.getValor();
         REQUIRE_THROWS(faixaEtaria.setValor(faixaInvalida));
-        REQUIRE(faixaEtaria.getValor() == faixaValida);
+        REQUIRE(faixaEtaria.getValor() == faixaAnterior);
     }
 }
 
 TEST_CASE("Disponibilidade") {
     Disponibilidade disponibilidade;
+    string disponibilidadeAnterior;
 
     SECTION("Disponibilidade valida") {
         string disponibilidadeValida1 = "0", disponibilidadeValida2 = "120";
@@ -352,31 +368,35 @@ TEST_CASE("Disponibilidade") {
         REQUIRE_NOTHROW(disponibilidade.setValor(disponibilidadeValida2));
         REQUIRE(disponibilidade.getValor() == disponibilidadeValida2);
     }
+
     SECTION("Disponibilidade invalida - valor negativo") {
-        string disponibilidadeInvalida = "-1", disponibilidadeValida;
+        string disponibilidadeInvalida = "-1";
 
-        disponibilidadeValida = disponibilidade.getValor();
+        disponibilidadeAnterior = disponibilidade.getValor();
         REQUIRE_THROWS(disponibilidade.setValor(disponibilidadeInvalida));
-        REQUIRE(disponibilidade.getValor() == disponibilidadeValida);
+        REQUIRE(disponibilidade.getValor() == disponibilidadeAnterior);
     }
+
     SECTION("Disponibilidade invalida - valor acima do permitido") {
-        string disponibilidadeInvalida = "251", disponibilidadeValida;
+        string disponibilidadeInvalida = "251";
 
-        disponibilidadeValida = disponibilidade.getValor();
+        disponibilidadeAnterior = disponibilidade.getValor();
         REQUIRE_THROWS(disponibilidade.setValor(disponibilidadeInvalida));
-        REQUIRE(disponibilidade.getValor() == disponibilidadeValida);
+        REQUIRE(disponibilidade.getValor() == disponibilidadeAnterior);
     }
-    SECTION("Disponibilidade invalida - valor não numérico") {
-        string disponibilidadeInvalida = "AA", disponibilidadeValida;
 
-        disponibilidadeValida = disponibilidade.getValor();
+    SECTION("Disponibilidade invalida - valor não numérico") {
+        string disponibilidadeInvalida = "AA";
+
+        disponibilidadeAnterior = disponibilidade.getValor();
         REQUIRE_THROWS(disponibilidade.setValor(disponibilidadeInvalida));
-        REQUIRE(disponibilidade.getValor() == disponibilidadeValida);
+        REQUIRE(disponibilidade.getValor() == disponibilidadeAnterior);
     }
 }
 
 TEST_CASE("Estado") {
     Estado estado;
+    string estadoAnterior;
 
     SECTION("Estado valido") {
         string estadoValido1 = "GO", estadoValido2 = "BA", estadoValido3 = "DF";
@@ -390,31 +410,35 @@ TEST_CASE("Estado") {
         REQUIRE_NOTHROW(estado.setValor(estadoValido3));
         REQUIRE(estado.getValor() == estadoValido3);
     }
+
     SECTION("Estado invalido - não está entre os possíveis") {
-        string estadoInvalido = "XX", estadoValido;
+        string estadoInvalido = "XX";
 
-        estadoValido = estado.getValor();
+        estadoAnterior = estado.getValor();
         REQUIRE_THROWS(estado.setValor(estadoInvalido));
-        REQUIRE(estado.getValor() == estadoValido);
+        REQUIRE(estado.getValor() == estadoAnterior);
     }
+
     SECTION("Estado invalido - Estado numérico") {
-        string estadoInvalido = "3", estadoValido;
+        string estadoInvalido = "3";
 
-        estadoValido = estado.getValor();
+        estadoAnterior = estado.getValor();
         REQUIRE_THROWS(estado.setValor(estadoInvalido));
-        REQUIRE(estado.getValor() == estadoValido);
+        REQUIRE(estado.getValor() == estadoAnterior);
     }
-    SECTION("Estado invalido - Estado numérico com dois caracteres") {
-        string estadoInvalido = "25", estadoValido;
 
-        estadoValido = estado.getValor();
+    SECTION("Estado invalido - Estado numérico com dois caracteres") {
+        string estadoInvalido = "25";
+
+        estadoAnterior = estado.getValor();
         REQUIRE_THROWS(estado.setValor(estadoInvalido));
-        REQUIRE(estado.getValor() == estadoValido);
+        REQUIRE(estado.getValor() == estadoAnterior);
     }
 }
 
 TEST_CASE("Data de Validade") {
     DataDeValidade data;
+    string dataAnterior;
 
     SECTION("Data Valida") {
         string dataValida1 = "12/98", dataValida2 = "01/00", dataValida3 = "07/99";
@@ -430,40 +454,41 @@ TEST_CASE("Data de Validade") {
     }
 
     SECTION("Data Invalida - sem separador e tamanho inadequado") {
-        string dataInvalida = "1298", dataValida;
+        string dataInvalida = "1298";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         REQUIRE_THROWS(data.setValor(dataInvalida));
-        REQUIRE(data.getValor() == dataValida);
+        REQUIRE(data.getValor() == dataAnterior);
     }
 
     SECTION("Data Invalida - tamanho inadequado") {
-        string dataInvalida = "12/980", dataValida;
+        string dataInvalida = "12/980";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         REQUIRE_THROWS(data.setValor(dataInvalida));
-        REQUIRE(data.getValor() == dataValida);
+        REQUIRE(data.getValor() == dataAnterior);
     }
 
     SECTION("Data Invalida - valor negativo") {
-        string dataInvalida = "-12/55", dataValida;
+        string dataInvalida = "-12/55";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         REQUIRE_THROWS(data.setValor(dataInvalida));
-        REQUIRE(data.getValor() == dataValida);
+        REQUIRE(data.getValor() == dataAnterior);
     }
 
     SECTION("Data Invalida - valor de mês acima do permitido") {
-        string dataInvalida = "13/50", dataValida;
+        string dataInvalida = "13/50";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         REQUIRE_THROWS(data.setValor(dataInvalida));
-        REQUIRE(data.getValor() == dataValida);
+        REQUIRE(data.getValor() == dataAnterior);
     }
 }
 
 TEST_CASE("Horario") {
     Horario horario;
+    string horarioAnterior;
 
     SECTION("Horario valido") {
         string horarioValido1 = "07:00", horarioValido2 = "07:45", horarioValido3 = "22:15";
@@ -479,43 +504,44 @@ TEST_CASE("Horario") {
     }
 
     SECTION("Horario invalido - horario abaixo do permitido") {
-        string horarioInvalido = "06:45", horarioValido;
-        horarioValido = horario.getValor();
+        string horarioInvalido = "06:45";
+        horarioAnterior = horario.getValor();
         REQUIRE_THROWS(horario.setValor(horarioInvalido));
-        REQUIRE(horario.getValor() == horarioValido);
+        REQUIRE(horario.getValor() == horarioAnterior);
     }
 
     SECTION("Horario invalido - horario acima do permitido") {
-        string horarioInvalido = "23:45", horarioValido;
-        horarioValido = horario.getValor();
+        string horarioInvalido = "23:45";
+        horarioAnterior = horario.getValor();
         REQUIRE_THROWS(horario.setValor(horarioInvalido));
-        REQUIRE(horario.getValor() == horarioValido);
+        REQUIRE(horario.getValor() == horarioAnterior);
     }
 
     SECTION("Horario invalido - minuto não permitido") {
-        string horarioInvalido = "12:44", horarioValido;
-        horarioValido = horario.getValor();
+        string horarioInvalido = "12:44";
+        horarioAnterior = horario.getValor();
         REQUIRE_THROWS(horario.setValor(horarioInvalido));
-        REQUIRE(horario.getValor() == horarioValido);
+        REQUIRE(horario.getValor() == horarioAnterior);
     }
 
     SECTION("Horario invalido - formato invalido") {
-        string horarioInvalido = "12/44", horarioValido;
-        horarioValido = horario.getValor();
+        string horarioInvalido = "12/44";
+        horarioAnterior = horario.getValor();
         REQUIRE_THROWS(horario.setValor(horarioInvalido));
-        REQUIRE(horario.getValor() == horarioValido);
+        REQUIRE(horario.getValor() == horarioAnterior);
     }
 
     SECTION("Horario invalido - tamanho invalido") {
-        string horarioInvalido = "12:344", horarioValido;
-        horarioValido = horario.getValor();
+        string horarioInvalido = "12:344";
+        horarioAnterior = horario.getValor();
         REQUIRE_THROWS(horario.setValor(horarioInvalido));
-        REQUIRE(horario.getValor() == horarioValido);
+        REQUIRE(horario.getValor() == horarioAnterior);
     }
 }
 
 TEST_CASE("Data") {
     Data data;
+    string dataAnterior;
 
     SECTION("Data valida") {
         string dataValida1 = "29/02/04", dataValida2 = "28/05/99", dataValida3 = "25/02/99", teste;
@@ -531,42 +557,42 @@ TEST_CASE("Data") {
     }
 
     SECTION("Data invalida - ano não bissexto, não permite dia 29 em fevereiro") {
-        string dataInvalida = "29/02/41", dataValida;
+        string dataInvalida = "29/02/41";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         CHECK_THROWS(data.setValor(dataInvalida));
-        CHECK(data.getValor() == dataValida);
+        CHECK(data.getValor() == dataAnterior);
     }
 
     SECTION("Data invalida - dia invalido") {
-        string dataInvalida = "33/03/41", dataValida;
+        string dataInvalida = "33/03/41";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         CHECK_THROWS(data.setValor(dataInvalida));
-        CHECK(data.getValor() == dataValida);
+        CHECK(data.getValor() == dataAnterior);
     }
 
     SECTION("Data invalida - mês invalido") {
-        string dataInvalida = "25/13/41", dataValida;
+        string dataInvalida = "25/13/41";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         CHECK_THROWS(data.setValor(dataInvalida));
-        CHECK(data.getValor() == dataValida);
+        CHECK(data.getValor() == dataAnterior);
     }
 
     SECTION("Data invalida - formato invalido, separadores inadequados") {
-        string dataInvalida = "25-12-41", dataValida;
+        string dataInvalida = "25-12-41";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         CHECK_THROWS(data.setValor(dataInvalida));
-        CHECK(data.getValor() == dataValida);
+        CHECK(data.getValor() == dataAnterior);
     }
 
     SECTION("Data invalida - formato e tamanho invalidos") {
-        string dataInvalida = "25512541", dataValida;
+        string dataInvalida = "25512541";
 
-        dataValida = data.getValor();
+        dataAnterior = data.getValor();
         CHECK_THROWS(data.setValor(dataInvalida));
-        CHECK(data.getValor() == dataValida);
+        CHECK(data.getValor() == dataAnterior);
     }
 }
