@@ -1,28 +1,26 @@
 //
-// Created by waliffcordeiro on 03/04/19.
+// Copyright [2019] <Pedro Augusto e Waliff Cordeiro>
 //
 
 #define CATCH_CONFIG_MAIN
 #include "../include/catch.hpp"
 #include "../include/Dominios.h"
 
-TEST_CASE("Teste NumeroDeCartao"){
+TEST_CASE("Teste NumeroDeCartao") {
     NumeroDeCartaoDeCredito numeroDeCartaoDeCredito;
 
-    SECTION("Numero invalido"){
+    SECTION("Numero invalido") {
         string numeroInvalido = "4984088007587532";
         string numeroAnterior = numeroDeCartaoDeCredito.getValor();
         CHECK_THROWS(numeroDeCartaoDeCredito.setValor(numeroInvalido));
         REQUIRE(numeroDeCartaoDeCredito.getValor() == numeroAnterior);
     }
 
-    SECTION("Numero valido"){
+    SECTION("Numero valido") {
         string numeroValido = "4984088007587535";
         REQUIRE_NOTHROW(numeroDeCartaoDeCredito.setValor(numeroValido));
         CHECK(numeroDeCartaoDeCredito.getValor() ==  numeroValido);
     }
-
-
 }
 
 TEST_CASE("Teste CodigoDeEvento") {
@@ -35,7 +33,7 @@ TEST_CASE("Teste CodigoDeEvento") {
         REQUIRE(codigoDeEvento.getValor() == codigoAnterior);
     }
 
-    SECTION("Codigo valido"){
+    SECTION("Codigo valido") {
         string codigoValido = "123";
         REQUIRE_NOTHROW(codigoDeEvento.setValor(codigoValido));
         CHECK(codigoDeEvento.getValor() ==  codigoValido);
@@ -47,14 +45,14 @@ TEST_CASE("Teste CodigoDeApresentacao") {
 
     SECTION("Codigo Invalido") {
         string codigoInvalido, codigoAnterior;
-        SECTION("Com numero diferente de digitos"){
+        SECTION("Com numero diferente de digitos") {
             codigoInvalido = "22222";
             codigoAnterior = codigoDeApresentacao.getValor();
             REQUIRE_THROWS(codigoDeApresentacao.setValor(codigoInvalido));
             REQUIRE(codigoDeApresentacao.getValor() == codigoAnterior);
         }
 
-        SECTION("Com letras"){
+        SECTION("Com letras") {
             codigoInvalido = "AAAA";
             codigoAnterior = codigoDeApresentacao.getValor();
             REQUIRE_THROWS(codigoDeApresentacao.setValor(codigoInvalido));
@@ -62,7 +60,7 @@ TEST_CASE("Teste CodigoDeApresentacao") {
         }
     }
 
-    SECTION("Codigo valido"){
+    SECTION("Codigo valido") {
         string codigoValido = "1234";
         REQUIRE_NOTHROW(codigoDeApresentacao.setValor(codigoValido));
         CHECK(codigoDeApresentacao.getValor() ==  codigoValido);
@@ -79,7 +77,7 @@ TEST_CASE("Teste CodigoDeIngresso") {
         REQUIRE(codigoDeIngresso.getValor() == codigoAnterior);
     }
 
-    SECTION("Codigo valido"){
+    SECTION("Codigo valido") {
         string codigoValido = "12345";
         REQUIRE_NOTHROW(codigoDeIngresso.setValor(codigoValido));
         CHECK(codigoDeIngresso.getValor() ==  codigoValido);
@@ -96,7 +94,7 @@ TEST_CASE("Teste CodigoDeSeguranca") {
         REQUIRE(codigoDeSeguranca.getValor() == codigoAnterior);
     }
 
-    SECTION("Codigo valido"){
+    SECTION("Codigo valido") {
         string codigoValido = "123";
         REQUIRE_NOTHROW(codigoDeSeguranca.setValor(codigoValido));
         CHECK(codigoDeSeguranca.getValor() ==  codigoValido);
@@ -114,7 +112,7 @@ TEST_CASE("Teste Classe De Evento") {
         REQUIRE(classeDeEvento.getValor() == classeAnterior);
     }
 
-    SECTION("Classe valida"){
+    SECTION("Classe valida") {
         string classeValida = "1";
         REQUIRE_NOTHROW(classeDeEvento.setValor(classeValida));
         CHECK(classeDeEvento.getValor() ==  classeValida);
@@ -131,7 +129,7 @@ TEST_CASE("Teste Numero de Sala") {
         REQUIRE(numeroAnterior == numeroDeSala.getValor());
     }
 
-    SECTION("Numero valido"){
+    SECTION("Numero valido") {
         string numeroValido = "3";
         REQUIRE_NOTHROW(numeroDeSala.setValor(numeroValido));
         CHECK(numeroDeSala.getValor() ==  numeroValido);
@@ -148,7 +146,7 @@ TEST_CASE("Teste Preco") {
         REQUIRE(precoAnterior == preco.getValor());
     }
 
-    SECTION("Preco valido"){
+    SECTION("Preco valido") {
         string precoValido = "100,00";
         REQUIRE_NOTHROW(preco.setValor(precoValido));
         CHECK(preco.getValor() ==  precoValido);
@@ -198,7 +196,7 @@ TEST_CASE("Senha") {
         }
     }
 
-    SECTION("Senha Valida"){
+    SECTION("Senha Valida") {
         string senhaValida = "1234Ab";
         REQUIRE_NOTHROW(senha.setValor(senhaValida));
         CHECK(senha.getValor() == senhaValida);
@@ -208,7 +206,7 @@ TEST_CASE("Senha") {
 TEST_CASE("Cidade") {
     Cidade cidade;
 
-    SECTION("Cidade Invalida"){
+    SECTION("Cidade Invalida") {
         string cidadeInvalida;
         SECTION("Com numero maior de digitos") {
             cidadeInvalida = "Campinas Muito Grande em quantidade";
@@ -224,7 +222,7 @@ TEST_CASE("Cidade") {
         }
     }
 
-    SECTION("Cidade Valida"){
+    SECTION("Cidade Valida") {
         string cidadeValida = "Campinas Grande";
         REQUIRE_NOTHROW(cidade.setValor(cidadeValida));
         REQUIRE(cidade.getValor() == cidadeValida);
@@ -234,7 +232,7 @@ TEST_CASE("Cidade") {
 TEST_CASE("Nome de evento") {
     NomeDeEvento nomeDeEvento;
 
-    SECTION("Nome de evento invalido"){
+    SECTION("Nome de evento invalido") {
         string nomeInvalido, nomeAnterior;
         SECTION("Com numero maior de digitos") {
             nomeInvalido = "Calangada Evento de Medicina da Unb";
@@ -256,18 +254,18 @@ TEST_CASE("Nome de evento") {
         }
     }
 
-    SECTION("Nome de evento valido"){
+    SECTION("Nome de evento valido") {
         string nomeValido = "Calangada 14 Med UnB";
         REQUIRE_NOTHROW(nomeDeEvento.setValor(nomeValido));
         REQUIRE(nomeDeEvento.getValor() == nomeValido);
     }
 }
 
-TEST_CASE("Teste CPF"){
+TEST_CASE("Teste CPF") {
     CPF cpf;
     string cpfAnterior;
 
-    SECTION("CPF valido"){
+    SECTION("CPF valido") {
         string cpfValido1 = "088.106.744-05", cpfValido2 = "498.633.310-07", cpfValido3 = "071.063.140-56";
 
         REQUIRE_NOTHROW(cpf.setValor(cpfValido1));
@@ -280,7 +278,7 @@ TEST_CASE("Teste CPF"){
         REQUIRE(cpf.getValor() ==  cpfValido2);
     }
 
-    SECTION("CPF invalido - digito verificador incoerente"){
+    SECTION("CPF invalido - digito verificador incoerente") {
         string cpfInvalido = "088.106.744-01";
 
         cpfAnterior = cpf.getValor();

@@ -86,7 +86,7 @@ protected:
  */
 class CodigoDeEvento : public Codigo {
 private:
-    const int TAMANHO_CODIGO_EVENTO = 3; /**< const que define o tamanho do codigo de evento.*/
+    const static int TAMANHO_CODIGO_EVENTO = 3; /**< const que define o tamanho do codigo de evento.*/
 
 public:
     /**
@@ -102,7 +102,7 @@ public:
  */
 class CodigoDeApresentacao : public Codigo {
 private:
-    const int TAMANHO_CODIGO_APRESENTACAO = 4; /**< const que define o tamanho do codigo de apresentacao.*/
+    const static int TAMANHO_CODIGO_APRESENTACAO = 4; /**< const que define o tamanho do codigo de apresentacao.*/
 
 public:
     /**
@@ -117,7 +117,7 @@ public:
  */
 class CodigoDeIngresso : public Codigo {
 private:
-    const int TAMANHO_CODIGO_INGRESSO = 5; /**< const que define o tamanho do código de ingresso.*/
+    const static int TAMANHO_CODIGO_INGRESSO = 5; /**< const que define o tamanho do código de ingresso.*/
 
 public:
     /**
@@ -133,7 +133,7 @@ public:
  */
 class CodigoDeSeguranca : public Codigo {
 private:
-    const int TAMANHO_CODIGO_SEGURANCA = 3; /**< const que define o tamanho do codigo de Seguranca.*/
+    const static int TAMANHO_CODIGO_SEGURANCA = 3; /**< const que define o tamanho do codigo de Seguranca.*/
 
 public:
     /**
@@ -150,7 +150,7 @@ public:
  * */
 class NomeDeEvento : public Dominio {
 private:
-    const int TAMANHO_NOME_EVENTO = 20; /**< const que define o tamanho do nome de evento.*/
+    const static int TAMANHO_NOME_EVENTO = 20; /**< const que define o tamanho do nome de evento.*/
 
     /** @brief Metodo que valida se a entrada esta de acordo com o formato do nomeDeEvento.
      *
@@ -207,7 +207,7 @@ private:
  * */
 class Cidade : public Dominio {
 private:
-    const int TAMANHO_CIDADE = 15; /**< const que define o tamanho da Cidade.*/
+    const static int TAMANHO_CIDADE = 15; /**< const que define o tamanho da Cidade.*/
 
     /**@brief Método que avalia se a entrada está no formato da Cidade.
      *
@@ -246,7 +246,7 @@ private:
  * */
 class Senha : public Dominio{
 private:
-    int const TAMANHO_SENHA = 6; /**< const que define o tamanho da Senha */
+    const static int TAMANHO_SENHA = 6; /**< const que define o tamanho da Senha */
     /**@brief Método que avalia se a entrada está no formato da Senha.
     *
     * O método verifica se a string entrada é do tamanho do TAMANHO_SENHA, Se cada caractere da entrada é letra,
@@ -267,7 +267,7 @@ private:
  * */
 class NumeroDeCartaoDeCredito : public Dominio {
 private:
-    int const TAMANHO_NUMERODECARTAO = 16;
+    const static int TAMANHO_NUMERODECARTAO = 16;
 
     /**@brief Método que avalia se a entrada está no formato do NumeroDeCartaoDeCredito.
     *
@@ -285,7 +285,7 @@ private:
  * */
 class Data : public Dominio{
 private:
-    const int TAMANHO_DATA = 8; /**< Uma constante definindo o tamanho que a estrutura de data deve ter XX/XX/XX */
+    const static int TAMANHO_DATA = 8; /**< Uma constante definindo o tamanho que a estrutura de data deve ter XX/XX/XX */
     /** @brief Método responsável pela validação da Data
      *
      * Este método de validação separa a data em dia, mes e ano, após verificar se os dados são numéricos
@@ -373,10 +373,10 @@ class CPF : public Dominio{
 private:
     // validacao de cpf
 
-    int const TAMANHO_CPF = 14; /**< Uma constante definindo o tamanho que a estrutura do CPF deve ter XXX.XXX.XXX-XX */
-    int const TAMANHO_CPF_AUXILIAR = 9; /**< Uma constante definindo o tamanho que a estrutura do CPF auxiliar deve ter XXXXXXXXXXX */
-    int const ULTIMO_DIGITO = TAMANHO_CPF-1; /**< Uma constante definindo o índice do último dígito do CPF */
-    int const PENULTIMO_DIGITO = TAMANHO_CPF-2; /**< Uma constante definindo o índice do penultimo dígito do CPF */
+    const static int TAMANHO_CPF = 14; /**< Uma constante definindo o tamanho que a estrutura do CPF deve ter XXX.XXX.XXX-XX */
+    const static int TAMANHO_CPF_AUXILIAR = 9; /**< Uma constante definindo o tamanho que a estrutura do CPF auxiliar deve ter XXXXXXXXXXX */
+    const static int ULTIMO_DIGITO = TAMANHO_CPF-1; /**< Uma constante definindo o índice do último dígito do CPF */
+    const static int PENULTIMO_DIGITO = TAMANHO_CPF-2; /**< Uma constante definindo o índice do penultimo dígito do CPF */
 
     /** @brief Método responsável pela validação do CPF
 *
@@ -397,7 +397,7 @@ private:
 class DataDeValidade : public Dominio{
 private:
 
-    const int TAMANHO_DATA = 5; /**< Uma constante definindo o tamanho da estrutura da Data MM/AA*/
+    const static int TAMANHO_DATA = 5; /**< Uma constante definindo o tamanho da estrutura da Data MM/AA*/
     /** @brief Método responsável pela validação da Faixa Etária
 *
 * Este método de validação atribui o mes e o ano em variáveis auxiliares, após verificar se os dados são numéricos
