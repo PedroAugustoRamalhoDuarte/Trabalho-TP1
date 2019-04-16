@@ -37,6 +37,7 @@ TEST_CASE("Teste CodigoDeEvento") {
         string codigoValido = "123";
         REQUIRE_NOTHROW(codigoDeEvento.setValor(codigoValido));
         CHECK(codigoDeEvento.getValor() ==  codigoValido);
+        CHECK(codigoDeEvento.getValor() ==  codigoValido);
     }
 }
 
