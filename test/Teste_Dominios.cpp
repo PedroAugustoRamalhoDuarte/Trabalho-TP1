@@ -3,7 +3,7 @@
 //
 
 #define CATCH_CONFIG_MAIN
-#include "../include/catch.hpp"
+#include "../lib/catch.hpp"
 #include "../include/Dominios.h"
 
 TEST_CASE("Teste NumeroDeCartao") {

@@ -2,7 +2,7 @@
 // Created by pedro on 16/04/19.
 //
 
-#include "../include/catch.hpp"
+#include "../lib/catch.hpp"
 #include "../include/Entidades.h"
 
 TEST_CASE("Teste Usuario") {

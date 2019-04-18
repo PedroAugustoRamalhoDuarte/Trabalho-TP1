@@ -1,8 +1,13 @@
 # Gerais
 
+- Analisar como fazer o doxygen para a validacao ficar documentada
 - Rodar cpplint
 
 # Pedro
 
 - Talvez Disponibilidade erro na validar n=5 deu erro
+
 # Waliff
+
+- Doxygen Entidades Set e Getters
+- Documentar Modulos, documentar arquivos

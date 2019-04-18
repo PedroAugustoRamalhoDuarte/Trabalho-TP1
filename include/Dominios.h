@@ -10,7 +10,7 @@
 #include <list>
 using namespace std;
 
-/** @brief Classe pai de todos os domínios da biblioteca
+/** @brief Classe pai de todos os domínios da biblioteca.
  *
  * Esta classe passa de herança para as classes filhas os métodos set, get e um método virtual validar,
  * assim como o atributo valor
@@ -58,9 +58,9 @@ public:
     }
 };
 
-/**
- * Classe pai dos códigos. Classe que contêm o metódo validar que funciona para todos os tipos de códigos lista
- * dos a seguir:
+/** @brief Classe abstrata pai dos Códigos.
+ *
+ * Classe que contêm o metódo validar que funciona para todos os tipos de códigos lista dos a seguir:
  * @see CodigoDeEvento
  * @see CodigoDeApresentacao
  * @see CodigoDeIngresso
@@ -81,9 +81,9 @@ protected:
 
 };
 
-/**
- * Classe filha de Codigo. Na qual a funcao é armazenar um codigo de envento
- * @see TAMANHO_CODIGO_EVENTO
+/**@brief Classe CodigoDeEvento.
+ *
+ *   Classe filha de Codigo. Na qual a funcao é armazenar um codigo de evento de tamanho 3
  */
 class CodigoDeEvento : public Codigo {
 private:
@@ -98,10 +98,10 @@ public:
 
 };
 
-/**
- * Classe filha de Código. Na qual a funcao é armazenar um código de apresentação
+/** @brief Classe CodigoDeApresentacao.
  *
- * @see CodigoDeApresentacao()
+ *      Classe filha de Código. Na qual a funcao é armazenar um código de apresentação de tamanho 4
+ *
  */
 class CodigoDeApresentacao : public Codigo {
 private:
@@ -115,8 +115,9 @@ public:
     CodigoDeApresentacao();
 };
 
-/**
- * Classe filha de Código. Na qual a funcao é armazenar um código de ingresso
+/** @brief Classe CodigoDeIngresso.
+ *
+ *      Classe filha de Código. Na qual a funcao é armazenar um código de ingresso de tamanho 5
  */
 class CodigoDeIngresso : public Codigo {
 private:
@@ -131,8 +132,9 @@ public:
 
 };
 
-/**
- * Classe filha de Codigo. Na qual a funcao é armazenar um codigo de segurança
+/** @brief Classe CodigoDeSeguranca.
+ *
+ *    Classe filha de Codigo. Na qual a funcao é armazenar um codigo de segurança de tamanho 3
  */
 class CodigoDeSeguranca : public Codigo {
 private:
@@ -395,7 +397,7 @@ private:
 
 };
 
-/** @brief Classe que manipula a Data de Validade do sistema
+/** @brief Classe que manipula a Data de Validade do sistema.
  *
  * Esta classe possui o método responsável pela validação da Data de Validade
  * */
