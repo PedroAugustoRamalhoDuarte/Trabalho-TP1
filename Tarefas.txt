@@ -4,5 +4,5 @@
 
 # Pedro
 
-
+- Talvez Disponibilidade erro na validar n=5 deu erro
 # Waliff
