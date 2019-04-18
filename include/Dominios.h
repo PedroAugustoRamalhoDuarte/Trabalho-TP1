@@ -83,6 +83,7 @@ protected:
 
 /**
  * Classe filha de Codigo. Na qual a funcao é armazenar um codigo de envento
+ * @see TAMANHO_CODIGO_EVENTO
  */
 class CodigoDeEvento : public Codigo {
 private:
@@ -99,6 +100,8 @@ public:
 
 /**
  * Classe filha de Código. Na qual a funcao é armazenar um código de apresentação
+ *
+ * @see CodigoDeApresentacao()
  */
 class CodigoDeApresentacao : public Codigo {
 private:
@@ -204,6 +207,8 @@ private:
 /** @brief Classe que manipula as cidades do sistema
  *
  * Esta classe possui o método responsável pela validação da cidade
+ *
+ * @see validar()
  * */
 class Cidade : public Dominio {
 private:
