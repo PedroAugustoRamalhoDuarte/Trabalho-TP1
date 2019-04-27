@@ -1,6 +1,14 @@
 #ifndef TRABALHOTP1_ENTIDADES_H
 #define TRABALHOTP1_ENTIDADES_H
 
+/**
+ * @file Entidades.h
+ * @brief Arquivos Header das Entidades
+ *
+ * @copyright Pedro Augusto
+ * @copyright Waliff Cordeiro
+ */
+
 #include "Dominios.h"
 
 /** @brief Classe Usuario
@@ -49,28 +57,78 @@ private:
     FaixaEtaria faixa;/**< atributo que armazena a faixa etária referente ao evento*/
 
 public:
+
+    /** @brief Retorna o atributo codigo
+     *
+     * @return Objeto do tipo CodigoDeEvento
+     */
     const CodigoDeEvento &getCodigo() const;
 
+    /**@brief Atribui ao codigo o valor passado por parâmetro
+     *
+     * @param codigo : Objeto do tipo CodigoDeEvento
+     */
     void setCodigo(const CodigoDeEvento &codigo);
 
+    /** @brief Retorna o atributo nome
+     *
+     * @return Objeto do tipo NomeDeEvento
+     */
     const NomeDeEvento &getNome() const;
 
+    /**@brief Atribui ao nome o valor passado por parâmetro
+     *
+     * @param nome : Objeto do tipo NomeDeEvento
+     */
     void setNome(const NomeDeEvento &nome);
 
+    /** @brief Retorna o atributo cidade
+     *
+     * @return Objeto do tipo Cidade
+     */
     const Cidade &getCidade() const;
 
+    /**@brief Atribui à cidade o valor passado por parâmetro
+     *
+     * @param cidade : Objeto do tipo Cidade
+     */
     void setCidade(const Cidade &cidade);
 
+    /** @brief Retorna o atributo estado
+     *
+     * @return Objeto do tipo Estado
+     */
     const Estado &getEstado() const;
 
+    /**@brief Atribui ao estado o valor passado por parâmetro
+     *
+     * @param estado : Objeto do tipo Estado
+     */
     void setEstado(const Estado &estado);
 
+    /** @brief Retorna o atributo classe
+     *
+     * @return Objeto do tipo ClasseDeEvento
+     */
     const ClasseDeEvento &getClasse() const;
 
+    /**@brief Atribui à classe o valor passado por parâmetro
+     *
+     * @param classe : Objeto do tipo ClasseDeEvento
+     */
     void setClasse(const ClasseDeEvento &classe);
 
+    /** @brief Retorna o atributo faixaEtaria
+     *
+     * @return Objeto do tipo FaixaEtaria
+     */
     const FaixaEtaria &getFaixa() const;
 
+
+    /**@brief Atribui à faixa o valor passado por parâmetro
+     *
+     * @param faixa : Objeto do tipo FaixaEtaria
+     */
     void setFaixa(const FaixaEtaria &faixa);
 };
 
@@ -97,26 +155,70 @@ private:
 public:
     const CodigoDeApresentacao &getCodigo() const;
 
+    /** @brief Atribui ao codigo o valor passado por parâmetro
+     *
+     * @param codigo : Objeto do tipo CodigoDeApresentacao
+     */
     void setCodigo(const CodigoDeApresentacao &codigo);
 
+    /** @brief Retorna o atributo data
+     *
+     * @return Objeto do tipo Data
+     */
     const Data &getData() const;
 
+    /**@brief Atribui à data o valor passado por parâmetro
+     *
+     * @param data : Objeto do tipo Data
+     */
     void setData(const Data &data);
 
+    /** @brief Retorna o atributo horario
+     *
+     * @return Objeto do tipo Horario
+     */
     const Horario &getHorario() const;
 
+    /** @brief Atribui ao horário o valor passado por parâmetro
+     *
+     * @param horario : Objeto do tipo Horario
+     */
     void setHorario(const Horario &horario);
 
+    /** @brief Retorna o atributo preco
+     *
+     * @return Objeto do tipo Preco
+     */
     const Preco &getPreco() const;
 
+    /** @brief Atribui ao preço valor passado por parâmetro
+     *
+     * @param preco : Objeto do tipo Preco
+     */
     void setPreco(const Preco &preco);
 
+    /** @brief Retorna o atributo numeroDeSala
+     *
+     * @return Objeto do tipo NumeroDeSala
+     */
     const NumeroDeSala &getNumeroDeSala() const;
 
+    /** @brief Atribui ao numeroDeSala o valor passado por parâmetro
+     *
+     * @param numeroDeSala : Objeto do tipo NumeroDeSala
+     */
     void setNumeroDeSala(const NumeroDeSala &numeroDeSala);
 
+    /** @brief Retorna o atributo disponibilidade
+     *
+     * @return Objeto do tipo Disponibilidade
+     */
     const Disponibilidade &getDisponibilidade() const;
 
+    /**@brief Atribui à disponibilidade o valor passado por parâmetro
+     *
+     * @param disponibilidade : Objeto do tipo disponibilidade
+     */
     void setDisponibilidade(const Disponibilidade &disponibilidade);
 };
 
@@ -131,8 +233,16 @@ private:
     CodigoDeIngresso codigo; /**< atributo que armazena o codigo do ingresso , Chave primária*/
 
 public:
+    /** @brief Retorna o atributo codigo
+     *
+     * @return Objeto do tipo CodigoDeIngresso
+     */
     const CodigoDeIngresso &getCodigo() const;
 
+    /** @brief Atribui ao codigo o valor passado por parâmetro
+     *
+     * @param codigo : Objeto do tipo CodigoDeIngresso
+     */
     void setCodigo(const CodigoDeIngresso &codigo);
 
 
@@ -154,16 +264,40 @@ private:
     DataDeValidade dataDeValidade; /**< atributo que armazena a data de validade do cartão de crédito */
 
 public:
+    /** @brief Retorna o atributo numero
+     *
+     * @return Objeto do tipo NumeroDeCartaoDeCredito
+     */
     const NumeroDeCartaoDeCredito &getNumero() const;
 
+    /** @brief Atribui ao numero o valor passado por parâmetro
+     *
+     * @param numero : Objeto do tipo NumeroDeCartaoDeCredito
+     */
     void setNumero(const NumeroDeCartaoDeCredito &numero);
 
+    /** @brief Retorna o atributo codigoDeSeguranca
+     *
+     * @return Objeto do tipo CodigoDeSeguranca
+     */
     const CodigoDeSeguranca &getCodigoDeSeguranca() const;
 
+    /** @brief Atribui ao codigo o valor passado por parâmetro
+     *
+     * @param codigoDeSeguranca : Objeto do tipo CodigoDeSeguranca
+     */
     void setCodigoDeSeguranca(const CodigoDeSeguranca &codigoDeSeguranca);
 
+    /** @brief Retorna o atributo dataDeValidade
+     *
+     * @return Objeto do tipo DataDeValidade
+     */
     const DataDeValidade &getDataDeValidade() const;
 
+    /** @brief Atribui à dataDevalidade o valor passado por parâmetro
+     *
+     * @param dataDeValidade : Objeto do tipo DataDeValidade
+     */
     void setDataDeValidade(const DataDeValidade &dataDeValidade);
 };
 

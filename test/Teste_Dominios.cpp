@@ -356,7 +356,7 @@ TEST_CASE("Disponibilidade") {
     string disponibilidadeAnterior;
 
     SECTION("Disponibilidade valida") {
-        string disponibilidadeValida1 = "0", disponibilidadeValida2 = "120";
+        string disponibilidadeValida1 = "6", disponibilidadeValida2 = "120";
 
         REQUIRE_NOTHROW(disponibilidade.setValor(disponibilidadeValida1));
         REQUIRE(disponibilidade.getValor() == disponibilidadeValida1);

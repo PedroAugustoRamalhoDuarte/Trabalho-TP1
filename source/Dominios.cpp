@@ -271,7 +271,11 @@ void Disponibilidade::validar(string entrada) {
             throw invalid_argument("CODIGO INVALIDO");
         }
     }
-    if ((entrada < "0") || (entrada > "250")) {
+    // Numero maior que o esperado e poderia dar erro no cast
+    if ((entrada.size()) > 4)
+        throw invalid_argument("Valor de disponibilidade invalido");
+
+    if ((stoi(entrada) < 0 || (stoi(entrada) > 250))) {
         throw invalid_argument("Valor de disponibilidade invalido");
     }
 }

@@ -1,6 +1,15 @@
 #ifndef TRABALHOTP1_DOMINIOS_H
 #define TRABALHOTP1_DOMINIOS_H
 
+/**
+ * @file Dominios.h
+ * @brief Arquivos Header dos Domínios
+ *
+ * @copyright Pedro Augusto
+ * @copyright Waliff Cordeiro
+ */
+
+
 #include <stdexcept>
 #include <iostream>
 #include <string>
@@ -8,6 +17,7 @@
 #include <cstdlib>
 #include <cctype>
 #include <list>
+
 using namespace std;
 
 /** @brief Classe pai de todos os domínios da biblioteca.
@@ -16,11 +26,13 @@ using namespace std;
  * assim como o atributo valor
  *
  * */
+
 class Dominio {
 protected:
+
     string valor; /**< Atributo no qual é armazenado a informação da classe.*/
 
-    /** @brief Método virtual validar
+    /* @brief Método virtual validar
      *
      * Método de validação de formato, no qual varia de acordo com o domínio, em caso de formato inválido
      * é retornado throw
@@ -28,7 +40,8 @@ protected:
      * @param entrada string que será validada
      * @throw invalid_argument caso não esteja no formato desejado
      *
-     * */
+     */
+
     virtual void validar(string entrada) = 0;
 
 public:
@@ -77,6 +90,7 @@ protected:
      * @param entrada uma string com o codigo para se validar.
      * @throws invalid_argument se a entrada não for do formato do código
      */
+
     void validar(string entrada) override;
 
 };
@@ -151,13 +165,16 @@ public:
 
 /** @brief Classe que manipula os nomes dos eventos do sistema
  *
- * Esta classe possui o método responsável pela validação do nome de evento
+ * Esta classe possui o método responsável pela validação do nome de evento. O valor de entrada deve estar
+ * em um formato de modo que não exista 2 espaços consecutivos, o tamanho deve ser menor que TAMANHO_NOME_EVENTO,
+ * o formato também deve conter pelo menos uma letra. Os caracteres permitidos são letras, digitos ou espaços
+ *
  * */
 class NomeDeEvento : public Dominio {
 private:
     const static int TAMANHO_NOME_EVENTO = 20; /**< const que define o tamanho do nome de evento.*/
 
-    /** @brief Metodo que valida se a entrada esta de acordo com o formato do nomeDeEvento.
+    /* @brief Metodo que valida se a entrada esta de acordo com o formato do nomeDeEvento.
      *
      * O Metodo verifica se na string de entrada há 2 espaços consecutivos, se o tamanho é menor ao TAMANHO_NOME_EVENTO
      * , se contém pelo menos uma letra, e se os caracteres da string não são letras,digitos ou espaços. Se uma das
@@ -172,11 +189,12 @@ private:
 
 /** @brief Classe que manipula os precos do sistema
  *
- * Esta classe possui o método responsável pela validação do preco
+ * Esta classe possui o método responsável pela validação do preco. O valor de entrada deve ser um número
+ * pertecente ao intervalo [0, 1000]
  * */
 class Preco : public Dominio {
 private:
-    /**@brief Método que avalia se a entrada está no formato de Preço.
+    /*@brief Método que avalia se a entrada está no formato de Preço.
      *
      * O método verifica se a string entrada está em uma intervalo de 0 a 1000, caso não estiver, será lançada uma
      * exceção do tipo invalid_argument
@@ -190,12 +208,13 @@ private:
 
 /** @brief Classe que manipula os numeros de salas do sistema
  *
- * Esta classe possui o método responsável pela validação do numero de sala
+ * Esta classe possui o método responsável pela validação do numero de sala. O valor de entrada estar no intervalo
+ * [1, 10] sendo aceito apenas caracteres numéricos
  * */
 class NumeroDeSala : public Dominio {
 private:
 
-    /**@brief Método que avalia se a entrada está no formato do NumeroDeSala.
+    /*@brief Método que avalia se a entrada está no formato do NumeroDeSala.
     *
     * O método verifica se a string entrada esta no intervalo de [1, 10], se não estiver é lançada uma exceção do tipo
     * invalid_argument
@@ -208,7 +227,9 @@ private:
 
 /** @brief Classe que manipula as cidades do sistema
  *
- * Esta classe possui o método responsável pela validação da cidade
+ * Esta classe possui o método responsável pela validação da cidade. O formato do valor deve ser uma string
+ * com o tamanho igual a TAMANHO_CIDADE (15), só é permitido conter letra, espaço ou ponto. Não pode haver mais de 1
+ * espaço consectivo e os pontos devem ser precedidos por pelo menos uma letra.
  *
  * @see validar()
  * */
@@ -216,7 +237,7 @@ class Cidade : public Dominio {
 private:
     const static int TAMANHO_CIDADE = 15; /**< const que define o tamanho da Cidade.*/
 
-    /**@brief Método que avalia se a entrada está no formato da Cidade.
+    /*@brief Método que avalia se a entrada está no formato da Cidade.
      *
      * O método verifica se a string entrada menor do que TAMANHO_CIDADE, Se cada caractere da entrada é letra,
      * espaço ou ponto, se não há espaços seguidos e se cada ponto é precedido por uma letra.Se uma das condições
@@ -231,7 +252,12 @@ private:
 
 /** @brief Classe que manipula as classes de evento do sistema
  *
- * Esta classe possui o método responsável pela validação da classe de evento
+ * Esta classe possui o método responsável pela validação da classe de evento. O valor de entrada deve ser um
+ * número pertecente ao intervalo [1, 4] sendo que:
+ * 1 = TEATRO
+ * 2 = ESPORTE
+ * 3 = SHOW NACIONAL
+ * 4 = SHOW INTERNACIONAL
  * */
 class ClasseDeEvento : public Dominio {
 private:
@@ -249,15 +275,17 @@ private:
 
 /** @brief Classe que manipula os senhas do sistema
  *
- * Esta classe possui o método responsável pela validação da senha
+ * Esta classe possui o método responsável pela validação da senha. O valor de entrada deve ser uma string e seu
+ * tamanho deve ser igual a TAMANHO_SENHA (6). Cada caracter deve ser letra ou digito. Não podem existir caracteres
+ * repetidos. Deve existir pelo menos uma letra maiúscula, uma letra minúscula e um número.
  * */
 class Senha : public Dominio{
 private:
     const static int TAMANHO_SENHA = 6; /**< const que define o tamanho da Senha */
-    /**@brief Método que avalia se a entrada está no formato da Senha.
+    /*@brief Método que avalia se a entrada está no formato da Senha.
     *
     * O método verifica se a string entrada é do tamanho do TAMANHO_SENHA, Se cada caractere da entrada é letra,
-    * ou digito,se não há caracteres repetidos e se há pelo menos uma letra maiuscula, minuscula e um digito.Se uma das
+    * ou digito,se não há caracteres repetidos e se há pelo menos uma letra maiuscula, minuscula e um número. Se uma das
     * condições anteriores forem descumpridas a string entrada não está no padrão estabelecido e é lançada uma exceção
     * do tipo invalid_argument.
     *
@@ -268,15 +296,18 @@ private:
 };
 
 
-/** @brief Classe que manipula os números de cartões do sistema
+/** @brief Classe que manipula os números de cartões do sistema. O valor de entrada deve ser uma string com tamanho
+ * igual ao TAMANHO_NUMERODECARTAO (16), o formato da entrada deve obedecer o algoritmo de Luhn, ou seja, deve
+ * ser um número de cartão existente.
  *
  * Esta classe possui o método responsável pela validação do número de cartão
  * */
+
 class NumeroDeCartaoDeCredito : public Dominio {
 private:
     const static int TAMANHO_NUMERODECARTAO = 16;
 
-    /**@brief Método que avalia se a entrada está no formato do NumeroDeCartaoDeCredito.
+    /*@brief Método que avalia se a entrada está no formato do NumeroDeCartaoDeCredito.
     *
     * O método verifica se a string entrada é do tamanho do TAMANHO_NUMERODECARTAO e se obedece o algoritmo de Luhn
     *
@@ -288,12 +319,13 @@ private:
 
 /** @brief Classe que manipula as datas do sistema
  *
- * Esta classe possui o método responsável pela validação da data
+ * Esta classe possui o método responsável pela validação da data. O valor de entrada deve ser uma string no formato
+ * DD/MM/AA, sendo que só são aceitos datas válidas, verificando-se as condições dos anos bissextos.
  * */
 class Data : public Dominio{
 private:
     const static int TAMANHO_DATA = 8; /**< Uma constante definindo o tamanho que a estrutura de data deve ter XX/XX/XX */
-    /** @brief Método responsável pela validação da Data
+    /* @brief Método responsável pela validação da Data
      *
      * Este método de validação separa a data em dia, mes e ano, após verificar se os dados são numéricos
      * verifica o intervalo de dias, meses e anos permitidos para uma data valida.
@@ -307,11 +339,12 @@ private:
 
 /** @brief Classe que manipula os horarios do sistema
  *
- * Esta classe possui o método responsável pela validação do horário
+ * Esta classe possui o método responsável pela validação do horário. O valor de entrada deve estar no formato
+ * HH:MM. Os minutos válidos são: 00, 15, 30 ou 45. As horas válidas pertencem ao intervalo [7, 22]
  * */
 class Horario : public Dominio{
 private:
-/** @brief Método responsável pela validação do horário
+/* @brief Método responsável pela validação do horário
  *
  * Este método de validação separa o horário em horas e minutos, após verificar se os dados são numéricos
  * atribui em variáveis auxiliares as horas e os minutos, verifica também se as horas estão no intervalo de
@@ -326,11 +359,12 @@ private:
 
 /** @brief Classe que manipula os Estados do sistema
  *
- * Esta classe possui o método responsável pela validação do Estado
+ * Esta classe possui o método responsável pela validação do Estado. O valor de entrada deve ser a sigla de
+ * algum Estado existente no Brasil
  * */
 class Estado : public Dominio {
 private:
-/** @brief Método responsável pela validação do Estado
+/* @brief Método responsável pela validação do Estado
 *
 * Este método de validação seleciona o Estado válido dentro dos Estados possíveis
 *
@@ -341,11 +375,12 @@ private:
 
 };
 
-/** @brief Classe que manipula a Disponibilidade do sistema
+/** @brief Classe que manipula a Disponibilidade do sistema. O valor de entrada deve pertencer ao intervalo [0, 250]
+ * sendo que só são aceitos valores numéricos.
  * */
 class Disponibilidade: public Dominio {
 private:
-/** @brief Método responsável pela validação da Disponibilidade
+/* @brief Método responsável pela validação da Disponibilidade
 *
 * Este método de validação verifica a Disponibilidade, sendo que esta deve estar entre [0, 250]
 *
@@ -358,11 +393,12 @@ private:
 
 /** @brief Classe que manipula as Faixas Etarias do sistema
  *
- * Esta classe possui o método responsável pela validação da Faixa Etaria
+ * Esta classe possui o método responsável pela validação da Faixa Etaria. Sendo que esta deve estar entre as possíveis
+ * faixas etárias: L, 10, 12, 14, 16 e 18
  * */
 class FaixaEtaria : public Dominio{
 private:
-/** @brief Método responsável pela validação da Faixa Etária
+/* @brief Método responsável pela validação da Faixa Etária
 *
 * Este método de validação seleciona a Faixa Etária válida dentro das Faixas Etárias possíveis
 *
@@ -374,7 +410,9 @@ private:
 
 /** @brief Classe que manipula os CPFS do sistema
  *
- * Esta classe possui o método responsável pela validação do CPF
+ * Esta classe possui o método responsável pela validação do CPF. O valor de entrada deve ser uma string no formato
+ * XXX.XXX.XXX-XX, no qual X são números e os dois últimos dígitos são verificadores do CPF. O valor inserido deve
+ * ser um CPF válido.
  * */
 class CPF : public Dominio{
 private:
@@ -385,34 +423,36 @@ private:
     const static int ULTIMO_DIGITO = TAMANHO_CPF-1; /**< Uma constante definindo o índice do último dígito do CPF */
     const static int PENULTIMO_DIGITO = TAMANHO_CPF-2; /**< Uma constante definindo o índice do penultimo dígito do CPF */
 
-    /** @brief Método responsável pela validação do CPF
-*
-* Este método de validação verifica o formato do CPF, após a verificação e a constatação de que todos os dígitos
-* são numéricos, verifica-se se o CPF é válido com base nos dígitos de verificação dos CPFS
-*
-* @param string uma entrada contendo o CPF
-* @throws invalid_argument se a entrada não for do formato do código ou se o CPF não for válido
-* */
+    /* @brief Método responsável pela validação do CPF
+    *
+    * Este método de validação verifica o formato do CPF, após a verificação e a constatação de que todos os dígitos
+    * são numéricos, verifica-se se o CPF é válido com base nos dígitos de verificação dos CPFS
+    *
+    * @param string uma entrada contendo o CPF
+    * @throws invalid_argument se a entrada não for do formato do código ou se o CPF não for válido
+    */
     void validar(string entrada) override;
 
 };
 
 /** @brief Classe que manipula a Data de Validade do sistema.
  *
- * Esta classe possui o método responsável pela validação da Data de Validade
+ * Esta classe possui o método responsável pela validação da Data de Validade. O valor de entrada deve ser uma string
+ * no formato MM/AA, sendo que o mês deve ser um valor numérico pertecente ao intervalo (0, 12] e o ano pertencente
+ * ao intervalo [00,99]
  * */
 class DataDeValidade : public Dominio{
 private:
 
     const static int TAMANHO_DATA = 5; /**< Uma constante definindo o tamanho da estrutura da Data MM/AA*/
-    /** @brief Método responsável pela validação da Faixa Etária
-*
-* Este método de validação atribui o mes e o ano em variáveis auxiliares, após verificar se os dados são numéricos
-* verifica-se se os meses estão no intervalo (0,12] e os anos estão no intervalo [00, 99]
-*
-* @param string uma entrada contendo a Data de Validade
-* @throws invalid_argument se a entrada não for do formato do código ou se não estiver no intervalo possível
-* */
+    /* @brief Método responsável pela validação da DataDeValidade
+    *
+    * Este método de validação atribui o mes e o ano em variáveis auxiliares, após verificar se os dados são numéricos
+    * verifica-se se os meses estão no intervalo (0,12] e os anos estão no intervalo [00, 99]
+    *
+    * @param string uma entrada contendo a Data de Validade
+    * @throws invalid_argument se a entrada não for do formato do código ou se não estiver no intervalo possível
+    */
     void validar(string entrada) override;
 };
 
