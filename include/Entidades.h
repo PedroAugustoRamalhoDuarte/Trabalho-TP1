@@ -11,7 +11,7 @@
 
 #include "Dominios.h"
 
-/** @brief Classe Usuario
+/** @brief Classe usuario
  *
  *  Responsável pelo armazenamento dos usuários no sistema com os atributos: cpf e senha.
  *  @see CPF
@@ -36,7 +36,7 @@ public:
 
 };
 
-/** @brief Classe Evento
+/** @brief Classe evento
  *
  *  Responsável pelo armazenamento dos eventos no sistema com os atributos:codigo(chave primária),nome,
  *  cidade, estado, classe, faixa.
@@ -223,7 +223,7 @@ public:
 };
 
 
-/** @brief Classe Ingresso.
+/** @brief Classe ingresso.
  *
  *  Responsável pelo armazenamento dos ingressos no sistema com o atributo:codigo(chave primária).
  */

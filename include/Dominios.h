@@ -95,7 +95,7 @@ protected:
 
 };
 
-/**@brief Classe CodigoDeEvento.
+/**@brief Classe que manipula os códigos de evento.
  *
  *   Classe filha de Codigo. Na qual a funcao é armazenar um codigo de evento de tamanho 3
  */
@@ -112,7 +112,7 @@ public:
 
 };
 
-/** @brief Classe CodigoDeApresentacao.
+/** @brief Classe que manipula os códigos de apresentacão.
  *
  *      Classe filha de Código. Na qual a funcao é armazenar um código de apresentação de tamanho 4
  *
@@ -129,7 +129,7 @@ public:
     CodigoDeApresentacao();
 };
 
-/** @brief Classe CodigoDeIngresso.
+/** @brief Classe que manipula os códigos de ingresso.
  *
  *      Classe filha de Código. Na qual a funcao é armazenar um código de ingresso de tamanho 5
  */
@@ -146,7 +146,7 @@ public:
 
 };
 
-/** @brief Classe CodigoDeSeguranca.
+/** @brief Classe que manipula os códigos de segurança.
  *
  *    Classe filha de Codigo. Na qual a funcao é armazenar um codigo de segurança de tamanho 3
  */
@@ -296,9 +296,10 @@ private:
 };
 
 
-/** @brief Classe que manipula os números de cartões do sistema. O valor de entrada deve ser uma string com tamanho
- * igual ao TAMANHO_NUMERODECARTAO (16), o formato da entrada deve obedecer o algoritmo de Luhn, ou seja, deve
- * ser um número de cartão existente.
+/** @brief Classe que manipula os números de cartões do sistema.
+ *
+ * O valor de entrada deve ser uma string com tamanho igual ao TAMANHO_NUMERODECARTAO (16), o formato da entrada deve
+ * obedecer o algoritmo de Luhn, ou seja, deve ser um número de cartão existente.
  *
  * Esta classe possui o método responsável pela validação do número de cartão
  * */
@@ -375,8 +376,9 @@ private:
 
 };
 
-/** @brief Classe que manipula a Disponibilidade do sistema. O valor de entrada deve pertencer ao intervalo [0, 250]
- * sendo que só são aceitos valores numéricos.
+/** @brief Classe que manipula a disponibilidade de ingressos do sistema.
+ *
+ *   O valor de entrada deve pertencer ao intervalo [0, 250] sendo que só são aceitos valores numéricos.
  * */
 class Disponibilidade: public Dominio {
 private:
@@ -408,7 +410,7 @@ private:
     void validar(string entrada) override;
 };
 
-/** @brief Classe que manipula os CPFS do sistema
+/** @brief Classe que manipula os CPF do sistema
  *
  * Esta classe possui o método responsável pela validação do CPF. O valor de entrada deve ser uma string no formato
  * XXX.XXX.XXX-XX, no qual X são números e os dois últimos dígitos são verificadores do CPF. O valor inserido deve
@@ -435,7 +437,7 @@ private:
 
 };
 
-/** @brief Classe que manipula a Data de Validade do sistema.
+/** @brief Classe que manipula a data de validade do sistema.
  *
  * Esta classe possui o método responsável pela validação da Data de Validade. O valor de entrada deve ser uma string
  * no formato MM/AA, sendo que o mês deve ser um valor numérico pertecente ao intervalo (0, 12] e o ano pertencente
