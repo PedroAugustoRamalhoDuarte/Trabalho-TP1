@@ -137,7 +137,7 @@ public:
  *  Responsável pelo armazenamento das apresentações no sistema com os atributos:codigo(chave primária), data, horário,
  *  preço. número da sala, disponibilidade
  */
-class Apresentacao{
+class Apresentacao {
 private:
     // Chave Primaria
     CodigoDeApresentacao codigo; /**< atributo que armazena o codigo da apresentação , Chave primária*/

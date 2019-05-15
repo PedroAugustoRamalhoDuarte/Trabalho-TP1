@@ -55,7 +55,7 @@ public:
      *
      * @see validar()
      */
-    void setValor(const string& entrada) {
+    void setValor(const string &entrada) {
         validar(entrada);
         this->valor = entrada;
     }
@@ -279,7 +279,7 @@ private:
  * tamanho deve ser igual a TAMANHO_SENHA (6). Cada caracter deve ser letra ou digito. Não podem existir caracteres
  * repetidos. Deve existir pelo menos uma letra maiúscula, uma letra minúscula e um número.
  * */
-class Senha : public Dominio{
+class Senha : public Dominio {
 private:
     const static int TAMANHO_SENHA = 6; /**< const que define o tamanho da Senha */
     /*@brief Método que avalia se a entrada está no formato da Senha.
@@ -323,7 +323,7 @@ private:
  * Esta classe possui o método responsável pela validação da data. O valor de entrada deve ser uma string no formato
  * DD/MM/AA, sendo que só são aceitos datas válidas, verificando-se as condições dos anos bissextos.
  * */
-class Data : public Dominio{
+class Data : public Dominio {
 private:
     const static int TAMANHO_DATA = 8; /**< Uma constante definindo o tamanho que a estrutura de data deve ter XX/XX/XX */
     /* @brief Método responsável pela validação da Data
@@ -343,7 +343,7 @@ private:
  * Esta classe possui o método responsável pela validação do horário. O valor de entrada deve estar no formato
  * HH:MM. Os minutos válidos são: 00, 15, 30 ou 45. As horas válidas pertencem ao intervalo [7, 22]
  * */
-class Horario : public Dominio{
+class Horario : public Dominio {
 private:
 /* @brief Método responsável pela validação do horário
  *
@@ -380,7 +380,7 @@ private:
  *
  *   O valor de entrada deve pertencer ao intervalo [0, 250] sendo que só são aceitos valores numéricos.
  * */
-class Disponibilidade: public Dominio {
+class Disponibilidade : public Dominio {
 private:
 /* @brief Método responsável pela validação da Disponibilidade
 *
@@ -398,7 +398,7 @@ private:
  * Esta classe possui o método responsável pela validação da Faixa Etaria. Sendo que esta deve estar entre as possíveis
  * faixas etárias: L, 10, 12, 14, 16 e 18
  * */
-class FaixaEtaria : public Dominio{
+class FaixaEtaria : public Dominio {
 private:
 /* @brief Método responsável pela validação da Faixa Etária
 *
@@ -416,14 +416,15 @@ private:
  * XXX.XXX.XXX-XX, no qual X são números e os dois últimos dígitos são verificadores do CPF. O valor inserido deve
  * ser um CPF válido.
  * */
-class CPF : public Dominio{
+class CPF : public Dominio {
 private:
     // validacao de cpf
 
     const static int TAMANHO_CPF = 14; /**< Uma constante definindo o tamanho que a estrutura do CPF deve ter XXX.XXX.XXX-XX */
     const static int TAMANHO_CPF_AUXILIAR = 9; /**< Uma constante definindo o tamanho que a estrutura do CPF auxiliar deve ter XXXXXXXXXXX */
-    const static int ULTIMO_DIGITO = TAMANHO_CPF-1; /**< Uma constante definindo o índice do último dígito do CPF */
-    const static int PENULTIMO_DIGITO = TAMANHO_CPF-2; /**< Uma constante definindo o índice do penultimo dígito do CPF */
+    const static int ULTIMO_DIGITO = TAMANHO_CPF - 1; /**< Uma constante definindo o índice do último dígito do CPF */
+    const static int PENULTIMO_DIGITO =
+            TAMANHO_CPF - 2; /**< Uma constante definindo o índice do penultimo dígito do CPF */
 
     /* @brief Método responsável pela validação do CPF
     *
@@ -443,7 +444,7 @@ private:
  * no formato MM/AA, sendo que o mês deve ser um valor numérico pertecente ao intervalo (0, 12] e o ano pertencente
  * ao intervalo [00,99]
  * */
-class DataDeValidade : public Dominio{
+class DataDeValidade : public Dominio {
 private:
 
     const static int TAMANHO_DATA = 5; /**< Uma constante definindo o tamanho da estrutura da Data MM/AA*/
