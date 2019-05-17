@@ -24,7 +24,6 @@ private:
 
     Senha senha;/**< atributo que armazena a senha do usuario */
 
-
 public:
     Usuario();
 
@@ -61,6 +60,7 @@ private:
     FaixaEtaria faixa;/**< atributo que armazena a faixa etária referente ao evento*/
 
 public:
+    Evento();
 
     Evento(const CodigoDeEvento &codigo, const NomeDeEvento &nome, const Cidade &cidade, const Estado &estado,
            const ClasseDeEvento &classe, const FaixaEtaria &faixa);
@@ -160,6 +160,8 @@ private:
     Disponibilidade disponibilidade; /**< atributo que armazena a disponibilidade da apresentação */
 
 public:
+    Apresentacao();
+
     Apresentacao(const CodigoDeApresentacao &codigo, const Data &data, const Horario &horario, const Preco &preco,
                  const NumeroDeSala &numeroDeSala, const Disponibilidade &disponibilidade);
 
@@ -243,6 +245,8 @@ private:
     CodigoDeIngresso codigo; /**< atributo que armazena o codigo do ingresso , Chave primária*/
 
 public:
+    Ingresso();
+
     Ingresso(const CodigoDeIngresso &codigo);
 
     /** @brief Retorna o atributo codigo

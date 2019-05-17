@@ -21,7 +21,7 @@ private:
     // Mensagem de erro
     char** mensagem;
 
-    /* Criacao de tabelas */
+    // Criacao de tabelas
 
     void criarTabelaUsuario();
 
@@ -31,9 +31,8 @@ private:
 
     void criarTabelaApresentacao();
 
+    // Funcao para Querys no database
     static int callback(void* data, int argc, char** argv, char** azColName);
-
-    void static verificarErro(int status, char* mensagem);
 
 protected:
     // Informação proveniente das querys
@@ -42,11 +41,6 @@ protected:
     string comandoSQL;
 
 public:
-
-    //void inserirUsuario(const Usuario &usuario,const CartaoDeCredito &cartaoDeCredito);
-
-    //void inserirIngresso(const Ingresso &ingresso, const CPF &cpf);
-
     void criarTabelas();
 
     void executar();

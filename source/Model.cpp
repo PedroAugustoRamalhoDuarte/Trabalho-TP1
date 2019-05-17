@@ -121,52 +121,6 @@ ModelServico::~ModelServico() {
     db = nullptr;
 }
 
-/*
-void ModelServico::inserirIngresso(const Ingresso &ingresso, const CPF &cpf) {
-    int status;
-    char sql_stm[256];
-
-    sprintf(sql_stm, "INSERT INTO ingresso VALUES(%s, \"%s\");", ingresso.getCodigo().getValor().c_str(),
-            cpf.getValor().c_str());
-
-    cout << sql_stm << endl;
-
-    status = sqlite3_exec(db, sql_stm, NULL, NULL, NULL);
-
-    if (status != SQLITE_OK) {
-        cout << "Falha ao inserir ingresso" << endl;
-    } else {
-        cout << "Ingresso inserido com sucesso" << endl;
-    }
-}*/
-/*
-void ModelServico::inserirUsuario(const Usuario &usuario, const CartaoDeCredito &cartaoDeCredito) {
-    int status = SQLITE_OK;
-    char sql_stm[256];
-    char *error;
-    sprintf(sql_stm, "INSERT INTO usuario VALUES(\"%s\", \"%s\", %s, \"%s\", \"%s\");",
-            usuario.getCpf().getValor().c_str(),
-            usuario.getSenha().getValor().c_str(),
-            cartaoDeCredito.getCodigoDeSeguranca().getValor().c_str(),
-            cartaoDeCredito.getNumero().getValor().c_str(),
-            cartaoDeCredito.getDataDeValidade().getValor().c_str());
-
-    cout << sql_stm << endl;
-
-    status = sqlite3_exec(db, sql_stm, nullptr, nullptr, &error);
-
-    if (status != SQLITE_OK) {
-        cout << "Falha ao inserir usuario" << endl;
-        cout << error << endl;
-    } else {
-        cout << "Usuario inserido com sucesso" << endl;
-    }
-} */
-
-void ModelServico::verificarErro(int status, char *mensagem) {
-    if (status != SQLITE_OK)
-        return throw invalid_argument(mensagem);
-}
 
 void ModelServico::executar() {
     status = sqlite3_exec(db, comandoSQL.c_str(), callback, (void *) data.c_str(), mensagem);
@@ -192,6 +146,11 @@ int ModelServico::callback(void *data, int argc, char **argv, char **azColName) 
 // --------------------------------------------------------------------------
 // Controladora Servico de Usuario
 
+// Construtor
+ModelServicoUsuario::ModelServicoUsuario() : ModelServico() {
+}
+
+// Metodos da Interface Serviço Usuário
 bool ModelServicoUsuario::cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) {
     comandoSQL = "INSERT INTO usuario VALUES (";
     comandoSQL += "'" + usuario.getCpf().getValor() + "', ";
@@ -200,6 +159,7 @@ bool ModelServicoUsuario::cadastrarUsuario(Usuario usuario, CartaoDeCredito cart
     comandoSQL += "'" + cartaoDeCredito.getNumero().getValor() + "',";
     comandoSQL += "'" + cartaoDeCredito.getDataDeValidade().getValor() + "');";
     try {
+        cout << "Inserindo usuario" << endl;
         this->executar();
         return true;
     } catch (invalid_argument &e) {
@@ -214,7 +174,6 @@ bool ModelServicoUsuario::mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCred
         cout << "Procurando usuario " << endl;
         cout << cpf.getValor() << endl;
         this->executar();
-        cout << data;
         return true;
     } catch (invalid_argument &e) {
         return false;
@@ -224,7 +183,7 @@ bool ModelServicoUsuario::mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCred
 bool ModelServicoUsuario::excluirUsuario(CPF cpf) {
     comandoSQL = "DELETE FROM usuario WHERE cpf = ";
     comandoSQL += "'" + cpf.getValor() + "';";
-    cout << "Excluindo Usuario ";
+    cout << "Excluindo Usuario";
     cout << cpf.getValor() << endl;
     try {
         this->executar();
@@ -232,9 +191,5 @@ bool ModelServicoUsuario::excluirUsuario(CPF cpf) {
     } catch (...) {
         return false;
     }
-
 }
 
-ModelServicoUsuario::ModelServicoUsuario() : ModelServico() {
-
-}

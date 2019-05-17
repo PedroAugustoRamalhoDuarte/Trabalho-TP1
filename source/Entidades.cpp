@@ -1,5 +1,6 @@
 #include "../include/Entidades.h"
 
+// Contrutores que incializam todos os atributos
 Usuario::Usuario(const CPF &cpf, const Senha &senha) : cpf(cpf), senha(senha) {}
 
 Evento::Evento(const CodigoDeEvento &codigo, const NomeDeEvento &nome, const Cidade &cidade, const Estado &estado,
@@ -19,6 +20,14 @@ CartaoDeCredito::CartaoDeCredito(const NumeroDeCartaoDeCredito &numero, const Co
                                                                          dataDeValidade(dataDeValidade) {}
 
 
-CartaoDeCredito::CartaoDeCredito() {}
+// Construtores Default
+Usuario::Usuario() = default;
 
-Usuario::Usuario() {}
+Evento::Evento() = default;
+
+Apresentacao::Apresentacao() = default;
+
+Ingresso::Ingresso() = default;
+
+CartaoDeCredito::CartaoDeCredito() = default;
+

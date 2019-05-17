@@ -34,8 +34,6 @@ private slots:
 
             void on_linedata_editingFinished();
 
-            void on_labelCPF_linkHovered(const QString &link);
-
 private:
     Ui::MainWindow *ui;
     ISUsuario* modelUsuario;
