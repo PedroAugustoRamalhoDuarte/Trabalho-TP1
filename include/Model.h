@@ -61,4 +61,26 @@ public:
 
     ModelServicoUsuario();
 };
+
+class ModelAutenticacao : public ModelServico, public  ISAutenticacao {
+public:
+    bool autenticar(CPF cpf, Senha senha) override;
+};
+
+class ModelEventos : public ModelServico, public ISEventos {
+public:
+    bool criarEvento(CPF cpf, Evento evento, Apresentacao *lista) override;
+
+    bool alterarEvento(CPF cpf, Evento evento) override;
+
+    bool descadastrarEvento(CPF cpf, Evento evento) override;
+
+    bool pesquisarEventos(Evento &evento, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
+};
+
+class ModelVendas : public ModelServico, public ISVendas {
+public:
+    bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) override;
+
+};
 #endif //TRABALHOTP1_MODEL_H

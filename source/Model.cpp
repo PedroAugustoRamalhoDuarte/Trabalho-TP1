@@ -22,7 +22,6 @@ ModelServico::ModelServico() {
 /* Criação de Tabelas */
 void ModelServico::criarTabelaIngresso() {
     const char *sql;
-    int status = 0;
     sql = "CREATE TABLE IF NOT EXISTS ingresso("
           "codigo_ingresso  INT PRIMARY KEY,"
           "codigo_apresentacao INT NOT NULL,"
@@ -30,7 +29,7 @@ void ModelServico::criarTabelaIngresso() {
           "FOREIGN KEY(codigo_apresentacao) REFERENCES apresentacao,"
           "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
 
-    status = sqlite3_exec(db, sql, NULL, NULL, NULL);
+    status = sqlite3_exec(db, sql, nullptr, nullptr, nullptr);
 
     if (status != SQLITE_OK) {
         cout << "Falha ao criar tabela ingresso" << endl;
@@ -41,7 +40,6 @@ void ModelServico::criarTabelaIngresso() {
 
 void ModelServico::criarTabelaUsuario() {
     const char *sql;
-    int status;
 
     sql = "CREATE TABLE IF NOT EXISTS usuario("
           "cpf VARCHAR(14) PRIMARY KEY,"
@@ -61,7 +59,6 @@ void ModelServico::criarTabelaUsuario() {
 
 void ModelServico::criarTabelaEvento() {
     const char *sql;
-    int status;
 
     sql = "CREATE TABLE IF NOT EXISTS evento("
           "cpf_usuario VARCHAR(14) NOT NULL,"
@@ -84,7 +81,6 @@ void ModelServico::criarTabelaEvento() {
 
 void ModelServico::criarTabelaApresentacao() {
     const char *sql;
-    int status;
 
     sql = "CREATE TABLE IF NOT EXISTS apresentacao("
           "codigo_evento int REFERENCES evento NOT NULL,"
@@ -129,7 +125,7 @@ void ModelServico::executar() {
             free(mensagem);
         throw invalid_argument("Erro na execucao do comando SQL");
     }
-};
+}
 
 int ModelServico::callback(void *data, int argc, char **argv, char **azColName) {
     int i;
@@ -144,7 +140,7 @@ int ModelServico::callback(void *data, int argc, char **argv, char **azColName) 
 }
 
 // --------------------------------------------------------------------------
-// Controladora Servico de Usuario
+// Model Servico de Usuario
 
 // Construtor
 ModelServicoUsuario::ModelServicoUsuario() : ModelServico() {
@@ -193,3 +189,47 @@ bool ModelServicoUsuario::excluirUsuario(CPF cpf) {
     }
 }
 
+// --------------------------------------------------------------------------
+// Model Servico Autenticacao
+
+bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
+    comandoSQL = "SELECT senha FROM usuario WHERE cpf =";
+    comandoSQL += "'" + cpf.getValor() + "';";
+    cout << "Autenticando Usuario";
+    cout << cpf.getValor() << endl;
+    try {
+        // Verificar se as senhas coincidem
+        this->executar();
+        return true;
+    } catch(...) {
+        return false;
+    }
+
+
+}
+
+// --------------------------------------------------------------------------
+// Model Eventos Autenticacao
+
+bool ModelEventos::criarEvento(CPF cpf, Evento evento, Apresentacao *lista) {
+    return false;
+}
+
+bool ModelEventos::alterarEvento(CPF cpf, Evento evento) {
+    return false;
+}
+
+bool ModelEventos::descadastrarEvento(CPF cpf, Evento evento) {
+    return false;
+}
+
+bool ModelEventos::pesquisarEventos(Evento &evento, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) {
+    return false;
+}
+
+// --------------------------------------------------------------------------
+// Model Serviço Vendas
+
+bool ModelVendas::adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) {
+    return false;
+}
