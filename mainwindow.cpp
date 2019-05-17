@@ -4,8 +4,6 @@
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QToolTip>
-#include <QPixmap>
 MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::MainWindow)
@@ -13,7 +11,11 @@ MainWindow::MainWindow(QWidget *parent) :
     modelUsuario = new ModelServicoUsuario();
     ui->setupUi(this);
 
-    QPixmap pix("../TrabalhoTP1/imagens/interrogacao.png");
+    // Diretorio Caso QtCreator
+    // QPixmap pix("../TrabalhoTP1/imagens/interrogacao.png");
+
+    // Diretorio caso Clion
+    QPixmap pix("../imagens/interrogacao.png");
     ui->helpCPF->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpCPF->setToolTip("O CPF deve estar no formato XXX.XXX.XXX-XX no qual X são números válidos");
     ui->helpSenha->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));

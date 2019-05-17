@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QToolTip>
+#include <QPixmap>
 #include "include/Model.h"
 
 namespace Ui {
