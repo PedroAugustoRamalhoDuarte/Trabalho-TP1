@@ -26,6 +26,10 @@ private:
 
 
 public:
+    Usuario();
+
+    Usuario(const CPF &cpf, const Senha &senha);
+
     const CPF getCpf() const;
 
     void setCpf(const CPF &cpf);
@@ -57,6 +61,9 @@ private:
     FaixaEtaria faixa;/**< atributo que armazena a faixa etária referente ao evento*/
 
 public:
+
+    Evento(const CodigoDeEvento &codigo, const NomeDeEvento &nome, const Cidade &cidade, const Estado &estado,
+           const ClasseDeEvento &classe, const FaixaEtaria &faixa);
 
     /** @brief Retorna o atributo codigo
      *
@@ -153,6 +160,9 @@ private:
     Disponibilidade disponibilidade; /**< atributo que armazena a disponibilidade da apresentação */
 
 public:
+    Apresentacao(const CodigoDeApresentacao &codigo, const Data &data, const Horario &horario, const Preco &preco,
+                 const NumeroDeSala &numeroDeSala, const Disponibilidade &disponibilidade);
+
     const CodigoDeApresentacao &getCodigo() const;
 
     /** @brief Atribui ao codigo o valor passado por parâmetro
@@ -233,6 +243,8 @@ private:
     CodigoDeIngresso codigo; /**< atributo que armazena o codigo do ingresso , Chave primária*/
 
 public:
+    Ingresso(const CodigoDeIngresso &codigo);
+
     /** @brief Retorna o atributo codigo
      *
      * @return Objeto do tipo CodigoDeIngresso
@@ -264,6 +276,11 @@ private:
     DataDeValidade dataDeValidade; /**< atributo que armazena a data de validade do cartão de crédito */
 
 public:
+    CartaoDeCredito();
+
+    CartaoDeCredito(const NumeroDeCartaoDeCredito &numero, const CodigoDeSeguranca &codigoDeSeguranca,
+                    const DataDeValidade &dataDeValidade);
+
     /** @brief Retorna o atributo numero
      *
      * @return Objeto do tipo NumeroDeCartaoDeCredito
@@ -322,6 +339,8 @@ inline void Usuario::setSenha(const Senha &senha) {
     Usuario::senha = senha;
 }
 
+
+
 // Evento
 inline const CodigoDeEvento &Evento::getCodigo() const {
     return codigo;
@@ -370,6 +389,7 @@ inline const FaixaEtaria &Evento::getFaixa() const {
 inline void Evento::setFaixa(const FaixaEtaria &faixa) {
     Evento::faixa = faixa;
 }
+
 
 // Apresentacao
 
@@ -431,6 +451,8 @@ inline void Ingresso::setCodigo(const CodigoDeIngresso &codigo) {
     Ingresso::codigo = codigo;
 }
 
+
+
 // Cartao de credito
 
 inline const NumeroDeCartaoDeCredito &CartaoDeCredito::getNumero() const {
@@ -456,5 +478,8 @@ inline const DataDeValidade &CartaoDeCredito::getDataDeValidade() const {
 inline void CartaoDeCredito::setDataDeValidade(const DataDeValidade &dataDeValidade) {
     CartaoDeCredito::dataDeValidade = dataDeValidade;
 }
+
+
+
 
 #endif //TRABALHOTP1_ENTIDADES_H

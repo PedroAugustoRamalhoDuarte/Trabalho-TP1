@@ -2,9 +2,9 @@
 // Created by pedro on 14/05/19.
 //
 
-#include "BdController.h"
+#include "../include/Model.h"
 
-BdController::BdController() {
+ModelServico::ModelServico() {
     cout << "Conectando..." << endl;
     int error = 0;
     error = sqlite3_open("example.db", &db);
@@ -20,7 +20,7 @@ BdController::BdController() {
 }
 
 /* Criação de Tabelas */
-void BdController::criarTabelaIngresso() {
+void ModelServico::criarTabelaIngresso() {
     const char *sql;
     int status = 0;
     sql = "CREATE TABLE IF NOT EXISTS ingresso("
@@ -39,7 +39,7 @@ void BdController::criarTabelaIngresso() {
     }
 }
 
-void BdController::criarTabelaUsuario() {
+void ModelServico::criarTabelaUsuario() {
     const char *sql;
     int status;
 
@@ -59,7 +59,7 @@ void BdController::criarTabelaUsuario() {
     }
 }
 
-void BdController::criarTabelaEvento() {
+void ModelServico::criarTabelaEvento() {
     const char *sql;
     int status;
 
@@ -82,7 +82,7 @@ void BdController::criarTabelaEvento() {
     }
 }
 
-void BdController::criarTabelaApresentacao() {
+void ModelServico::criarTabelaApresentacao() {
     const char *sql;
     int status;
 
@@ -107,7 +107,7 @@ void BdController::criarTabelaApresentacao() {
 
 /***********************************************************/
 
-void BdController::criarTabelas() {
+void ModelServico::criarTabelas() {
     // Testar se deu erro depois
     criarTabelaUsuario();
     criarTabelaEvento();
@@ -115,12 +115,14 @@ void BdController::criarTabelas() {
     criarTabelaIngresso();
 }
 
-BdController::~BdController() {
+ModelServico::~ModelServico() {
+    cout << "Closing DataBase... " << endl;
     sqlite3_close(db);
     db = nullptr;
 }
 
-void BdController::inserirIngresso(const Ingresso &ingresso, const CPF &cpf) {
+/*
+void ModelServico::inserirIngresso(const Ingresso &ingresso, const CPF &cpf) {
     int status;
     char sql_stm[256];
 
@@ -136,12 +138,12 @@ void BdController::inserirIngresso(const Ingresso &ingresso, const CPF &cpf) {
     } else {
         cout << "Ingresso inserido com sucesso" << endl;
     }
-}
-
-void BdController::inserirUsuario(const Usuario &usuario, const CartaoDeCredito &cartaoDeCredito) {
+}*/
+/*
+void ModelServico::inserirUsuario(const Usuario &usuario, const CartaoDeCredito &cartaoDeCredito) {
     int status = SQLITE_OK;
     char sql_stm[256];
-    char* error;
+    char *error;
     sprintf(sql_stm, "INSERT INTO usuario VALUES(\"%s\", \"%s\", %s, \"%s\", \"%s\");",
             usuario.getCpf().getValor().c_str(),
             usuario.getSenha().getValor().c_str(),
@@ -159,11 +161,80 @@ void BdController::inserirUsuario(const Usuario &usuario, const CartaoDeCredito 
     } else {
         cout << "Usuario inserido com sucesso" << endl;
     }
-}
+} */
 
-void BdController::verificarErro(int status, char *mensagem) {
+void ModelServico::verificarErro(int status, char *mensagem) {
     if (status != SQLITE_OK)
         return throw invalid_argument(mensagem);
 }
 
+void ModelServico::executar() {
+    status = sqlite3_exec(db, comandoSQL.c_str(), callback, (void *) data.c_str(), mensagem);
+    if (status != SQLITE_OK) {
+        if (mensagem)
+            free(mensagem);
+        throw invalid_argument("Erro na execucao do comando SQL");
+    }
+};
 
+int ModelServico::callback(void *data, int argc, char **argv, char **azColName) {
+    int i;
+    fprintf(stderr, "%s: ", (const char *) data);
+
+    for (i = 0; i < argc; i++) {
+        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+    }
+
+    printf("\n");
+    return 0;
+}
+
+// --------------------------------------------------------------------------
+// Controladora Servico de Usuario
+
+bool ModelServicoUsuario::cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) {
+    comandoSQL = "INSERT INTO usuario VALUES (";
+    comandoSQL += "'" + usuario.getCpf().getValor() + "', ";
+    comandoSQL += "'" + usuario.getSenha().getValor() + "',";
+    comandoSQL += "'" + cartaoDeCredito.getCodigoDeSeguranca().getValor() + "',";
+    comandoSQL += "'" + cartaoDeCredito.getNumero().getValor() + "',";
+    comandoSQL += "'" + cartaoDeCredito.getDataDeValidade().getValor() + "');";
+    try {
+        this->executar();
+        return true;
+    } catch (invalid_argument &e) {
+        return false;
+    }
+}
+
+bool ModelServicoUsuario::mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) {
+    comandoSQL = "SELECT * FROM usuario WHERE cpf = ";
+    comandoSQL += "'" + cpf.getValor() + "';";
+    try {
+        cout << "Procurando usuario " << endl;
+        cout << cpf.getValor() << endl;
+        this->executar();
+        cout << data;
+        return true;
+    } catch (invalid_argument &e) {
+        return false;
+    }
+}
+
+bool ModelServicoUsuario::excluirUsuario(CPF cpf) {
+    comandoSQL = "DELETE FROM usuario WHERE cpf = ";
+    comandoSQL += "'" + cpf.getValor() + "';";
+    cout << "Excluindo Usuario ";
+    cout << cpf.getValor() << endl;
+    try {
+        this->executar();
+        return true;
+    } catch (...) {
+        return false;
+    }
+
+}
+
+ModelServicoUsuario::ModelServicoUsuario() : ModelServico() {
+
+}

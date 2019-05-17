@@ -27,12 +27,15 @@ public:
 
 class ISUsuario {
 public:
-    virtual bool cadastrar(Usuario usuario, CartaoDeCredito cartaoDeCredito) = 0;
-    virtual bool excluir(CPF cpf) = 0;
+    virtual bool cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) = 0;
+    virtual bool mostrarUsuario(CPF cpf, Usuario* usuario, CartaoDeCredito* cartaoDeCredito) = 0;
+    virtual bool excluirUsuario(CPF cpf) = 0;
 };
+
 
 class ISVendas {
 public:
     virtual bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo,int quantidade) = 0;
 };
+
 #endif //TRABALHOTP1_INTERFACES_SERVICOS_H
