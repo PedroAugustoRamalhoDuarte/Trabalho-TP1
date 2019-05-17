@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->helpCPF->setToolTip("O CPF deve estar no formato XXX.XXX.XXX-XX no qual X são números válidos");
     ui->helpSenha->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpSenha->setToolTip("A senha deve conter pelo menos 6 caracteres, sendo que deve ter pelo menos uma letra maiúscula, <br>"
-                              "uma minúscula e não pode conter dois caracteres repetidos");
+                              "uma minúscula, um dígito e não pode conter dois caracteres repetidos");
     ui->helpCartao->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpCartao->setToolTip("O cartão deve conter um número válido sem espaço entre os números");
     ui->helpCodigo->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
