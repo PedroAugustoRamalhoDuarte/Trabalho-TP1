@@ -14,10 +14,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     QPixmap pix("../TrabalhoTP1/imagens/interrogacao.png");
-    ui->helpCPF->setPixmap(pix.scaled(40,40,Qt::KeepAspectRatio));
-    ui->helpCPF->setToolTip("O CPF deve estar no formato <br>XXX.XXX.XXX-XX no qual X são números válidos");
-    ui->helpSenha->setPixmap(pix.scaled(40,40,Qt::KeepAspectRatio));
-    ui->helpSenha->setToolTip("cpf");
+    ui->helpCPF->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->helpCPF->setToolTip("O CPF deve estar no formato XXX.XXX.XXX-XX no qual X são números válidos");
+    ui->helpSenha->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->helpSenha->setToolTip("A senha deve conter pelo menos 6 caracteres, sendo que deve ter pelo menos uma letra maiúscula, <br>"
+                              "uma minúscula e não pode conter dois caracteres repetidos");
+    ui->helpCartao->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->helpCartao->setToolTip("O cartão deve conter um número válido sem espaço entre os números");
+    ui->helpCodigo->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->helpCodigo->setToolTip("O Código conter os 3 digitos de segurança");
+    ui->helpValidade->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->helpValidade->setToolTip("A data deve estar no formato MM/AA, no qual MM é o mês e AA o ano");
 }
 
 MainWindow::~MainWindow()
