@@ -115,7 +115,7 @@ void Senha::validar(string entrada) {
     bool contemDigit = false, contemLetraMaiuscula = false, contemLetraMinuscula = false;
     // lista para verificao de caracteres repetidos
     list <char> listaChar;
-    if (entrada.size() < TAMANHO_SENHA) {
+    if (entrada.size() < TAMANHO_SENHA || entrada.size() > (2*TAMANHO_SENHA)) {
         throw invalid_argument("Formato Invalido de Senha");
     } else {
         // Se for no tamanho valido

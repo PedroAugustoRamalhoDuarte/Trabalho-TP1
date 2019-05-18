@@ -195,6 +195,18 @@ TEST_CASE("Senha") {
             REQUIRE_THROWS(senha.setValor(senhaInvalida));
             REQUIRE(senha.getValor() == senhaAnterior);
         }
+        SECTION("Senha com menos de 6 caracteres") {
+            senhaInvalida = "12bA";
+            senhaAnterior = senha.getValor();
+            REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
+        }
+        SECTION("Senha com mais de 12 caracteres") {
+            senhaInvalida = "wfY12bAcd89034";
+            senhaAnterior = senha.getValor();
+            REQUIRE_THROWS(senha.setValor(senhaInvalida));
+            REQUIRE(senha.getValor() == senhaAnterior);
+        }
     }
 
     SECTION("Senha Valida") {

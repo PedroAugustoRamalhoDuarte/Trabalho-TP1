@@ -12,15 +12,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     // Diretorio Caso QtCreator
-    // QPixmap pix("../TrabalhoTP1/imagens/interrogacao.png");
+    QPixmap pix("../TrabalhoTP1/imagens/interrogacao.png");
 
     // Diretorio caso Clion
-    QPixmap pix("../imagens/interrogacao.png");
+    //QPixmap pix("../imagens/interrogacao.png");
     ui->helpCPF->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpCPF->setToolTip("O CPF deve estar no formato XXX.XXX.XXX-XX no qual X são números válidos");
     ui->helpSenha->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
-    ui->helpSenha->setToolTip("A senha deve conter pelo menos 6 caracteres, sendo que deve ter pelo menos uma letra maiúscula, <br>"
-                              "uma minúscula, um dígito e não pode conter dois caracteres repetidos");
+    ui->helpSenha->setToolTip("A senha deve conter no mínimo 6 caracteres e no máximo 12. Entre os caracteres deve ter pelo menos uma letra maiúscula, <br>"
+                              "uma minúscula e um dígito. Não pode conter dois caracteres repetidos.");
     ui->helpCartao->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpCartao->setToolTip("O cartão deve conter um número válido sem espaço entre os números");
     ui->helpCodigo->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
