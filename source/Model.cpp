@@ -4,10 +4,13 @@
 
 #include "../include/Model.h"
 
-ModelServico::ModelServico() {
+list<string> Model::listaResultados = {};
+
+Model::Model() {
     cout << "Conectando..." << endl;
     int error = 0;
     error = sqlite3_open("example.db", &db);
+
 
     if (error) {
 
@@ -20,7 +23,7 @@ ModelServico::ModelServico() {
 }
 
 /* Criação de Tabelas */
-void ModelServico::criarTabelaIngresso() {
+void Model::criarTabelaIngresso() {
     const char *sql;
     sql = "CREATE TABLE IF NOT EXISTS ingresso("
           "codigo_ingresso  INT PRIMARY KEY,"
@@ -38,12 +41,12 @@ void ModelServico::criarTabelaIngresso() {
     }
 }
 
-void ModelServico::criarTabelaUsuario() {
+void Model::criarTabelaUsuario() {
     const char *sql;
 
     sql = "CREATE TABLE IF NOT EXISTS usuario("
           "cpf VARCHAR(14) PRIMARY KEY,"
-          "senha VARCHAR(6) NOT NULL,"
+          "senha VARCHAR(12) NOT NULL,"
           "codigo_cartao INT NOT NULL,"
           "numero_cartao VARCHAR(16) NOT NULL,"
           "data_validade VARCHAR(5) NOT NULL);";
@@ -57,7 +60,7 @@ void ModelServico::criarTabelaUsuario() {
     }
 }
 
-void ModelServico::criarTabelaEvento() {
+void Model::criarTabelaEvento() {
     const char *sql;
 
     sql = "CREATE TABLE IF NOT EXISTS evento("
@@ -79,7 +82,7 @@ void ModelServico::criarTabelaEvento() {
     }
 }
 
-void ModelServico::criarTabelaApresentacao() {
+void Model::criarTabelaApresentacao() {
     const char *sql;
 
     sql = "CREATE TABLE IF NOT EXISTS apresentacao("
@@ -103,7 +106,7 @@ void ModelServico::criarTabelaApresentacao() {
 
 /***********************************************************/
 
-void ModelServico::criarTabelas() {
+void Model::criarTabelas() {
     // Testar se deu erro depois
     criarTabelaUsuario();
     criarTabelaEvento();
@@ -111,15 +114,15 @@ void ModelServico::criarTabelas() {
     criarTabelaIngresso();
 }
 
-ModelServico::~ModelServico() {
+Model::~Model() {
     cout << "Closing DataBase... " << endl;
     sqlite3_close(db);
     db = nullptr;
 }
 
 
-void ModelServico::executar() {
-    status = sqlite3_exec(db, comandoSQL.c_str(), callback, (void *) data.c_str(), mensagem);
+void Model::executar() {
+    status = sqlite3_exec(db, comandoSQL.c_str(), callback, nullptr, mensagem);
     if (status != SQLITE_OK) {
         if (mensagem)
             free(mensagem);
@@ -127,15 +130,20 @@ void ModelServico::executar() {
     }
 }
 
-int ModelServico::callback(void *data, int argc, char **argv, char **azColName) {
+int Model::callback(void *notUsed, int argc, char **argv, char **azColName) {
     int i;
-    fprintf(stderr, "%s: ", (const char *) data);
-
+    //cout << "ARGC:" << argc << endl;
+    //cout << "ARGV:" << *argv << endl;
+    //fprintf(stderr, "%s: ", (const char *) data);
+    /*
     for (i = 0; i < argc; i++) {
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
+    } 
+    printf("\n");*/
 
-    printf("\n");
+    for (i = 0; i < argc; i++) {
+        listaResultados.push_back(argv[i]);
+    }
     return 0;
 }
 
@@ -143,11 +151,11 @@ int ModelServico::callback(void *data, int argc, char **argv, char **azColName) 
 // Model Servico de Usuario
 
 // Construtor
-ModelServicoUsuario::ModelServicoUsuario() : ModelServico() {
+ModelUsuario::ModelUsuario() : Model() {
 }
 
 // Metodos da Interface Serviço Usuário
-bool ModelServicoUsuario::cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) {
+bool ModelUsuario::cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) {
     comandoSQL = "INSERT INTO usuario VALUES (";
     comandoSQL += "'" + usuario.getCpf().getValor() + "', ";
     comandoSQL += "'" + usuario.getSenha().getValor() + "',";
@@ -155,7 +163,7 @@ bool ModelServicoUsuario::cadastrarUsuario(Usuario usuario, CartaoDeCredito cart
     comandoSQL += "'" + cartaoDeCredito.getNumero().getValor() + "',";
     comandoSQL += "'" + cartaoDeCredito.getDataDeValidade().getValor() + "');";
     try {
-        cout << "Inserindo usuario" << endl;
+        cout << "Inserindo usuario :" << endl;
         this->executar();
         return true;
     } catch (invalid_argument &e) {
@@ -163,23 +171,24 @@ bool ModelServicoUsuario::cadastrarUsuario(Usuario usuario, CartaoDeCredito cart
     }
 }
 
-bool ModelServicoUsuario::mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) {
+bool ModelUsuario::mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) {
     comandoSQL = "SELECT * FROM usuario WHERE cpf = ";
     comandoSQL += "'" + cpf.getValor() + "';";
     try {
-        cout << "Procurando usuario " << endl;
+        cout << "Procurando usuario : ";
         cout << cpf.getValor() << endl;
         this->executar();
+        //cout << listaResultados.front();
         return true;
     } catch (invalid_argument &e) {
         return false;
     }
 }
 
-bool ModelServicoUsuario::excluirUsuario(CPF cpf) {
+bool ModelUsuario::excluirUsuario(CPF cpf) {
     comandoSQL = "DELETE FROM usuario WHERE cpf = ";
     comandoSQL += "'" + cpf.getValor() + "';";
-    cout << "Excluindo Usuario";
+    cout << "Excluindo Usuario : ";
     cout << cpf.getValor() << endl;
     try {
         this->executar();
@@ -192,6 +201,8 @@ bool ModelServicoUsuario::excluirUsuario(CPF cpf) {
 // --------------------------------------------------------------------------
 // Model Servico Autenticacao
 
+ModelAutenticacao::ModelAutenticacao() : Model() {}
+
 bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
     comandoSQL = "SELECT senha FROM usuario WHERE cpf =";
     comandoSQL += "'" + cpf.getValor() + "';";
@@ -200,7 +211,14 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
     try {
         // Verificar se as senhas coincidem
         this->executar();
-        return true;
+        if(listaResultados.back() == senha.getValor()) {
+            listaResultados.clear();
+            return true;
+        } else {
+            listaResultados.clear();
+            return false;
+        }
+
     } catch(...) {
         return false;
     }
@@ -210,6 +228,7 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
 
 // --------------------------------------------------------------------------
 // Model Eventos Autenticacao
+ModelEventos::ModelEventos() : Model() {}
 
 bool ModelEventos::criarEvento(CPF cpf, Evento evento, Apresentacao *lista) {
     return false;
@@ -229,6 +248,7 @@ bool ModelEventos::pesquisarEventos(Evento &evento, Data dataInicio, Data dataTe
 
 // --------------------------------------------------------------------------
 // Model Serviço Vendas
+ModelVendas::ModelVendas() : Model() {}
 
 bool ModelVendas::adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) {
     return false;

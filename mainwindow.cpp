@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::MainWindow)
 {
-    modelUsuario = new ModelServicoUsuario();
+    modelUsuario = new ModelUsuario();
     ui->setupUi(this);
 
     // Diretorio Caso QtCreator
@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete (ModelServicoUsuario*)(modelUsuario);
+    delete (ModelUsuario*)(modelUsuario);
     delete ui;
 }
 

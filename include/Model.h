@@ -10,7 +10,7 @@
 #include <iostream>
 #include <sqlite3.h>
 
-class ModelServico {
+class Model {
 private:
     // Ponteiro para o bd
     sqlite3* db;
@@ -32,11 +32,11 @@ private:
     void criarTabelaApresentacao();
 
     // Funcao para Querys no database
-    static int callback(void* data, int argc, char** argv, char** azColName);
+    static int callback(void* notUsed, int argc, char** argv, char** azColName);
 
 protected:
     // Informação proveniente das querys
-    string data;
+    static list<string> listaResultados;
 
     string comandoSQL;
 
@@ -45,13 +45,13 @@ public:
 
     void executar();
 
-    ModelServico();
+    Model();
 
-    virtual ~ModelServico();
+    virtual ~Model();
 };
 
 
-class ModelServicoUsuario : public ModelServico, public ISUsuario {
+class ModelUsuario : public Model, public ISUsuario {
 public:
     bool cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) override;
 
@@ -59,15 +59,17 @@ public:
 
     bool excluirUsuario(CPF cpf) override;
 
-    ModelServicoUsuario();
+    ModelUsuario();
 };
 
-class ModelAutenticacao : public ModelServico, public  ISAutenticacao {
+class ModelAutenticacao : public Model, public  ISAutenticacao {
 public:
     bool autenticar(CPF cpf, Senha senha) override;
+
+    ModelAutenticacao();
 };
 
-class ModelEventos : public ModelServico, public ISEventos {
+class ModelEventos : public Model, public ISEventos {
 public:
     bool criarEvento(CPF cpf, Evento evento, Apresentacao *lista) override;
 
@@ -76,11 +78,14 @@ public:
     bool descadastrarEvento(CPF cpf, Evento evento) override;
 
     bool pesquisarEventos(Evento &evento, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
+
+    ModelEventos();
 };
 
-class ModelVendas : public ModelServico, public ISVendas {
+class ModelVendas : public Model, public ISVendas {
 public:
     bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) override;
 
+    ModelVendas();
 };
 #endif //TRABALHOTP1_MODEL_H

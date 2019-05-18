@@ -25,16 +25,39 @@ private:
     Senha senha;/**< atributo que armazena a senha do usuario */
 
 public:
+    /** @brief Construtor Default da classe Usuario
+     *
+     */
     Usuario();
 
+    /** @brief Construtor que inicializa todos os atributos
+     *
+     * @param cpf
+     * @param senha
+     */
     Usuario(const CPF &cpf, const Senha &senha);
-
+    /** @brief Retorna o atributo cpf
+    *
+    * @return Objeto do tipo CPF
+    */
     const CPF getCpf() const;
 
+    /**@brief Atribui ao cpf o valor passado por parâmetro
+     *
+     * @param codigo : Objeto do tipo CPF
+     */
     void setCpf(const CPF &cpf);
 
+    /** @brief Retorna o atributo senha
+    *
+    * @return Objeto do tipo Senha
+    */
     const Senha &getSenha() const;
 
+    /**@brief Atribui ao codigo a senha passado por parâmetro
+     *
+     * @param codigo : Objeto do tipo Senha
+     */
     void setSenha(const Senha &senha);
 
 };
@@ -60,8 +83,20 @@ private:
     FaixaEtaria faixa;/**< atributo que armazena a faixa etária referente ao evento*/
 
 public:
+    /** @brief Construtor default da classe Evento
+     *
+     */
     Evento();
 
+    /** @brief Construtor que inicializa todas as variaveis da classe evento
+     *
+     * @param codigo
+     * @param nome
+     * @param cidade
+     * @param estado
+     * @param classe
+     * @param faixa
+     */
     Evento(const CodigoDeEvento &codigo, const NomeDeEvento &nome, const Cidade &cidade, const Estado &estado,
            const ClasseDeEvento &classe, const FaixaEtaria &faixa);
 
@@ -160,8 +195,20 @@ private:
     Disponibilidade disponibilidade; /**< atributo que armazena a disponibilidade da apresentação */
 
 public:
+    /** @brief Construtor default da classe Apresentacao
+     *
+     */
     Apresentacao();
 
+    /** @brief Construtor que inicializa todos os atributos
+     *
+     * @param codigo
+     * @param data
+     * @param horario
+     * @param preco
+     * @param numeroDeSala
+     * @param disponibilidade
+     */
     Apresentacao(const CodigoDeApresentacao &codigo, const Data &data, const Horario &horario, const Preco &preco,
                  const NumeroDeSala &numeroDeSala, const Disponibilidade &disponibilidade);
 
@@ -245,8 +292,15 @@ private:
     CodigoDeIngresso codigo; /**< atributo que armazena o codigo do ingresso , Chave primária*/
 
 public:
+    /** @brief Construtor default da class Ingresso
+     *
+     */
     Ingresso();
 
+    /** @brief Construtor que inicializa todos os atributos
+     *
+     * @param codigo
+     */
     Ingresso(const CodigoDeIngresso &codigo);
 
     /** @brief Retorna o atributo codigo
@@ -280,8 +334,17 @@ private:
     DataDeValidade dataDeValidade; /**< atributo que armazena a data de validade do cartão de crédito */
 
 public:
+    /** @brief Construtor default da classe CartaoDeCredito
+     *
+     */
     CartaoDeCredito();
 
+    /** @brief Construtor que inicializa todos os atributos
+     *
+     * @param numero
+     * @param codigoDeSeguranca
+     * @param dataDeValidade
+     */
     CartaoDeCredito(const NumeroDeCartaoDeCredito &numero, const CodigoDeSeguranca &codigoDeSeguranca,
                     const DataDeValidade &dataDeValidade);
 
@@ -342,7 +405,6 @@ inline const Senha &Usuario::getSenha() const {
 inline void Usuario::setSenha(const Senha &senha) {
     Usuario::senha = senha;
 }
-
 
 
 // Evento
@@ -482,8 +544,6 @@ inline const DataDeValidade &CartaoDeCredito::getDataDeValidade() const {
 inline void CartaoDeCredito::setDataDeValidade(const DataDeValidade &dataDeValidade) {
     CartaoDeCredito::dataDeValidade = dataDeValidade;
 }
-
-
 
 
 #endif //TRABALHOTP1_ENTIDADES_H
