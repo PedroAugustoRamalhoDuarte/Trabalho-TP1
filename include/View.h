@@ -6,9 +6,9 @@
 #define TRABALHOTP1_VIEW_H
 
 
-class View {
+#include "Interfaces_Apresentacao.h"
 
-};
+
 
 
 #endif //TRABALHOTP1_VIEW_H

@@ -3,14 +3,21 @@
 //
 
 #include "mainwindow.h"
+#include "controladora.h"
 #include <QApplication>
 #include <QPushButton>
-
+#include "./include/View.h"
 int main(int argc, char *argv[])
 {
+    CPF cpf;
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
 
-    return a.exec();
+    Controladora control;
+    control.show();
+    a.exec();
+    cout << "passou main" << endl;
+    control.show();
+    a.exec();
+
+    return 0;
 }

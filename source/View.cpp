@@ -3,3 +3,4 @@
 //
 
 #include "../include/View.h"
+#include "../mainwindow.h"

@@ -6,17 +6,20 @@
 #include <QToolTip>
 #include <QPixmap>
 #include "include/Model.h"
-
+#include "include/Interfaces_Apresentacao.h"
 namespace Ui {
     class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+class MainWindow : public QMainWindow, public IAUsuario
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *paren0t = nullptr);
+
+    void executar(CPF &cpf);
+
     ~MainWindow();
 
 private slots:

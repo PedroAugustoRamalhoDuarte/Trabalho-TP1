@@ -28,19 +28,24 @@ CONFIG += c++11
 LIBS += -l sqlite3
 
 SOURCES += \
+        controladora.cpp \
         main.cpp \
         mainwindow.cpp \
         source/Entidades.cpp \
         source/Dominios.cpp \
-        source/Model.cpp
+        source/Model.cpp \
+        source/View.cpp
 
 HEADERS += \
+        controladora.h \
         mainwindow.h \
         include/Entidades.h \
         include/Dominios.h \
-        include/Model.h
+        include/Model.h \
+        include/View.h
 
 FORMS += \
+        controladora.ui \
         mainwindow.ui
 
 # Default rules for deployment.

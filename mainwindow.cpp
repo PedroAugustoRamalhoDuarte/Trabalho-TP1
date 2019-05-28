@@ -29,6 +29,11 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->helpValidade->setToolTip("A data deve estar no formato MM/AA, no qual MM é o mês e AA o ano");
 }
 
+void MainWindow::executar(CPF &cpf){
+    this->show();
+    cout << "saiu";
+}
+
 MainWindow::~MainWindow()
 {
     delete (ModelUsuario*)(modelUsuario);
