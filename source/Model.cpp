@@ -211,7 +211,7 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
     try {
         // Verificar se as senhas coincidem
         this->executar();
-        if(listaResultados.back() == senha.getValor()) {
+        if (listaResultados.back() == senha.getValor()) {
             listaResultados.clear();
             return true;
         } else {
@@ -219,7 +219,7 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
             return false;
         }
 
-    } catch(...) {
+    } catch (...) {
         return false;
     }
 
@@ -228,10 +228,54 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
 
 // --------------------------------------------------------------------------
 // Model Eventos Autenticacao
+bool ModelEventos::isLimiteEventos(CPF cpf) {
+    comandoSQL = "SELECT COUNT(*) FROM evento WHERE cpf_usuario =";
+    comandoSQL += "'" + cpf.getValor() + "';";
+    try {
+        this->executar();
+        // Verifica se o usuario tem um numero maior ou igual de eventos permitidos
+        if (atoi(listaResultados.back().c_str()) < LIMITE_EVENTOS) {
+            listaResultados.clear();
+            return true;
+        } else {
+            listaResultados.clear();
+            return false;
+        }
+    } catch (...) {
+        return false;
+    }
+}
+
 ModelEventos::ModelEventos() : Model() {}
 
-bool ModelEventos::criarEvento(CPF cpf, Evento evento, Apresentacao *lista) {
-    return false;
+bool ModelEventos::criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) {
+    // Primeiramente verificar se o usuario nao possui mais que o limite de eventos
+    if (!this->isLimiteEventos(cpf) && listaApresentacao.size() <= LIMITE_APRESENTACAO) {
+        comandoSQL = "INSERT INTO evento VALUES (";
+        comandoSQL += "'" + cpf.getValor() + "', ";
+        comandoSQL += "'" + evento.getCodigo().getValor() + "',";
+        comandoSQL += "'" + evento.getNome().getValor() + "',";
+        comandoSQL += "'" + evento.getCidade().getValor() + "',";
+        comandoSQL += "'" + evento.getEstado().getValor() + "',";
+        comandoSQL += "'" + evento.getClasse().getValor() + "',";
+        comandoSQL += "'" + evento.getFaixa().getValor() + "');";
+
+        // Adicionar apresentacoes depois
+        try {
+            // Executa o comando mysql
+            this->executar();
+            return true;
+        } catch (...) {
+            // Se der falha ao executar o comando
+            cout << "Falha ao criar evento" << endl;
+            return false;
+        }
+
+    } else {
+        // Como mostrar para o usuario esse erro?
+        cout << "Falha ao criar envento:Limite de eventos" << endl;
+        return false;
+    }
 }
 
 bool ModelEventos::alterarEvento(CPF cpf, Evento evento) {

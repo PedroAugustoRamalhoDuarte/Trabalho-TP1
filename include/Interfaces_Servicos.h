@@ -19,7 +19,7 @@ public:
 
 class ISEventos {
 public:
-    virtual bool criarEvento(CPF cpf,Evento evento,Apresentacao* lista) = 0;
+    virtual bool criarEvento(CPF cpf,Evento evento,list<Apresentacao> listaApresentacao) = 0;
     virtual bool alterarEvento(CPF cpf, Evento evento) = 0;
     virtual bool descadastrarEvento(CPF, Evento) = 0;
     virtual bool pesquisarEventos(Evento&, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;

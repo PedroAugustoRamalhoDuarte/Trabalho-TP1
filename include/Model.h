@@ -70,8 +70,15 @@ public:
 };
 
 class ModelEventos : public Model, public ISEventos {
+private:
+    const static int LIMITE_EVENTOS = 10;
+    const static int LIMITE_APRESENTACAO = 10;
+
+    // Retorna True caso não possa mais criar eventos
+    bool isLimiteEventos(CPF cpf);
+
 public:
-    bool criarEvento(CPF cpf, Evento evento, Apresentacao *lista) override;
+    bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) override;
 
     bool alterarEvento(CPF cpf, Evento evento) override;
 

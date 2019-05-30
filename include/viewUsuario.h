@@ -5,22 +5,22 @@
 #include <QMessageBox>
 #include <QToolTip>
 #include <QPixmap>
-#include "include/Model.h"
-#include "include/Interfaces_Apresentacao.h"
+#include "Model.h"
+#include "Interfaces_Apresentacao.h"
 namespace Ui {
-    class MainWindow;
+    class viewUsuario;
 }
 
-class MainWindow : public QMainWindow, public IAUsuario
+class viewUsuario : public QMainWindow, public IAUsuario
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *paren0t = nullptr);
+    explicit viewUsuario(QWidget *paren0t = nullptr);
 
     void executar(CPF &cpf);
 
-    ~MainWindow();
+    ~viewUsuario();
 
 private slots:
             void on_pushButton_clicked();
@@ -39,8 +39,10 @@ private slots:
 
             void on_linedata_editingFinished();
 
+            void on_pushButton_2_clicked();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::viewUsuario *ui;
     ISUsuario* modelUsuario;
 };
 

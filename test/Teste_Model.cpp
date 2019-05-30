@@ -44,4 +44,39 @@ TEST_CASE("Teste das Models") {
         REQUIRE(modelAutenticacao->autenticar(cpf, senha) == false);
         delete modelAutenticacao;
     }
+
+    /*
+    SECTION("CriarEventos") {
+        // Cadastrando Usuario
+        ModelUsuario *modelUsuario = new ModelUsuario();
+        CPF cpf;
+        Senha senha;
+        NumeroDeCartaoDeCredito numero;
+        CodigoDeSeguranca codigo;
+        DataDeValidade data;
+        cpf.setValor("105.214.720-83");
+        senha.setValor("Abc9827");
+        numero.setValor("5555666677778884");
+        codigo.setValor("123");
+        data.setValor("10/22");
+        Usuario *user = new Usuario(cpf, senha);
+        CartaoDeCredito *cartaoDeCredito =  new CartaoDeCredito(numero, codigo, data);
+        modelUsuario->cadastrarUsuario(*user, *cartaoDeCredito);
+        delete modelUsuario;
+
+        SECTION("Criando 1 Evento") {
+            // Criando Evento
+            auto *modelEvento = new ModelEventos();
+            NomeDeEvento nomeDeEvento;
+            CodigoDeEvento codigoDeEvento;
+            Cidade cidade;
+            Estado estado;
+            ClasseDeEvento classeDeEvento;
+            FaixaEtaria faixaEtaria;
+            Evento evento;
+            modelEvento->criarEvento(cpf, evento, apresentacao);
+        }
+    }
+    */
 }
+

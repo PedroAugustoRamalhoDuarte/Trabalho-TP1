@@ -28,25 +28,28 @@ CONFIG += c++11
 LIBS += -l sqlite3
 
 SOURCES += \
-        controladora.cpp \
-        main.cpp \
-        mainwindow.cpp \
+        source/controladora.cpp \
+        source/main.cpp \
+        source/viewUsuario.cpp \
         source/Entidades.cpp \
         source/Dominios.cpp \
         source/Model.cpp \
-        source/View.cpp
+        source/View.cpp \
+        source/viewAutenticacao.cpp
 
 HEADERS += \
-        controladora.h \
-        mainwindow.h \
+        include/controladora.h \
+        include/viewUsuario.h \
         include/Entidades.h \
         include/Dominios.h \
         include/Model.h \
-        include/View.h
+        include/View.h \
+        include/viewAutenticacao.h
 
 FORMS += \
-        controladora.ui \
-        mainwindow.ui
+        ui/controladora.ui \
+        ui/viewUsuario.ui \
+        ui/viewAutenticacao.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

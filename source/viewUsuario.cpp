@@ -2,11 +2,11 @@
 // Created by pedro on 15/05/19.
 //
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
-MainWindow::MainWindow(QWidget *parent) :
+#include "../include/viewUsuario.h"
+#include "ui_viewUsuario.h"
+viewUsuario::viewUsuario(QWidget *parent) :
         QMainWindow(parent),
-        ui(new Ui::MainWindow)
+        ui(new Ui::viewUsuario)
 {
     modelUsuario = new ModelUsuario();
     ui->setupUi(this);
@@ -16,6 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Diretorio caso Clion
     //QPixmap pix("../imagens/interrogacao.png");
+
+    // Código do Help para digitação dos campos
     ui->helpCPF->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpCPF->setToolTip("O CPF deve estar no formato XXX.XXX.XXX-XX no qual X são números válidos");
     ui->helpSenha->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
@@ -29,18 +31,19 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->helpValidade->setToolTip("A data deve estar no formato MM/AA, no qual MM é o mês e AA o ano");
 }
 
-void MainWindow::executar(CPF &cpf){
+void viewUsuario::executar(CPF &cpf){
+    // Mostra a view do Usuario
     this->show();
-    cout << "saiu";
 }
 
-MainWindow::~MainWindow()
+viewUsuario::~viewUsuario()
 {
+    // Encerra a conexao do banco de dados(alterar local depois)
     delete (ModelUsuario*)(modelUsuario);
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
+void viewUsuario::on_pushButton_clicked()
 {
     CPF cpf;
     Senha senha;
@@ -57,14 +60,15 @@ void MainWindow::on_pushButton_clicked()
         CartaoDeCredito* cartao = new  CartaoDeCredito(numero, codigo, data);
         modelUsuario->cadastrarUsuario(*usuario, *cartao);
         ui->msg->setText("Usuário inserido com sucesso!");
-    } catch (std::exception &e) {
+    } catch (...) {
+        // Mudar tratamento de erro
         ui->msg->setText("Errou maluco");
     }
 
 
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void viewUsuario::on_pushButton_3_clicked()
 {
     CPF cpf;
     Usuario usuario;
@@ -78,7 +82,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 }
 
-void MainWindow::on_buttonDelete_clicked()
+void viewUsuario::on_buttonDelete_clicked()
 {
     CPF cpf;
     try {
@@ -89,7 +93,7 @@ void MainWindow::on_buttonDelete_clicked()
     }
 }
 
-void MainWindow::on_linecpf_editingFinished()
+void viewUsuario::on_linecpf_editingFinished()
 {
     CPF cpf;
     try {
@@ -102,7 +106,7 @@ void MainWindow::on_linecpf_editingFinished()
     }
 }
 
-void MainWindow::on_linesenha_editingFinished()
+void viewUsuario::on_linesenha_editingFinished()
 {
     Senha senha;
     try {
@@ -115,7 +119,7 @@ void MainWindow::on_linesenha_editingFinished()
     }
 }
 
-void MainWindow::on_linenumero_editingFinished()
+void viewUsuario::on_linenumero_editingFinished()
 {
     NumeroDeCartaoDeCredito cartao;
     try {
@@ -129,7 +133,7 @@ void MainWindow::on_linenumero_editingFinished()
 
 }
 
-void MainWindow::on_linecodigo_editingFinished()
+void viewUsuario::on_linecodigo_editingFinished()
 {
     CodigoDeSeguranca codigo;
     try {
@@ -142,7 +146,7 @@ void MainWindow::on_linecodigo_editingFinished()
     }
 }
 
-void MainWindow::on_linedata_editingFinished()
+void viewUsuario::on_linedata_editingFinished()
 {
     DataDeValidade data;
     try {
@@ -155,3 +159,8 @@ void MainWindow::on_linedata_editingFinished()
     }
 }
 
+
+void viewUsuario::on_pushButton_2_clicked()
+{
+    this->close();
+}
