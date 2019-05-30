@@ -7,8 +7,12 @@ Controladora::Controladora(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
     // Inicializando variaveis do usuario
     this->isUsuarioLogado = false;
+    this->cpfUsuarioLogado = new CPF();
+
+
 }
 
 Controladora::~Controladora()
@@ -20,7 +24,7 @@ Controladora::~Controladora()
 
 void Controladora::on_btnLogin_clicked()
 {
-    viewAutenticacao->executar(*this->cpfUsuarioLogado);
+    viewAutenticacao->executar(this->cpfUsuarioLogado);
     this->flag = 1;
     this->hide();
 
@@ -37,4 +41,10 @@ void Controladora::on_btnCadastro_clicked()
 void Controladora::on_pushButton_clicked()
 {
 
+}
+
+void Controladora::on_btnEventos_clicked()
+{
+    // Incializando label Usuario
+    ui->label->setText(QString::fromStdString(this->cpfUsuarioLogado->getValor()));
 }

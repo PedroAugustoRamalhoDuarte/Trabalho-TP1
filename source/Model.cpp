@@ -222,8 +222,6 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
     } catch (...) {
         return false;
     }
-
-
 }
 
 // --------------------------------------------------------------------------

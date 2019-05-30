@@ -14,7 +14,7 @@
 class IAAutenticacao {
 public:
 
-    virtual bool executar(CPF &cpf) = 0;
+    virtual bool executar(CPF* cpf) = 0;
 };
 
 class IAEventos {

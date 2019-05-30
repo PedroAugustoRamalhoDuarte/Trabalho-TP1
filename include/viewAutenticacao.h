@@ -14,7 +14,7 @@ class viewAutenticacao : public QMainWindow, public IAAutenticacao
     Q_OBJECT
 
 public:
-    bool executar(CPF &cpf) override;
+    bool executar(CPF* cpf) override;
 
     explicit viewAutenticacao(QWidget *parent = nullptr);
 
@@ -23,9 +23,14 @@ public:
 private slots:
     void on_Login_clicked();
 
+    void on_lineCpf_editingFinished();
+
+    void on_lineSenha_editingFinished();
+
 private:
     Ui::viewAutenticacao *ui;
     ISAutenticacao* modelAutenticacao = new class ModelAutenticacao();
+    CPF* cpfUsuarioLogado;
 };
 
 #endif // VIEWAUTENTICACAO_H

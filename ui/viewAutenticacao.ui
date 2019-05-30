@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>628</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Autenticação</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="Login">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>260</y>
-      <width>89</width>
+      <x>191</x>
+      <y>164</y>
+      <width>91</width>
       <height>25</height>
      </rect>
     </property>
@@ -27,25 +27,88 @@
      <string>Login</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineCpf">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>180</y>
-      <width>113</width>
+      <x>300</x>
+      <y>164</y>
+      <width>91</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Home</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineSenha">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>220</y>
-      <width>113</width>
-      <height>25</height>
+      <x>192</x>
+      <y>103</y>
+      <width>223</width>
+      <height>58</height>
      </rect>
     </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="CPF">
+       <property name="text">
+        <string>CPF</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="lineCpf"/>
+     </item>
+     <item row="0" column="2">
+      <widget class="QLabel" name="checkCPF">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>25</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="Senha">
+       <property name="text">
+        <string>Senha</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineSenha"/>
+     </item>
+     <item row="1" column="2">
+      <widget class="QLabel" name="checkSenha">
+       <property name="minimumSize">
+        <size>
+         <width>25</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>25</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -53,7 +116,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>628</width>
      <height>22</height>
     </rect>
    </property>

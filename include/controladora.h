@@ -27,6 +27,8 @@ private slots:
 
     void on_btnCadastro_clicked();
 
+    void on_btnEventos_clicked();
+
 private:
     // Interfaces de apresentacao
     IAAutenticacao* viewAutenticacao = new class viewAutenticacao();
