@@ -7,20 +7,38 @@
 #include <QApplication>
 #include <QPushButton>
 #include "./include/View.h"
+#include "include/Builder.h"
+
 int main(int argc, char *argv[])
 {
     CPF cpf;
     QApplication a(argc, argv);
 
     Controladora control;
-    control.show();
+    Builder builder;
+    builder.build(&control);
+    //control.executar();
+    int result;
     while (1){
-        control.show();
-        if (!a.exec() && control.flag == 1)
+        control.executar();
+        result = a.exec();
+        cout << "CONTROL FLAG:";
+        cout <<  control.flag << endl;
+        //cout << result << endl;
+        cout << "LOOP PRINCIPAL" << endl;
+        if (result == 0 && control.flag == 1){
             control.flag = 0;
-        else if(!a.exec() && control.flag == 0)
+            //cout<<"test"<<endl;
+            //cout<<control.flag<<endl;
+        }
+        else if(control.flag == 0 && result == 0){
+            //cout<<"break";
             break;
-
+        }
+        else if (control.flag==0){
+            //cout<<"break";
+            break;
+        }
     }
-    return a.exec();
+    return 0;
 }

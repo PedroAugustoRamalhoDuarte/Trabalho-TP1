@@ -20,6 +20,10 @@ public:
 
     ~viewAutenticacao();
 
+    void setModelAutenticacao(ISAutenticacao *modelAutenticacao) {
+        viewAutenticacao::modelAutenticacao = modelAutenticacao;
+    }
+
 private slots:
     void on_Login_clicked();
 
@@ -27,10 +31,18 @@ private slots:
 
     void on_lineSenha_editingFinished();
 
+    void on_Home_clicked();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::viewAutenticacao *ui;
-    ISAutenticacao* modelAutenticacao = new class ModelAutenticacao();
+
+    ISAutenticacao* modelAutenticacao;
+
     CPF* cpfUsuarioLogado;
+
+    bool userLogedIn = false;
 };
 
 #endif // VIEWAUTENTICACAO_H

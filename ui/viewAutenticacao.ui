@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="Login">
     <property name="geometry">
      <rect>
-      <x>191</x>
-      <y>164</y>
+      <x>201</x>
+      <y>180</y>
       <width>91</width>
       <height>25</height>
      </rect>
@@ -27,11 +27,11 @@
      <string>Login</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="Home">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>164</y>
+      <x>310</x>
+      <y>180</y>
       <width>91</width>
       <height>25</height>
      </rect>
@@ -40,11 +40,11 @@
      <string>Home</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>192</x>
-      <y>103</y>
+      <x>202</x>
+      <y>119</y>
       <width>223</width>
       <height>58</height>
      </rect>

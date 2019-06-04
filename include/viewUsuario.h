@@ -22,6 +22,8 @@ public:
 
     ~viewUsuario();
 
+    void setModelUsuario(ISUsuario *modelUsuario);
+
 private slots:
             void on_pushButton_clicked();
 

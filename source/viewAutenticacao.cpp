@@ -11,12 +11,17 @@ viewAutenticacao::viewAutenticacao(QWidget *parent) :
 
 viewAutenticacao::~viewAutenticacao()
 {
+    cout << "Destrutor da porra da viewAutenticao" << endl;
+    free(this->cpfUsuarioLogado);
+    //delete (ModelAutenticacao*)(modelAutenticacao);
     delete ui;
 }
 
 bool viewAutenticacao::executar(CPF* cpf) {
     this->cpfUsuarioLogado = cpf;
     this->show();
+    if (userLogedIn)
+        return true;
     return false;
 }
 
@@ -24,14 +29,24 @@ void viewAutenticacao::on_Login_clicked()
 {
     CPF cpf;
     Senha senha;
-    cpf.setValor(ui->lineCpf->text().toStdString());
-    senha.setValor(ui->lineSenha->text().toStdString());
-    if (modelAutenticacao->autenticar(cpf, senha)){
-        *this->cpfUsuarioLogado = cpf;
-        this->close();
-    } else {
-        cout << "Erro ao fazer login " << endl;
+    try {
+        cpf.setValor(ui->lineCpf->text().toStdString());
+        senha.setValor(ui->lineSenha->text().toStdString());
+        cout << "AntesDeAutenticar" << endl;
+        if (modelAutenticacao->autenticar(cpf, senha)){
+            cout << "AntesDeAtribuirCPF(btnLogin)" << endl;
+            *this->cpfUsuarioLogado = cpf;
+            cout << "DepoisDeAtribuirCPF(btnLogin)" << endl;
+            userLogedIn = true;
+            //this->close();
+        } else {
+            cout << "Erro ao fazer login " << endl;
+        }
+    } catch (...) {
+        cout << "Erro no formato" << endl;
     }
+
+
 }
 
 void viewAutenticacao::on_lineCpf_editingFinished()
@@ -59,4 +74,15 @@ void viewAutenticacao::on_lineSenha_editingFinished()
         ui->checkSenha->setStyleSheet("color:#f00");
         ui->checkSenha->setText("x");
     }
+}
+
+
+void viewAutenticacao::on_Home_clicked()
+{
+    this->close();
+}
+
+void viewAutenticacao::on_pushButton_clicked()
+{
+
 }

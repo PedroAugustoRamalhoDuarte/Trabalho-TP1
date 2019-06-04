@@ -114,15 +114,15 @@ void Model::criarTabelas() {
     criarTabelaIngresso();
 }
 
-Model::~Model() {
+/*Model::~Model() {
     cout << "Closing DataBase... " << endl;
     sqlite3_close(db);
     db = nullptr;
-}
+}*/
 
 
 void Model::executar() {
-    status = sqlite3_exec(db, comandoSQL.c_str(), callback, nullptr, mensagem);
+    status = sqlite3_exec(db, comandoSQL.c_str(), callback, nullptr, &mensagem);
     if (status != SQLITE_OK) {
         if (mensagem)
             free(mensagem);
@@ -138,7 +138,7 @@ int Model::callback(void *notUsed, int argc, char **argv, char **azColName) {
     /*
     for (i = 0; i < argc; i++) {
         printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    } 
+    }
     printf("\n");*/
 
     for (i = 0; i < argc; i++) {
@@ -213,9 +213,11 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
         this->executar();
         if (listaResultados.back() == senha.getValor()) {
             listaResultados.clear();
+            cout<<"autenticou";
             return true;
         } else {
             listaResultados.clear();
+            cout<<"nao autenticou";
             return false;
         }
 

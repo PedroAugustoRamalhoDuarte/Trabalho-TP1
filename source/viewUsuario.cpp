@@ -3,12 +3,13 @@
 //
 
 #include "../include/viewUsuario.h"
+//#include "../cmake-build-debug/helloworld_autogen/include/ui_viewUsuario.h"
 #include "ui_viewUsuario.h"
 viewUsuario::viewUsuario(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::viewUsuario)
 {
-    modelUsuario = new ModelUsuario();
+    //modelUsuario = new ModelUsuario();
     ui->setupUi(this);
 
     // Diretorio Caso QtCreator
@@ -163,4 +164,8 @@ void viewUsuario::on_linedata_editingFinished()
 void viewUsuario::on_pushButton_2_clicked()
 {
     this->close();
+}
+
+void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
+    viewUsuario::modelUsuario = modelUsuario;
 }

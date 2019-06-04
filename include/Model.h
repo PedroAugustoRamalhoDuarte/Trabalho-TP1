@@ -19,7 +19,7 @@ private:
     int status;
 
     // Mensagem de erro
-    char** mensagem;
+    char* mensagem;
 
     // Criacao de tabelas
 
@@ -45,9 +45,21 @@ public:
 
     void executar();
 
+    /*void conectar() {
+        status = sqlite3_open("example.db", &db);
+        if( status != SQLITE_OK )
+            throw invalid_argument("Erro na conexao ao banco de dados");
+    }
+
+    void desconectar() {
+        status =  sqlite3_close(db);
+        if( status != SQLITE_OK )
+            throw invalid_argument("Erro na desconexao ao banco de dados");
+    } */
+
     Model();
 
-    virtual ~Model();
+    //virtual ~Model();
 };
 
 

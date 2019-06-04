@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.12)
 project(TrabalhoTP1)
 
+find_package(SQLite3)
+
 add_executable(TesteDominEntidade test/Teste_Dominios.cpp source/Dominios.cpp include/Dominios.h source/Entidades.cpp include/Entidades.h include/Dominios.h test/Teste_Entidades.cpp)
 add_executable(ParaOClionPegar include/Interfaces_Servicos.h include/Interfaces_Apresentacao.h include/Model.h include/View.h source/Model.cpp source/View.cpp source/main.cpp include/viewUsuario.h source/viewUsuario.cpp)
 add_executable(TesteModel test/Teste_Model.cpp source/Model.cpp source/Entidades.cpp source/Dominios.cpp)
 
+target_link_libraries(TesteModel sqlite3)
 #find_package(SQLite3)
 #target_link_libraries(TesteModel sqlite3)
 
@@ -27,7 +30,7 @@ find_package(Qt5Widgets CONFIG)
 find_package(Qt5Gui)
 find_package(Qt5Svg)
 find_package(Qt5Core)
-find_package(SQLite3)
+
 # Populate a CMake variable with the sources
 set(helloworld_SRCS
         ui/viewUsuario.ui
@@ -38,7 +41,7 @@ set(helloworld_SRCS
         source/Entidades.cpp
         source/Dominios.cpp
         source/Model.cpp
-        )
+        source/Builder.cpp include/Builder.h)
 
 
 # Tell CMake to create the helloworld executable

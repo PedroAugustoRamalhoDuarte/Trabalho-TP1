@@ -6,21 +6,34 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>628</width>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>viewUsuario</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>80</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CPF</string>
+    </property>
+   </widget>
    <widget class="QPushButton" name="btnCadastro">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>150</y>
+      <x>240</x>
+      <y>110</y>
       <width>89</width>
-      <height>25</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -30,8 +43,8 @@
    <widget class="QPushButton" name="btnLogin">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>210</y>
+      <x>240</x>
+      <y>150</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -43,8 +56,8 @@
    <widget class="QPushButton" name="btnEventos">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>280</y>
+      <x>240</x>
+      <y>190</y>
       <width>89</width>
       <height>25</height>
      </rect>
@@ -53,26 +66,13 @@
      <string>Eventos</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>300</x>
-      <y>50</y>
-      <width>67</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>CPF</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>628</width>
      <height>22</height>
     </rect>
    </property>

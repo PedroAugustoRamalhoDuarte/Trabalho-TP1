@@ -5,6 +5,7 @@
 #include "Interfaces_Apresentacao.h"
 #include "viewUsuario.h"
 #include "viewAutenticacao.h"
+#include "viewEventos.h"
 
 namespace Ui {
 class Controladora;
@@ -17,9 +18,17 @@ class Controladora : public QMainWindow
 public:
     int flag = 0;
 
+    void executar();
     explicit Controladora(QWidget *parent = nullptr);
     ~Controladora();
 
+    void setViewAutenticacao(IAAutenticacao *viewAutenticacao);
+
+    void setViewUsuario(IAUsuario *viewUsuario);
+
+    void setViewEventos(IAEventos *viewEventos);
+
+    void setViewVendas(IAVendas *viewVendas);
 private slots:
     void on_pushButton_clicked();
 
@@ -31,8 +40,8 @@ private slots:
 
 private:
     // Interfaces de apresentacao
-    IAAutenticacao* viewAutenticacao = new class viewAutenticacao();
-    IAUsuario* viewUsuario = new class viewUsuario();
+    IAAutenticacao* viewAutenticacao;
+    IAUsuario* viewUsuario ;
     IAEventos* viewEventos;
     IAVendas* viewVendas;
 
