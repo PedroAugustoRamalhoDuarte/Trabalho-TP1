@@ -8,7 +8,10 @@ viewAutenticacao::viewAutenticacao(QWidget *parent) :
     ui->setupUi(this);
     //Escondendo caracteres da senha
     ui->lineSenha->setEchoMode(QLineEdit::Password);
+
+    // Incializando variaveis para suporte na autenticação
     this->cpfUsuarioLogado = new CPF();
+    this->userLogedIn = false;
 }
 
 viewAutenticacao::~viewAutenticacao()
@@ -40,7 +43,7 @@ void viewAutenticacao::on_Login_clicked()
             *this->cpfUsuarioLogado = cpf;
             cout << "DepoisDeAtribuirCPF(btnLogin)" << endl;
             userLogedIn = true;
-            //this->close();
+            this->close();
         } else {
             cout << "Erro ao fazer login " << endl;
         }
@@ -84,10 +87,6 @@ void viewAutenticacao::on_Home_clicked()
     this->close();
 }
 
-void viewAutenticacao::on_pushButton_clicked()
-{
-
-}
 
 void viewAutenticacao::on_showPassword_clicked()
 {

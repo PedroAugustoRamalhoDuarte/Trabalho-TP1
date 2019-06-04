@@ -45,6 +45,7 @@ private slots:
 
             void on_checkBox_clicked();
 
+
 private:
     Ui::viewUsuario *ui;
     ISUsuario* modelUsuario;

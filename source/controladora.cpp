@@ -12,6 +12,7 @@ Controladora::Controladora(QWidget *parent) :
     this->isUsuarioLogado = false;
     this->flag = 0;
     this->cpfUsuarioLogado = new CPF();
+    // Teste
 
 
 }
@@ -33,18 +34,17 @@ void Controladora::on_btnLogin_clicked()
 
 }
 
+// Módulo de Usuários
 void Controladora::on_btnCadastro_clicked()
 {
-    CPF cpf;
-    viewUsuario->executar(cpf);
+    viewUsuario->executar(*this->cpfUsuarioLogado);
     this->flag = 1;
     this->hide();
 }
 
+// Módulo de Eventos
 void Controladora::on_btnEventos_clicked()
 {
-    // Incializando label Usuario
-    ui->label->setText(QString::fromStdString(this->cpfUsuarioLogado->getValor()));
     viewEventos->executar();
     this->flag = 1;
     this->hide();
@@ -55,21 +55,20 @@ void Controladora::executar()
 {
     cout << "PASSOU EXECUTAR CONTROLADORA" << endl;
     //cout << isUsuarioLogado << endl;
-    /*if(!isUsuarioLogado){
-        if (ui->stackedWidget->is)
-        ui->stackedWidget->setCurrentIndex(0);
+    // Se o usuário estiver logado
+    if(cpfUsuarioLogado->getValor() != ""){
+        ui->btnCadastro->setText("Perfil");
+        ui->btnLogin->setVisible(false);
     }
+    // Se o usuário não estiver logado
     else {
-        ui->stackedWidget->setCurrentIndex(1);
-    }*/
+        ui->btnCadastro->setText("Cadastre-se");
+        ui->btnLogin->setVisible(true);
+    }
     this->show();
     cout << "PASSOU SHOW EXECUTAR " << endl;
 }
 
-void Controladora::on_pushButton_clicked()
-{
-
-}
 
 void Controladora::setViewAutenticacao(IAAutenticacao *viewAutenticacao) {
     Controladora::viewAutenticacao = viewAutenticacao;

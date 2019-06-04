@@ -30,7 +30,6 @@ public:
 
     void setViewVendas(IAVendas *viewVendas);
 private slots:
-    void on_pushButton_clicked();
 
     void on_btnLogin_clicked();
 

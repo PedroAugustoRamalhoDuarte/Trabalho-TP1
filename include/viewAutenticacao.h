@@ -33,8 +33,6 @@ private slots:
 
     void on_Home_clicked();
 
-    void on_pushButton_clicked();
-
     void on_showPassword_clicked();
 
 private:
@@ -44,7 +42,7 @@ private:
 
     CPF* cpfUsuarioLogado;
 
-    bool userLogedIn = false;
+    bool userLogedIn;
 };
 
 #endif // VIEWAUTENTICACAO_H

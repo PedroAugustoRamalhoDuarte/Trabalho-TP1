@@ -35,6 +35,11 @@ viewUsuario::viewUsuario(QWidget *parent) :
 }
 
 void viewUsuario::executar(CPF &cpf){
+    if (cpf.getValor() == "") {
+        ui->stackedWidget->setCurrentIndex(0);
+    } else {
+        ui->stackedWidget->setCurrentIndex(1);
+    }
     // Mostra a view do Usuario
     this->show();
 }
@@ -181,3 +186,4 @@ void viewUsuario::on_checkBox_clicked()
 
 
 }
+
