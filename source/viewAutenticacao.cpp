@@ -6,6 +6,8 @@ viewAutenticacao::viewAutenticacao(QWidget *parent) :
     ui(new Ui::viewAutenticacao)
 {
     ui->setupUi(this);
+    //Escondendo caracteres da senha
+    ui->lineSenha->setEchoMode(QLineEdit::Password);
     this->cpfUsuarioLogado = new CPF();
 }
 
@@ -85,4 +87,12 @@ void viewAutenticacao::on_Home_clicked()
 void viewAutenticacao::on_pushButton_clicked()
 {
 
+}
+
+void viewAutenticacao::on_showPassword_clicked()
+{
+    if(!ui->showPassword->isChecked())
+        ui->lineSenha->setEchoMode(QLineEdit::Password);
+    else
+        ui->lineSenha->setEchoMode(QLineEdit::Normal);
 }

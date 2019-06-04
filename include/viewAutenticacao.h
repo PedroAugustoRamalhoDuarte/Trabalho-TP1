@@ -35,6 +35,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_showPassword_clicked();
+
 private:
     Ui::viewAutenticacao *ui;
 

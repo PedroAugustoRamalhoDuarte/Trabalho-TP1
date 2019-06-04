@@ -30,6 +30,8 @@ viewUsuario::viewUsuario(QWidget *parent) :
     ui->helpCodigo->setToolTip("O Código conter os 3 digitos de segurança");
     ui->helpValidade->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpValidade->setToolTip("A data deve estar no formato MM/AA, no qual MM é o mês e AA o ano");
+    //Escondendo os caracteres da senha
+    ui->linesenha->setEchoMode(QLineEdit::Password);
 }
 
 void viewUsuario::executar(CPF &cpf){
@@ -168,4 +170,14 @@ void viewUsuario::on_pushButton_2_clicked()
 
 void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
     viewUsuario::modelUsuario = modelUsuario;
+}
+
+void viewUsuario::on_checkBox_clicked()
+{
+    if(!ui->checkBox->isChecked())
+        ui->linesenha->setEchoMode(QLineEdit::Password);
+    else
+        ui->linesenha->setEchoMode(QLineEdit::Normal);
+
+
 }
