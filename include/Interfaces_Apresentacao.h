@@ -23,7 +23,7 @@ public:
 class IAEventos {
 public:
 
-    virtual void executar() = 0;
+    virtual void executar(CPF cpf) = 0;
 
     virtual void setModelEventos(ISEventos *modelEventos) = 0;
 };

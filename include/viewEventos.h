@@ -15,7 +15,7 @@ class viewEventos : public QMainWindow, public IAEventos
 
 public:
     explicit viewEventos(QWidget *parent = nullptr);
-    void executar();
+    void executar(CPF cpf);
     ~viewEventos();
 
     void setModelEventos(ISEventos *modelEventos) {

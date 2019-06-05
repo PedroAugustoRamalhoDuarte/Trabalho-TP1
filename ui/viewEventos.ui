@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>628</width>
-    <height>358</height>
+    <width>772</width>
+    <height>506</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,19 +19,19 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>628</width>
-      <height>358</height>
+      <width>761</width>
+      <height>411</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="btnHome">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>230</y>
+        <x>240</x>
+        <y>170</y>
         <width>89</width>
         <height>25</height>
        </rect>
@@ -40,8 +40,160 @@
        <string>Home</string>
       </property>
      </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>20</y>
+        <width>191</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Menu Usuario Logado</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnCriar">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>90</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Criar</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnPesquisar">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>130</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pesquisar</string>
+      </property>
+     </widget>
     </widget>
-    <widget class="QWidget" name="page_2"/>
+    <widget class="QWidget" name="page_2">
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>0</y>
+        <width>451</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Página da pesquisa(Usuário não logado sera direcionado para aqui)</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>601</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Código</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nome</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cidade</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Estado</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Classe</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Faixa Etária</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>20</y>
+        <width>591</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="3">
+        <widget class="QDateEdit" name="dateFim"/>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEstado"/>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="lineCidade"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="labelEstado">
+         <property name="text">
+          <string>Estado</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QDateEdit" name="dateInicio"/>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelCidade">
+         <property name="text">
+          <string>Cidade</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLabel" name="labelDateInicio">
+         <property name="text">
+          <string>Data Início</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="labelDateFim">
+         <property name="text">
+          <string>Data Fim</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="4">
+        <widget class="QPushButton" name="btnPesquisarReal">
+         <property name="text">
+          <string>Pesquisar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -49,7 +201,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>628</width>
+     <width>772</width>
      <height>22</height>
     </rect>
    </property>

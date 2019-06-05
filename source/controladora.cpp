@@ -40,7 +40,7 @@ void Controladora::on_btnCadastro_clicked()
 // Módulo de Eventos
 void Controladora::on_btnEventos_clicked()
 {
-    viewEventos->executar();
+    viewEventos->executar(*this->cpfUsuarioLogado);
     this->flag = 1;
     this->hide();
 
