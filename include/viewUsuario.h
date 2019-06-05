@@ -48,6 +48,8 @@ private slots:
 
             void on_btnHome_clicked();
 
+            void on_btnHome_2_clicked();
+
 private:
 
     Ui::viewUsuario *ui;

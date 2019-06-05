@@ -30,7 +30,7 @@ public:
 cada apresentação, horário de cada apresentação, preço do ingresso de cada apresentação, número da sala de cada
 apresentação, quantidade de ingressos disponíveis para cada apresentação, classe e faixa etária do evento.
      */
-    virtual bool pesquisarEventos(Evento &, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
+    virtual bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
 };
 
 class ISUsuario {

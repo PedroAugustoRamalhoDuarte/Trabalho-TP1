@@ -26,9 +26,22 @@ public:
 private slots:
     void on_btnHome_clicked();
 
+    void on_btnPesquisarReal_clicked();
+
+    void on_btnCriarEvento_clicked();
+
+    void on_btnCriar_clicked();
+
+    void on_btnAdicionarApr_clicked();
+
+    void on_btnConcluirApr_clicked();
+
 private:
     Ui::viewEventos *ui;
+    Evento eventoADD;
+    list<Apresentacao> listApresentacao;
     ISEventos* modelEventos;
+    CPF cpfUsuarioLogado;
 };
 
 #endif // VIEWEVENTOS_H

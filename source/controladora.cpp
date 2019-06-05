@@ -20,13 +20,20 @@ Controladora::Controladora(QWidget *parent) :
 // Módulo Autenticação
 void Controladora::on_btnLogin_clicked()
 {
-    if (viewAutenticacao->executar(this->cpfUsuarioLogado))
-        this->isUsuarioLogado = true;
-    else
-        this->isUsuarioLogado = false;
-    this->flag = 1;
-    this->hide();
-
+    if (ui->btnLogin->text() == "Logout") {
+        // Logout
+        delete cpfUsuarioLogado;
+        cpfUsuarioLogado = new CPF();
+        this->executar();
+    } else {
+        // Login
+        if (viewAutenticacao->executar(this->cpfUsuarioLogado))
+            this->isUsuarioLogado = true;
+        else
+            this->isUsuarioLogado = false;
+        this->flag = 1;
+        this->hide();
+    }
 }
 
 // Módulo de Usuários
@@ -53,12 +60,12 @@ void Controladora::executar()
     // Se o usuário estiver logado
     if(cpfUsuarioLogado->getValor() != ""){
         ui->btnCadastro->setText("Perfil");
-        ui->btnLogin->setVisible(false);
+        ui->btnLogin->setText("Logout");
     }
     // Se o usuário não estiver logado
     else {
         ui->btnCadastro->setText("Cadastre-se");
-        ui->btnLogin->setVisible(true);
+        ui->btnLogin->setText("Login");
     }
     this->show();
     cout << "PASSOU SHOW EXECUTAR " << endl;

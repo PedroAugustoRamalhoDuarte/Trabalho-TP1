@@ -38,7 +38,21 @@ void viewUsuario::executar(CPF &cpf){
     if (cpf.getValor() == "") {
         ui->stackedWidget->setCurrentIndex(0);
     } else {
+        auto *usuario = new Usuario();
+        auto *cartao = new CartaoDeCredito();
+        try {
+            modelUsuario->mostrarUsuario(this->cpfUsuarioLogado, usuario, cartao);
+            ui->labelSetCPF->setText(QString::fromStdString(usuario->getCpf().getValor()));
+            ui->labelSetCartao->setText(QString::fromStdString(cartao->getNumero().getValor()));
+            ui->labelSetCodigo->setText(QString::fromStdString(cartao->getCodigoDeSeguranca().getValor()));
+            ui->labelSetValidade->setText(QString::fromStdString(cartao->getDataDeValidade().getValor()));
+        } catch (...) {
+            cout << "Erro ao mostrar Usuario";
+        }
+        delete usuario;
+        delete cartao;
         ui->stackedWidget->setCurrentIndex(1);
+
     }
     // Mostra a view do Usuario
     this->show();
@@ -190,4 +204,9 @@ void viewUsuario::on_buttonDelete_clicked()
 
 void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
     viewUsuario::modelUsuario = modelUsuario;
+}
+
+void viewUsuario::on_btnHome_2_clicked()
+{
+    this->close();
 }

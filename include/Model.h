@@ -45,18 +45,6 @@ public:
 
     void executar();
 
-    /*void conectar() {
-        status = sqlite3_open("example.db", &db);
-        if( status != SQLITE_OK )
-            throw invalid_argument("Erro na conexao ao banco de dados");
-    }
-
-    void desconectar() {
-        status =  sqlite3_close(db);
-        if( status != SQLITE_OK )
-            throw invalid_argument("Erro na desconexao ao banco de dados");
-    } */
-
     Model();
 
     //virtual ~Model();
@@ -96,7 +84,7 @@ public:
 
     bool descadastrarEvento(CPF cpf, Evento evento) override;
 
-    bool pesquisarEventos(Evento &evento, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
+    bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
 
     ModelEventos();
 };

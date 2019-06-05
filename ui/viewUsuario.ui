@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="userNotLogado">
      <widget class="QCheckBox" name="checkBox">
@@ -314,7 +314,7 @@
      <widget class="QPushButton" name="buttonDelete">
       <property name="geometry">
        <rect>
-        <x>410</x>
+        <x>430</x>
         <y>230</y>
         <width>80</width>
         <height>25</height>
@@ -327,7 +327,7 @@
      <widget class="QPushButton" name="btnMostrar">
       <property name="geometry">
        <rect>
-        <x>290</x>
+        <x>230</x>
         <y>230</y>
         <width>80</width>
         <height>25</height>
@@ -382,7 +382,7 @@
        <rect>
         <x>130</x>
         <y>50</y>
-        <width>121</width>
+        <width>141</width>
         <height>121</height>
        </rect>
       </property>
@@ -406,6 +406,9 @@
          <property name="text">
           <string>Codigo</string>
          </property>
+         <property name="wordWrap">
+          <bool>false</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -416,6 +419,19 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="btnHome_2">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>230</y>
+        <width>80</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Home</string>
+      </property>
      </widget>
     </widget>
    </widget>

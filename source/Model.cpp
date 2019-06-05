@@ -297,6 +297,7 @@ bool ModelEventos::criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaA
         try {
             // Executa o comando mysql
             this->executar();
+            //adicionarApresentacao(codigoevento, listaApresentacao)
             return true;
         } catch (...) {
             // Se der falha ao executar o comando
@@ -319,7 +320,7 @@ bool ModelEventos::descadastrarEvento(CPF cpf, Evento evento) {
     return false;
 }
 
-bool ModelEventos::pesquisarEventos(Evento &evento, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) {
+bool ModelEventos::pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) {
     return false;
 }
 
