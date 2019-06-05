@@ -9,7 +9,6 @@ viewUsuario::viewUsuario(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::viewUsuario)
 {
-    //modelUsuario = new ModelUsuario();
     ui->setupUi(this);
 
     // Diretorio Caso QtCreator
@@ -35,6 +34,7 @@ viewUsuario::viewUsuario(QWidget *parent) :
 }
 
 void viewUsuario::executar(CPF &cpf){
+    this->cpfUsuarioLogado = cpf;
     if (cpf.getValor() == "") {
         ui->stackedWidget->setCurrentIndex(0);
     } else {
@@ -51,44 +51,7 @@ viewUsuario::~viewUsuario()
     delete ui;
 }
 
-void viewUsuario::on_pushButton_clicked()
-{
-    CPF cpf;
-    Senha senha;
-    NumeroDeCartaoDeCredito numero;
-    CodigoDeSeguranca codigo;
-    DataDeValidade data;
-    try {
-        cpf.setValor(ui->linecpf->text().toStdString());
-        senha.setValor(ui->linesenha->text().toStdString());
-        numero.setValor(ui->linenumero->text().toStdString());
-        codigo.setValor(ui->linecodigo->text().toStdString());
-        data.setValor(ui->linedata->text().toStdString());
-        Usuario* usuario = new Usuario(cpf, senha);
-        CartaoDeCredito* cartao = new  CartaoDeCredito(numero, codigo, data);
-        modelUsuario->cadastrarUsuario(*usuario, *cartao);
-        ui->msg->setText("Usuário inserido com sucesso!");
-    } catch (...) {
-        // Mudar tratamento de erro
-        ui->msg->setText("Errou maluco");
-    }
 
-
-}
-
-void viewUsuario::on_pushButton_3_clicked()
-{
-    CPF cpf;
-    Usuario usuario;
-    CartaoDeCredito cartao;
-    try {
-        cpf.setValor(ui->linecpf->text().toStdString());
-        modelUsuario->mostrarUsuario(cpf, &usuario, &cartao);
-    } catch (...) {
-        cout << "Erro ao mostrar Usuario" << endl;
-    }
-
-}
 
 void viewUsuario::on_buttonDelete_clicked()
 {
@@ -168,11 +131,6 @@ void viewUsuario::on_linedata_editingFinished()
 }
 
 
-void viewUsuario::on_pushButton_2_clicked()
-{
-    this->close();
-}
-
 void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
     viewUsuario::modelUsuario = modelUsuario;
 }
@@ -187,3 +145,49 @@ void viewUsuario::on_checkBox_clicked()
 
 }
 
+
+void viewUsuario::on_btnMostrar_clicked()
+{
+    auto *usuario = new Usuario();
+    auto *cartao = new CartaoDeCredito();
+    try {
+        modelUsuario->mostrarUsuario(this->cpfUsuarioLogado, usuario, cartao);
+        ui->labelSetCPF->setText(QString::fromStdString(usuario->getCpf().getValor()));
+        ui->labelSetCartao->setText(QString::fromStdString(cartao->getNumero().getValor()));
+        ui->labelSetCodigo->setText(QString::fromStdString(cartao->getCodigoDeSeguranca().getValor()));
+        ui->labelSetValidade->setText(QString::fromStdString(cartao->getDataDeValidade().getValor()));
+    } catch (...) {
+        cout << "Erro ao mostrar Usuario";
+    }
+    delete usuario;
+    delete cartao;
+}
+
+void viewUsuario::on_btnRegistrar_clicked()
+{
+    CPF cpf;
+    Senha senha;
+    NumeroDeCartaoDeCredito numero;
+    CodigoDeSeguranca codigo;
+    DataDeValidade data;
+    try {
+        cpf.setValor(ui->linecpf->text().toStdString());
+        senha.setValor(ui->linesenha->text().toStdString());
+        numero.setValor(ui->linenumero->text().toStdString());
+        codigo.setValor(ui->linecodigo->text().toStdString());
+        data.setValor(ui->linedata->text().toStdString());
+        Usuario* usuario = new Usuario(cpf, senha);
+        CartaoDeCredito* cartao = new  CartaoDeCredito(numero, codigo, data);
+        modelUsuario->cadastrarUsuario(*usuario, *cartao);
+        ui->msg->setText("Usuário inserido com sucesso!");
+    } catch (...) {
+        // Mudar tratamento de erro
+        ui->msg->setText("Errou maluco");
+    }
+
+}
+
+void viewUsuario::on_btnHome_clicked()
+{
+    this->close();
+}

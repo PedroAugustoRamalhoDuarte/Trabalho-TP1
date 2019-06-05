@@ -291,7 +291,7 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="btnRegistrar">
          <property name="styleSheet">
           <string notr="true"/>
          </property>
@@ -301,7 +301,7 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="btnHome">
          <property name="text">
           <string>Home</string>
          </property>
@@ -324,7 +324,7 @@
        <string>Delete</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="btnMostrar">
       <property name="geometry">
        <rect>
         <x>290</x>

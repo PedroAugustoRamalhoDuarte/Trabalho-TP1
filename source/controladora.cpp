@@ -17,12 +17,7 @@ Controladora::Controladora(QWidget *parent) :
 
 }
 
-Controladora::~Controladora()
-{
-    delete ui;
-}
-
-
+// Módulo Autenticação
 void Controladora::on_btnLogin_clicked()
 {
     if (viewAutenticacao->executar(this->cpfUsuarioLogado))
@@ -69,6 +64,10 @@ void Controladora::executar()
     cout << "PASSOU SHOW EXECUTAR " << endl;
 }
 
+Controladora::~Controladora()
+{
+    delete ui;
+}
 
 void Controladora::setViewAutenticacao(IAAutenticacao *viewAutenticacao) {
     Controladora::viewAutenticacao = viewAutenticacao;

@@ -25,12 +25,7 @@ public:
     void setModelUsuario(ISUsuario *modelUsuario);
 
 private slots:
-            void on_pushButton_clicked();
-
-            void on_pushButton_3_clicked();
-
-            void on_buttonDelete_clicked();
-
+            // Verificar Formato
             void on_linecpf_editingFinished();
 
             void on_linesenha_editingFinished();
@@ -41,14 +36,26 @@ private slots:
 
             void on_linedata_editingFinished();
 
-            void on_pushButton_2_clicked();
-
+            // Mostrar senha
             void on_checkBox_clicked();
 
+            // Botoões
+            void on_buttonDelete_clicked();
+
+            void on_btnMostrar_clicked();
+
+            void on_btnRegistrar_clicked();
+
+            void on_btnHome_clicked();
 
 private:
+
     Ui::viewUsuario *ui;
+
+    // Interface de serviço
     ISUsuario* modelUsuario;
+
+    CPF cpfUsuarioLogado;
 };
 
 #endif // MAINWINDOW_H

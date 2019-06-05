@@ -81,7 +81,7 @@ void viewAutenticacao::on_lineSenha_editingFinished()
     }
 }
 
-
+// Redirecionar para página principal
 void viewAutenticacao::on_Home_clicked()
 {
     this->close();
