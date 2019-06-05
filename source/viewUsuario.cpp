@@ -51,19 +51,8 @@ viewUsuario::~viewUsuario()
     delete ui;
 }
 
-
-
-void viewUsuario::on_buttonDelete_clicked()
-{
-    CPF cpf;
-    try {
-        cpf.setValor(ui->linecpf->text().toStdString());
-        modelUsuario->excluirUsuario(cpf);
-    } catch (...) {
-        cout << "Erro ao excluir Usuario" << endl;
-    }
-}
-
+//---------------------------------------------
+// Verificação de formato
 void viewUsuario::on_linecpf_editingFinished()
 {
     CPF cpf;
@@ -130,11 +119,6 @@ void viewUsuario::on_linedata_editingFinished()
     }
 }
 
-
-void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
-    viewUsuario::modelUsuario = modelUsuario;
-}
-
 void viewUsuario::on_checkBox_clicked()
 {
     if(!ui->checkBox->isChecked())
@@ -145,7 +129,8 @@ void viewUsuario::on_checkBox_clicked()
 
 }
 
-
+//------------------------------------------------------
+// Botões
 void viewUsuario::on_btnMostrar_clicked()
 {
     auto *usuario = new Usuario();
@@ -179,7 +164,7 @@ void viewUsuario::on_btnRegistrar_clicked()
         Usuario* usuario = new Usuario(cpf, senha);
         CartaoDeCredito* cartao = new  CartaoDeCredito(numero, codigo, data);
         modelUsuario->cadastrarUsuario(*usuario, *cartao);
-        ui->msg->setText("Usuário inserido com sucesso!");
+        ui->msg->setText("Usuário cadastrado com sucesso! Para fazer login redirecione para página de login");
     } catch (...) {
         // Mudar tratamento de erro
         ui->msg->setText("Errou maluco");
@@ -190,4 +175,19 @@ void viewUsuario::on_btnRegistrar_clicked()
 void viewUsuario::on_btnHome_clicked()
 {
     this->close();
+}
+
+void viewUsuario::on_buttonDelete_clicked()
+{
+    CPF cpf;
+    try {
+        cpf.setValor(ui->linecpf->text().toStdString());
+        modelUsuario->excluirUsuario(cpf);
+    } catch (...) {
+        cout << "Erro ao excluir Usuario" << endl;
+    }
+}
+
+void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
+    viewUsuario::modelUsuario = modelUsuario;
 }
