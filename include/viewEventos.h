@@ -18,6 +18,10 @@ public:
     void executar(CPF cpf);
     ~viewEventos();
 
+    void aprlineclean();
+
+    void eventolineclean();
+
     void setModelEventos(ISEventos *modelEventos) {
         viewEventos::modelEventos = modelEventos;
     }

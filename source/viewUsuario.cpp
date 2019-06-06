@@ -34,6 +34,8 @@ viewUsuario::viewUsuario(QWidget *parent) :
 }
 
 void viewUsuario::executar(CPF &cpf){
+    // Limpando os dados de cadastro
+    viewUsuario::lineclean();
     this->cpfUsuarioLogado = cpf;
     if (cpf.getValor() == "") {
         ui->stackedWidget->setCurrentIndex(0);
@@ -189,6 +191,20 @@ void viewUsuario::on_btnRegistrar_clicked()
 void viewUsuario::on_btnHome_clicked()
 {
     this->close();
+}
+
+void viewUsuario::lineclean(){
+    ui->msg->setText("");
+    ui->linecpf->setText("");
+    ui->linedata->setText("");
+    ui->linesenha->setText("");
+    ui->linecodigo->setText("");
+    ui->linenumero->setText("");
+    ui->labelCheckCPF->setText("");
+    ui->labelCheckCartao->setText("");
+    ui->labelCheckCodigo->setText("");
+    ui->labelCheckData->setText("");
+    ui->labelCheckSenha->setText("");
 }
 
 void viewUsuario::on_buttonDelete_clicked()

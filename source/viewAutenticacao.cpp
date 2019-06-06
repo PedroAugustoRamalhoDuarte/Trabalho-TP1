@@ -23,11 +23,17 @@ viewAutenticacao::~viewAutenticacao()
 }
 
 bool viewAutenticacao::executar(CPF* cpf) {
+    viewAutenticacao::lineclean();
     this->cpfUsuarioLogado = cpf;
     this->show();
     if (userLogedIn)
         return true;
     return false;
+}
+
+void viewAutenticacao::lineclean(){
+    ui->lineCpf->setText("");
+    ui->lineSenha->setText("");
 }
 
 void viewAutenticacao::on_Login_clicked()
@@ -44,6 +50,7 @@ void viewAutenticacao::on_Login_clicked()
             cout << "DepoisDeAtribuirCPF(btnLogin)" << endl;
             userLogedIn = true;
             this->close();
+
         } else {
             cout << "Erro ao fazer login " << endl;
         }
@@ -59,11 +66,8 @@ void viewAutenticacao::on_lineCpf_editingFinished()
     CPF cpf;
     try {
         cpf.setValor(ui->lineCpf->text().toStdString());
-        ui->checkCPF->setStyleSheet("color:#7d7");
-        ui->checkCPF->setText("✓");
     } catch (...) {
-        ui->checkCPF->setStyleSheet("color:#f00");
-        ui->checkCPF->setText("x");
+
     }
 
 }
@@ -73,11 +77,8 @@ void viewAutenticacao::on_lineSenha_editingFinished()
     Senha senha;
     try {
         senha.setValor(ui->lineSenha->text().toStdString());
-        ui->checkSenha->setStyleSheet("color:#7d7");
-        ui->checkSenha->setText("✓");
     } catch (...) {
-        ui->checkSenha->setStyleSheet("color:#f00");
-        ui->checkSenha->setText("x");
+
     }
 }
 

@@ -20,6 +20,8 @@ public:
 
     void executar(CPF &cpf);
 
+    void lineclean();
+
     ~viewUsuario();
 
     void setModelUsuario(ISUsuario *modelUsuario);

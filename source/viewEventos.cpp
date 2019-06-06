@@ -56,6 +56,9 @@ viewEventos::~viewEventos()
 }
 
 void viewEventos::executar(CPF cpf) {
+    // Ao executar a view limpar os campos de evento e apresentação
+    viewEventos::aprlineclean();
+    viewEventos::eventolineclean();
     if (cpf.getValor() != "") {
         cpfUsuarioLogado = cpf;
         // Menu Eventos Usuario logado
@@ -105,6 +108,21 @@ void viewEventos::on_btnPesquisarReal_clicked()
     }
 
     ui->tableEventos->update();
+}
+
+void viewEventos::eventolineclean(){
+    ui->clineNome->setText("");
+    ui->checkNome->setText("");
+    ui->clineFaixa->setText("");
+    ui->checkFaixa->setText("");
+    ui->clineCidade->setText("");
+    ui->checkCidade->setText("");
+    ui->clineClasse->setText("");
+    ui->checkClasse->setText("");
+    ui->clineCodigo->setText("");
+    ui->checkCodigo->setText("");
+    ui->clineEstado->setText("");
+    ui->checkEstado->setText("");
 }
 
 // Adiciona a informação do evento para posteriormente inserir no BD
@@ -169,6 +187,23 @@ void viewEventos::on_btnAdicionarApr_clicked()
     } catch (...) {
         cout << "Erro ao adicionar Apresentação" << endl;
     }
+}
+
+void viewEventos::aprlineclean(){
+    // Reiniciando valores das linetext
+    //ui->alineData->setDate("01/01/00");
+    ui->alineSala->setText("");
+    ui->alinePreco->setText("");
+    ui->alineCodigo->setText("");
+    ui->alineDisponibilidade->setText("");
+    //ui->alineHorario->setTime(00:00);
+    // Reiniciando Check
+    ui->aprCheckCod->setText("");
+    ui->aprCheckHor->setText("");
+    ui->aprCheckData->setText("");
+    ui->aprCheckSala->setText("");
+    ui->aprCheckDisp->setText("");
+    ui->aprCheckPreco->setText("");
 }
 
 void viewEventos::on_btnConcluirApr_clicked()

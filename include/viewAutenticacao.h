@@ -16,6 +16,8 @@ class viewAutenticacao : public QMainWindow, public IAAutenticacao
 public:
     bool executar(CPF* cpf) override;
 
+    void lineclean();
+
     explicit viewAutenticacao(QWidget *parent = nullptr);
 
     ~viewAutenticacao();
