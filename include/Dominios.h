@@ -45,7 +45,7 @@ protected:
     virtual void validar(string entrada) = 0;
 
 public:
-    /**@brief Método Set.
+    /** @brief Método Set.
      *
      * Método responsável pela atribuição do valor, nele é chamado o método validar que verifica se o valor está
      * no formato correto, se estiver será atribuido, caso contrário será retornado throw.
@@ -60,7 +60,7 @@ public:
         this->valor = entrada;
     }
 
-    /**@brief Método Get
+    /** @brief Método Get
      *
      * Método responsável por retornar o valor
      *
@@ -95,7 +95,7 @@ protected:
 
 };
 
-/**@brief Classe que manipula os códigos de evento.
+/** @brief Classe que manipula os códigos de evento.
  *
  *   Classe filha de Codigo. Na qual a funcao é armazenar um codigo de evento de tamanho 3
  */

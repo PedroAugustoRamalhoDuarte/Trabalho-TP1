@@ -65,6 +65,17 @@ void NomeDeEvento::validar(string entrada) {
 }
 
 void Preco::validar(string entrada) {
+    // Procura um ponto na entrada
+    auto pos = entrada.find(".");
+    // Se achar um ponto
+    if (pos != string::npos){
+        // Separa do começo ate o ponto
+        string primeiraParte = entrada.substr(0, pos);
+        // Do ponto ate o final
+        string segundaParte = entrada.substr(pos + 1, entrada.size() - pos);
+        // Junta as duas partes
+        entrada = primeiraParte + segundaParte;
+    }
     double preco = stod(entrada);
     if (preco < 0 || preco > 1000) {
         throw invalid_argument("Preco Invalido");
