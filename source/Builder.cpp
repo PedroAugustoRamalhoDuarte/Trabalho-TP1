@@ -10,11 +10,11 @@ void Builder::build(Controladora* controladora) {
     // Instanciando as interfaces de serviço
     ISAutenticacao* modelAutenticao = new ModelAutenticacao();
     ISUsuario* modelUsuario = new ModelUsuario();
-    ISEventos* modelEventos;
-    ISVendas* modelVendas;
+    ISEventos* modelEventos = new ModelEventos();
+    //ISVendas* modelVendas = new ModelVendas();
 
     // Intanciando as interfaces de apresentação
-    //IAVendas *viewsVendas ;
+    //IAVendas *viewsVendas = new class viewVendas() ;
     IAEventos *viewEventos = new class viewEventos();
     IAAutenticacao *viewAutenticacao = new class viewAutenticacao();
     IAUsuario *viewUsuario  = new class viewUsuario();

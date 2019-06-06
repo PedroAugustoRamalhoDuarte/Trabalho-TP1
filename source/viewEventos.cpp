@@ -107,6 +107,7 @@ void viewEventos::on_btnPesquisarReal_clicked()
     ui->tableEventos->update();
 }
 
+// Adiciona a informação do evento para posteriormente inserir no BD
 void viewEventos::on_btnCriarEvento_clicked()
 {
     CodigoDeEvento codigo;
@@ -141,6 +142,7 @@ void viewEventos::on_btnCriar_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
+// Adiciona apresentacoes na lista de apresentações para posteriormente adiciona-las
 void viewEventos::on_btnAdicionarApr_clicked()
 {
     CodigoDeApresentacao codigo;

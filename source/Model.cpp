@@ -261,12 +261,17 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
 
 // --------------------------------------------------------------------------
 // Model Eventos Autenticacao
+
+ModelEventos::ModelEventos() : Model() {}
+
+// return: True se for menor que o limite, False se for maior que o limiete
 bool ModelEventos::isLimiteEventos(CPF cpf) {
+    // Verifica se o usuario tem um numero maior ou igual de eventos permitidos
     comandoSQL = "SELECT COUNT(*) FROM evento WHERE cpf_usuario =";
     comandoSQL += "'" + cpf.getValor() + "';";
     try {
         this->executar();
-        // Verifica se o usuario tem um numero maior ou igual de eventos permitidos
+        // Se tem menos evento que o limite
         if (atoi(listaResultados.back().c_str()) < LIMITE_EVENTOS) {
             listaResultados.clear();
             return true;
@@ -279,11 +284,9 @@ bool ModelEventos::isLimiteEventos(CPF cpf) {
     }
 }
 
-ModelEventos::ModelEventos() : Model() {}
-
 bool ModelEventos::criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) {
     // Primeiramente verificar se o usuario nao possui mais que o limite de eventos
-    if (!this->isLimiteEventos(cpf) && listaApresentacao.size() <= LIMITE_APRESENTACAO) {
+    if (this->isLimiteEventos(cpf) && listaApresentacao.size() <= LIMITE_APRESENTACAO) {
         comandoSQL = "INSERT INTO evento VALUES (";
         comandoSQL += "'" + cpf.getValor() + "', ";
         comandoSQL += "'" + evento.getCodigo().getValor() + "',";
@@ -292,12 +295,11 @@ bool ModelEventos::criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaA
         comandoSQL += "'" + evento.getEstado().getValor() + "',";
         comandoSQL += "'" + evento.getClasse().getValor() + "',";
         comandoSQL += "'" + evento.getFaixa().getValor() + "');";
-
         // Adicionar apresentacoes depois
         try {
             // Executa o comando mysql
             this->executar();
-            //adicionarApresentacao(codigoevento, listaApresentacao)
+            adicionarApresentacoes(evento.getCodigo(), listaApresentacao);
             return true;
         } catch (...) {
             // Se der falha ao executar o comando
@@ -322,6 +324,24 @@ bool ModelEventos::descadastrarEvento(CPF cpf, Evento evento) {
 
 bool ModelEventos::pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) {
     return false;
+}
+
+void ModelEventos::adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao) {
+    for (Apresentacao apresentacao: listaApresentacao) {
+        try {
+            comandoSQL = "INSERT INTO apresentacao VALUES (";
+            comandoSQL += "'" + codigo.getValor() + "', ";
+            comandoSQL += "'" + apresentacao.getCodigo().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getData().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getHorario().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getPreco().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getNumeroDeSala().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getDisponibilidade().getValor() + "');";
+            this->executar();
+        } catch (...) {
+
+        }
+    }
 }
 
 // --------------------------------------------------------------------------

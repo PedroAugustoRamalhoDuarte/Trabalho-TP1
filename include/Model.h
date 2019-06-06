@@ -77,6 +77,8 @@ private:
     // Retorna True caso não possa mais criar eventos
     bool isLimiteEventos(CPF cpf);
 
+    void adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao);
+
 public:
     bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) override;
 
