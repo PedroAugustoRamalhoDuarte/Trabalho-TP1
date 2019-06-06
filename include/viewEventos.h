@@ -36,6 +36,30 @@ private slots:
 
     void on_btnConcluirApr_clicked();
 
+    void on_clineCodigo_editingFinished();
+
+    void on_clineNome_editingFinished();
+
+    void on_clineCidade_editingFinished();
+
+    void on_clineEstado_editingFinished();
+
+    void on_clineClasse_editingFinished();
+
+    void on_clineFaixa_editingFinished();
+
+    void on_alineData_editingFinished();
+
+    void on_alineHorario_editingFinished();
+
+    void on_alineCodigo_editingFinished();
+
+    void on_alinePreco_editingFinished();
+
+    void on_alineSala_editingFinished();
+
+    void on_alineDisponibilidade_editingFinished();
+
 private:
     Ui::viewEventos *ui;
     Evento eventoADD;

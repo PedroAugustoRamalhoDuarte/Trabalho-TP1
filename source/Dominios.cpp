@@ -81,7 +81,7 @@ void NumeroDeSala::validar(string entrada) {
 void Cidade::validar(string entrada) {
     // Variavel para checar se o caracter anterior e espaco
     bool isAnteriorEspaco = false, isAnteriorLetra = false;
-    if (entrada.size() > TAMANHO_CIDADE) {
+    if (entrada.size() > TAMANHO_CIDADE || entrada == "") {
         throw invalid_argument("Formato Invalido");
     } else {
         for (char c : entrada) {
