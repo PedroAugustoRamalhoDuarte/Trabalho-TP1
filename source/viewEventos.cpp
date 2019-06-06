@@ -190,13 +190,15 @@ void viewEventos::on_btnAdicionarApr_clicked()
 }
 
 void viewEventos::aprlineclean(){
+    QTime time = QTime::fromString("00:00", "hh:mm");
+    QDate date = QDate::fromString("01/01/00", "dd/MM/yy");
     // Reiniciando valores das linetext
-    //ui->alineData->setDate("01/01/00");
+    ui->alineData->setDate(date);
     ui->alineSala->setText("");
     ui->alinePreco->setText("");
     ui->alineCodigo->setText("");
     ui->alineDisponibilidade->setText("");
-    //ui->alineHorario->setTime(00:00);
+    ui->alineHorario->setTime(time);
     // Reiniciando Check
     ui->aprCheckCod->setText("");
     ui->aprCheckHor->setText("");
