@@ -83,7 +83,7 @@ void viewEventos::on_btnPesquisarReal_clicked()
     Data dataIncio;
     Data dataFim;
     // Retirar tamanho quando pesquisar estiver pronto
-    list<Evento> listaEventos(5);
+    list<Evento> listaEventos;
     try {
         // Pesquisar
         cidade.setValor(ui->lineCidade->text().toStdString());
@@ -102,9 +102,16 @@ void viewEventos::on_btnPesquisarReal_clicked()
     // Adicionar na tabela
     ui->tableEventos->clearContents();
     ui->tableEventos->setRowCount(listaEventos.size());
-    for (int i=0; i < listaEventos.size() ; i++) {
-        ui->tableEventos->setItem(i, 1, new QTableWidgetItem("Hello"));
+    int i=0;
+    for (auto evento: listaEventos) {
+        ui->tableEventos->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(evento.getCodigo().getValor())));
+        ui->tableEventos->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(evento.getNome().getValor())));
+        ui->tableEventos->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(evento.getCidade().getValor())));
+        ui->tableEventos->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(evento.getEstado().getValor())));
+        ui->tableEventos->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(evento.getClasse().getValor())));
+        ui->tableEventos->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(evento.getFaixa().getValor())));
         ui->tableEventos->setItem(i, 6, new QTableWidgetItem("Link para Apresentações"));
+        i++;
     }
 
     ui->tableEventos->update();
@@ -371,5 +378,33 @@ void viewEventos::on_alineDisponibilidade_editingFinished()
     } catch (...) {
         ui->aprCheckDisp->setStyleSheet("color:#f00");
         ui->aprCheckDisp->setText("x");
+    }
+}
+
+void viewEventos::on_tableEventos_cellClicked(int row, int column)
+{
+    int ULTIMA_COLUNA = 6;
+    list<Apresentacao> listaApresentacao;
+    if (column == ULTIMA_COLUNA) {
+        CodigoDeEvento codigo;
+        codigo.setValor( ui->tableEventos->itemAt(row, 0)->text().toStdString()) ;
+        modelEventos->mostrarApresentacao(listaApresentacao, codigo);
+
+        // Adicionar na tabela
+        ui->tableApresentacao->clearContents();
+        ui->tableApresentacao->setRowCount(listaApresentacao.size());
+        int i=0;
+        for (auto apresentacao : listaApresentacao) {
+            ui->tableApresentacao->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(apresentacao.getCodigo().getValor())));
+            ui->tableApresentacao->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(apresentacao.getData().getValor())));
+            ui->tableApresentacao->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(apresentacao.getHorario().getValor())));
+            ui->tableApresentacao->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(apresentacao.getPreco().getValor())));
+            ui->tableApresentacao->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(apresentacao.getNumeroDeSala().getValor())));
+            ui->tableApresentacao->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(apresentacao.getDisponibilidade().getValor())));
+            i++;
+        }
+        ui->tableApresentacao->update();
+        ui->stackedWidget->setCurrentIndex(4);
+
     }
 }

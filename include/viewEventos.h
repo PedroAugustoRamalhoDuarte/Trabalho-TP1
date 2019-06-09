@@ -64,6 +64,8 @@ private slots:
 
     void on_alineDisponibilidade_editingFinished();
 
+    void on_tableEventos_cellClicked(int row, int column);
+
 private:
     Ui::viewEventos *ui;
     Evento eventoADD;

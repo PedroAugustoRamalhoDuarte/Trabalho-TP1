@@ -91,6 +91,8 @@ public:
     bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
 
     ModelEventos();
+
+    bool mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) override;
 };
 
 class ModelVendas : public Model, public ISVendas {

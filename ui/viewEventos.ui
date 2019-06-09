@@ -716,6 +716,48 @@
       </layout>
      </widget>
     </widget>
+    <widget class="QWidget" name="page_5">
+     <widget class="QTableWidget" name="tableApresentacao">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>90</y>
+        <width>681</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Código</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Data</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Horário</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Preço</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Sala</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Disponibilidade</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

@@ -25,12 +25,9 @@ public:
 
     virtual bool descadastrarEvento(CPF, Evento) = 0;
 
-    /*Em resposta à consulta, o sistema lista os seguintes dados sobre cada evento que atenda aos requisitos da consulta
-     : nome do evento, código de cada apresentação, data de
-cada apresentação, horário de cada apresentação, preço do ingresso de cada apresentação, número da sala de cada
-apresentação, quantidade de ingressos disponíveis para cada apresentação, classe e faixa etária do evento.
-     */
     virtual bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
+
+    virtual bool mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) = 0;
 };
 
 class ISUsuario {

@@ -152,6 +152,12 @@ TEST_CASE("Teste Preco") {
         REQUIRE_NOTHROW(preco.setValor(precoValido));
         CHECK(preco.getValor() ==  precoValido);
     }
+
+    SECTION("Preco valido 2") {
+        string precoValido = "250.00";
+        REQUIRE_NOTHROW(preco.setValor(precoValido));
+        CHECK(preco.getValor() ==  precoValido);
+    }
 }
 
 TEST_CASE("Senha") {

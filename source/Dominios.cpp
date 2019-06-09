@@ -67,8 +67,9 @@ void NomeDeEvento::validar(string entrada) {
 void Preco::validar(string entrada) {
     // Procura um ponto na entrada
     auto pos = entrada.find(".");
+    auto virg = entrada.find(",");
     // Se achar um ponto
-    if (pos != string::npos){
+    if (pos != string::npos && virg != string::npos){
         // Separa do começo ate o ponto
         string primeiraParte = entrada.substr(0, pos);
         // Do ponto ate o final
