@@ -76,6 +76,8 @@ void viewEventos::on_btnHome_clicked()
     this->close();
 }
 
+// ---------------------------------------------------------------
+// Lógica da view
 void viewEventos::on_btnPesquisarReal_clicked()
 {
     Cidade cidade;
@@ -117,21 +119,6 @@ void viewEventos::on_btnPesquisarReal_clicked()
     ui->tableEventos->update();
 }
 
-void viewEventos::eventolineclean(){
-    ui->clineNome->setText("");
-    ui->checkNome->setText("");
-    ui->clineFaixa->setText("");
-    ui->checkFaixa->setText("");
-    ui->clineCidade->setText("");
-    ui->checkCidade->setText("");
-    ui->clineClasse->setText("");
-    ui->checkClasse->setText("");
-    ui->clineCodigo->setText("");
-    ui->checkCodigo->setText("");
-    ui->clineEstado->setText("");
-    ui->checkEstado->setText("");
-}
-
 // Adiciona a informação do evento para posteriormente inserir no BD
 void viewEventos::on_btnCriarEvento_clicked()
 {
@@ -162,6 +149,7 @@ void viewEventos::on_btnCriarEvento_clicked()
     }
 }
 
+// Troca a view para adicionar a apresentção
 void viewEventos::on_btnCriar_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
@@ -191,30 +179,13 @@ void viewEventos::on_btnAdicionarApr_clicked()
      apresentacao.setNumeroDeSala(sala);
      apresentacao.setDisponibilidade(disponibilidade);
      listApresentacao.push_back(apresentacao);
+     this->aprlineclean();
     } catch (...) {
         cout << "Erro ao adicionar Apresentação" << endl;
     }
 }
 
-void viewEventos::aprlineclean(){
-    QTime time = QTime::fromString("00:00", "hh:mm");
-    QDate date = QDate::fromString("01/01/00", "dd/MM/yy");
-    // Reiniciando valores das linetext
-    ui->alineData->setDate(date);
-    ui->alineSala->setText("");
-    ui->alinePreco->setText("");
-    ui->alineCodigo->setText("");
-    ui->alineDisponibilidade->setText("");
-    ui->alineHorario->setTime(time);
-    // Reiniciando Check
-    ui->aprCheckCod->setText("");
-    ui->aprCheckHor->setText("");
-    ui->aprCheckData->setText("");
-    ui->aprCheckSala->setText("");
-    ui->aprCheckDisp->setText("");
-    ui->aprCheckPreco->setText("");
-}
-
+// Criar de fato o evento com as apresentações associadas
 void viewEventos::on_btnConcluirApr_clicked()
 {
     try {
@@ -224,6 +195,38 @@ void viewEventos::on_btnConcluirApr_clicked()
     }
 }
 
+// Método no qual quando clicar na última célua da tabela Eventos -> mostrar tabela apresentação
+void viewEventos::on_tableEventos_cellClicked(int row, int column)
+{
+    int ULTIMA_COLUNA = 6;
+    list<Apresentacao> listaApresentacao;
+    if (column == ULTIMA_COLUNA) {
+        CodigoDeEvento codigo;
+        codigo.setValor( ui->tableEventos->itemAt(row, 0)->text().toStdString()) ;
+        modelEventos->mostrarApresentacao(listaApresentacao, codigo);
+
+        // Adicionar na tabela
+        ui->tableApresentacao->clearContents();
+        ui->tableApresentacao->setRowCount(listaApresentacao.size());
+        int i=0;
+        for (auto apresentacao : listaApresentacao) {
+            ui->tableApresentacao->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(apresentacao.getCodigo().getValor())));
+            ui->tableApresentacao->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(apresentacao.getData().getValor())));
+            ui->tableApresentacao->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(apresentacao.getHorario().getValor())));
+            ui->tableApresentacao->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(apresentacao.getPreco().getValor())));
+            ui->tableApresentacao->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(apresentacao.getNumeroDeSala().getValor())));
+            ui->tableApresentacao->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(apresentacao.getDisponibilidade().getValor())));
+            i++;
+        }
+        ui->tableApresentacao->update();
+        ui->stackedWidget->setCurrentIndex(4);
+
+    }
+}
+//------------------------------------------------------------------
+
+// -----------------------------------------------------------------
+// Métodos para auxiliar usuário por tipos corretos
 void viewEventos::on_clineCodigo_editingFinished()
 {
     CodigoDeEvento codigo;
@@ -380,31 +383,41 @@ void viewEventos::on_alineDisponibilidade_editingFinished()
         ui->aprCheckDisp->setText("x");
     }
 }
+//---------------------------------------------------------------------
 
-void viewEventos::on_tableEventos_cellClicked(int row, int column)
-{
-    int ULTIMA_COLUNA = 6;
-    list<Apresentacao> listaApresentacao;
-    if (column == ULTIMA_COLUNA) {
-        CodigoDeEvento codigo;
-        codigo.setValor( ui->tableEventos->itemAt(row, 0)->text().toStdString()) ;
-        modelEventos->mostrarApresentacao(listaApresentacao, codigo);
-
-        // Adicionar na tabela
-        ui->tableApresentacao->clearContents();
-        ui->tableApresentacao->setRowCount(listaApresentacao.size());
-        int i=0;
-        for (auto apresentacao : listaApresentacao) {
-            ui->tableApresentacao->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(apresentacao.getCodigo().getValor())));
-            ui->tableApresentacao->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(apresentacao.getData().getValor())));
-            ui->tableApresentacao->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(apresentacao.getHorario().getValor())));
-            ui->tableApresentacao->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(apresentacao.getPreco().getValor())));
-            ui->tableApresentacao->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(apresentacao.getNumeroDeSala().getValor())));
-            ui->tableApresentacao->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(apresentacao.getDisponibilidade().getValor())));
-            i++;
-        }
-        ui->tableApresentacao->update();
-        ui->stackedWidget->setCurrentIndex(4);
-
-    }
+// -------------------------------------------------------------------
+// Métodos para limpar view
+void viewEventos::eventolineclean(){
+    ui->clineNome->setText("");
+    ui->checkNome->setText("");
+    ui->clineFaixa->setText("");
+    ui->checkFaixa->setText("");
+    ui->clineCidade->setText("");
+    ui->checkCidade->setText("");
+    ui->clineClasse->setText("");
+    ui->checkClasse->setText("");
+    ui->clineCodigo->setText("");
+    ui->checkCodigo->setText("");
+    ui->clineEstado->setText("");
+    ui->checkEstado->setText("");
 }
+
+void viewEventos::aprlineclean(){
+    QTime time = QTime::fromString("00:00", "hh:mm");
+    QDate date = QDate::fromString("01/01/00", "dd/MM/yy");
+    // Reiniciando valores das linetext
+    ui->alineData->setDate(date);
+    ui->alineSala->setText("");
+    ui->alinePreco->setText("");
+    ui->alineCodigo->setText("");
+    ui->alineDisponibilidade->setText("");
+    ui->alineHorario->setTime(time);
+    // Reiniciando Check
+    ui->aprCheckCod->setText("");
+    ui->aprCheckHor->setText("");
+    ui->aprCheckData->setText("");
+    ui->aprCheckSala->setText("");
+    ui->aprCheckDisp->setText("");
+    ui->aprCheckPreco->setText("");
+}
+//---------------------------------------------------------------------

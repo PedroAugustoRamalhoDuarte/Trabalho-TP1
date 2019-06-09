@@ -453,6 +453,8 @@ bool ModelEventos::mostrarApresentacao(list<Apresentacao> &listaApresentacao, Co
     comandoSQL = "SELECT * FROM apresentacao WHERE codigo_evento =";
     comandoSQL += "'" + codigoDeEvento.getValor() + "' ;";
     try {
+        // Limpando a lista de resultados
+        listaResultados.clear();
         cout << "PESQUISANDO EVENTO" << endl;
         this->executar();
         cout << "PESQUISANDO EVENT1" << endl;
