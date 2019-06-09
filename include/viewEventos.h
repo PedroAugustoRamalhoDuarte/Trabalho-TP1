@@ -70,6 +70,8 @@ private slots:
 
     void on_buttonHome_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::viewEventos *ui;
     Evento eventoADD;

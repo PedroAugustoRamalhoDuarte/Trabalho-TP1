@@ -438,3 +438,8 @@ void viewEventos::on_buttonHome_clicked()
 {
     this->close();
 }
+
+void viewEventos::on_pushButton_clicked()
+{
+    this->close();
+}
