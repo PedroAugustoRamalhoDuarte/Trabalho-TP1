@@ -11,7 +11,6 @@ Model::Model() {
     int error = 0;
     error = sqlite3_open("example.db", &db);
 
-
     if (error) {
 
         cout << "DB Open Error: " << sqlite3_errmsg(db) << endl;
@@ -124,8 +123,10 @@ void Model::criarTabelas() {
 void Model::executar() {
     status = sqlite3_exec(db, comandoSQL.c_str(), callback, nullptr, &mensagem);
     if (status != SQLITE_OK) {
-        if (mensagem)
-            free(mensagem);
+        if (*mensagem)
+            cout << mensagem;
+          //  free(mensagem);
+        cout << "ERRO SQL" << endl;
         throw invalid_argument("Erro na execucao do comando SQL");
     }
 }
@@ -322,8 +323,100 @@ bool ModelEventos::descadastrarEvento(CPF cpf, Evento evento) {
     return false;
 }
 
-bool ModelEventos::pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) {
+bool ModelEventos::verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino){
+   for (auto evento : listaEventos) {
+       comandoSQL = "SELECT * FROM apresentacao WHERE data >= ";
+       comandoSQL += "'"+dataInicio.getValor()+"' AND data <= ";
+       comandoSQL += "'"+dataTermino.getValor()+"' AND codigo_evento =";
+       comandoSQL+= "'"+evento.getCodigo().getValor()+"';";
+       try {
+           this->executar();
+           int tam = (listaResultados.size()/7);
+           for (int i = 0; i < tam; i++) {
+               Apresentacao apresentacao;
+               CodigoDeApresentacao codigo;
+               Data data;
+               Horario horario;
+               Preco preco;
+               NumeroDeSala numeroDeSala;
+               Disponibilidade disponibilidade;
+           }
+       } catch (...) {
+
+       }
+   }
+
     return false;
+}
+bool ModelEventos::pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) {
+    comandoSQL = "SELECT * FROM evento WHERE cidade =";
+    comandoSQL += "'" + cidade.getValor() + "' AND estado = ";
+    comandoSQL += "'" + estado.getValor() + "';";
+    try {
+        cout << "PESQUISANDO EVENTO" << endl;
+        this->executar();
+        cout << "PESQUISANDO EVENT1" << endl;
+        int tam = (listaResultados.size() / 7);
+        cout << "PESQUISANDO EVENTO2" << endl;
+        for(int i=0; i<tam ;i++) {
+            auto evento = new Evento();
+            CodigoDeEvento codigo;
+            NomeDeEvento nome;
+            Cidade cidade;
+            Estado estado;
+            ClasseDeEvento classe;
+            FaixaEtaria faixa;
+
+            // Retirando o CPF, pois não é usado no Evento
+            listaResultados.pop_back();
+
+            //Atribuindo o codigo ao evento
+            cout << "codigo: "<< listaResultados.back()<<endl;
+            codigo.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setCodigo(codigo);
+
+            // Atribuindo o nome ao evento
+            cout << "nome: "<< listaResultados.back()<<endl;
+            nome.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setNome(nome);
+
+            // Atribuindo a cidade ao evento
+            cout << "cidade: "<< listaResultados.back()<<endl;
+            cidade.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setCidade(cidade);
+
+            // Atribuindo o estado ao evento
+            cout << "estado: "<< listaResultados.back()<<endl;
+            estado.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setEstado(estado);
+
+            // Atribuindo a classe ao evento
+            cout << "classe: "<< listaResultados.back()<<endl;
+            classe.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setClasse(classe);
+
+            // Atribundo a faixa etaria ao evento
+            cout << "faixa: "<< listaResultados.back()<<endl;
+            faixa.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setFaixa(faixa);
+
+            listaEventos.push_back(*evento);
+
+            delete evento;
+        }
+    } catch (...) {
+        return false;
+    }
+
+    this->verificaDataApresentacao(listaEventos, dataInicio, dataTermino);
+
+    return true;
 }
 
 void ModelEventos::adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao) {

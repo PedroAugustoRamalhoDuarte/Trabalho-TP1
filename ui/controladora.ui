@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>viewUsuario</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btnCadastro">
     <property name="geometry">

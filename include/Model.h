@@ -79,6 +79,8 @@ private:
 
     void adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao);
 
+    bool verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino);
+
 public:
     bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) override;
 
