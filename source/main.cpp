@@ -11,6 +11,8 @@
 
 int main(int argc, char *argv[])
 {
+    auto model = new Model();
+    model->criarTabelas();
     CPF cpf;
     QApplication a(argc, argv);
 

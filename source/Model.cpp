@@ -25,8 +25,8 @@ Model::Model() {
 void Model::criarTabelaIngresso() {
     const char *sql;
     sql = "CREATE TABLE IF NOT EXISTS ingresso("
-          "codigo_ingresso  INT PRIMARY KEY,"
-          "codigo_apresentacao INT NOT NULL,"
+          "codigo_ingresso VARCHAR(10)  PRIMARY KEY,"
+          "codigo_apresentacao VARCHAR(10) NOT NULL,"
           "cpf_usuario  VARCHAR(14) NOT NULL,"
           "FOREIGN KEY(codigo_apresentacao) REFERENCES apresentacao,"
           "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
@@ -46,7 +46,7 @@ void Model::criarTabelaUsuario() {
     sql = "CREATE TABLE IF NOT EXISTS usuario("
           "cpf VARCHAR(14) PRIMARY KEY,"
           "senha VARCHAR(12) NOT NULL,"
-          "codigo_cartao INT NOT NULL,"
+          "codigo_cartao VARCHAR(10) NOT NULL,"
           "numero_cartao VARCHAR(16) NOT NULL,"
           "data_validade VARCHAR(5) NOT NULL);";
 
@@ -64,11 +64,11 @@ void Model::criarTabelaEvento() {
 
     sql = "CREATE TABLE IF NOT EXISTS evento("
           "cpf_usuario VARCHAR(14) NOT NULL,"
-          "codigo int PRIMARY KEY,"
+          "codigo VARCHAR(10) PRIMARY KEY,"
           "nome VARCHAR(20) NOT NULL,"
           "cidade VARCHAR(15) NOT NULL,"
           "estado VARCHAR(2) NOT NULL,"
-          "classe SMALLINT(1) NOT NULL,"
+          "classe VARCHAR(1) NOT NULL,"
           "faixa_etaria VARCHAR(2) NOT NULL,"
           "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
 
@@ -85,13 +85,13 @@ void Model::criarTabelaApresentacao() {
     const char *sql;
 
     sql = "CREATE TABLE IF NOT EXISTS apresentacao("
-          "codigo_evento int REFERENCES evento NOT NULL,"
-          "codigo_apresentacao int PRIMARY KEY,"
+          "codigo_evento VARCHAR(10) REFERENCES evento NOT NULL,"
+          "codigo_apresentacao VARCHAR(10) PRIMARY KEY,"
           "data VARCHAR(8) NOT NULL,"
           "horario VARCHAR(15) NOT NULL,"
-          "preco FLOAT NOT NULL,"
-          "sala INT NOT NULL,"
-          "disponibilidade INT NOT NULL,"
+          "preco VARCHAR(10) NOT NULL,"
+          "sala VARCHAR(10) NOT NULL,"
+          "disponibilidade VARCHAR(10) NOT NULL,"
           "FOREIGN KEY(codigo_evento) REFERENCES evento);";
 
     status = sqlite3_exec(db, sql, nullptr, nullptr, nullptr);
@@ -261,92 +261,39 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
 }
 
 // --------------------------------------------------------------------------
-// Model Eventos Autenticacao
+// Model Servico Eventos
 
 ModelEventos::ModelEventos() : Model() {}
-
-// return: True se for menor que o limite, False se for maior que o limiete
-bool ModelEventos::isLimiteEventos(CPF cpf) {
-    // Verifica se o usuario tem um numero maior ou igual de eventos permitidos
-    comandoSQL = "SELECT COUNT(*) FROM evento WHERE cpf_usuario =";
-    comandoSQL += "'" + cpf.getValor() + "';";
-    try {
-        this->executar();
-        // Se tem menos evento que o limite
-        if (atoi(listaResultados.back().c_str()) < LIMITE_EVENTOS) {
-            listaResultados.clear();
-            return true;
-        } else {
-            listaResultados.clear();
-            return false;
-        }
-    } catch (...) {
-        return false;
-    }
-}
-
-bool ModelEventos::criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) {
-    // Primeiramente verificar se o usuario nao possui mais que o limite de eventos
-    if (this->isLimiteEventos(cpf) && listaApresentacao.size() <= LIMITE_APRESENTACAO) {
-        comandoSQL = "INSERT INTO evento VALUES (";
-        comandoSQL += "'" + cpf.getValor() + "', ";
-        comandoSQL += "'" + evento.getCodigo().getValor() + "',";
-        comandoSQL += "'" + evento.getNome().getValor() + "',";
-        comandoSQL += "'" + evento.getCidade().getValor() + "',";
-        comandoSQL += "'" + evento.getEstado().getValor() + "',";
-        comandoSQL += "'" + evento.getClasse().getValor() + "',";
-        comandoSQL += "'" + evento.getFaixa().getValor() + "');";
-        // Adicionar apresentacoes depois
-        try {
-            // Executa o comando mysql
-            this->executar();
-            adicionarApresentacoes(evento.getCodigo(), listaApresentacao);
-            return true;
-        } catch (...) {
-            // Se der falha ao executar o comando
-            cout << "Falha ao criar evento" << endl;
-            return false;
-        }
-
-    } else {
-        // Como mostrar para o usuario esse erro?
-        cout << "Falha ao criar envento:Limite de eventos" << endl;
-        return false;
-    }
-}
 
 bool ModelEventos::alterarEvento(CPF cpf, Evento evento) {
     return false;
 }
 
-bool ModelEventos::descadastrarEvento(CPF cpf, Evento evento) {
-    return false;
-}
-
-bool ModelEventos::verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino) {
-    for (auto evento : listaEventos) {
-        comandoSQL = "SELECT * FROM apresentacao WHERE data >= ";
-        comandoSQL += "'" + dataInicio.getValor() + "' AND data <= ";
-        comandoSQL += "'" + dataTermino.getValor() + "' AND codigo_evento =";
-        comandoSQL += "'" + evento.getCodigo().getValor() + "';";
-        try {
-            this->executar();
-            int tam = (listaResultados.size() / 7);
-            for (int i = 0; i < tam; i++) {
-                Apresentacao apresentacao;
-                CodigoDeApresentacao codigo;
-                Data data;
-                Horario horario;
-                Preco preco;
-                NumeroDeSala numeroDeSala;
-                Disponibilidade disponibilidade;
+bool ModelEventos::descadastrarEvento(CPF cpf, CodigoDeEvento codigo) {
+    // Falta Logica de negocio
+    if (isUsuarioDono(cpf, codigo)) {
+        if (!jaVendeu(codigo)) {
+            comandoSQL = "DELETE * from evento WHERE codigo = ";
+            comandoSQL += "'" + codigo.getValor() + "';";
+            try {
+                this->executar();
+                cout << "Evento Excluido com sucesso" << endl;
+                comandoSQL = "DELETE * from apresentacao WHERE codigo_evento = ";
+                comandoSQL += "'" + codigo.getValor() + "';";
+                this->executar();
+                return true;
+            } catch (...) {
+                cout << "Falha ao excluir evento" << endl;
+                return false;
             }
-        } catch (...) {
-
+        } else {
+            cout << "Falhha ao excluir enveto(Evento ja teve ingressos vendidos)" << endl;
         }
-    }
 
-    return false;
+    } else {
+        cout << "Falha ao excluir evento(Usuário não é dono do evento)" << endl;
+        return false;
+    }
 }
 
 bool ModelEventos::pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade,
@@ -411,13 +358,6 @@ bool ModelEventos::pesquisarEventos(list<Evento> &listaEventos, Data dataInicio,
             listaResultados.pop_back();
 
 
-
-
-
-
-
-
-
             listaEventos.push_back(*evento);
 
             delete evento;
@@ -429,24 +369,6 @@ bool ModelEventos::pesquisarEventos(list<Evento> &listaEventos, Data dataInicio,
     this->verificaDataApresentacao(listaEventos, dataInicio, dataTermino);
 
     return true;
-}
-
-void ModelEventos::adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao) {
-    for (Apresentacao apresentacao: listaApresentacao) {
-        try {
-            comandoSQL = "INSERT INTO apresentacao VALUES (";
-            comandoSQL += "'" + codigo.getValor() + "', ";
-            comandoSQL += "'" + apresentacao.getCodigo().getValor() + "',";
-            comandoSQL += "'" + apresentacao.getData().getValor() + "',";
-            comandoSQL += "'" + apresentacao.getHorario().getValor() + "',";
-            comandoSQL += "'" + apresentacao.getPreco().getValor() + "',";
-            comandoSQL += "'" + apresentacao.getNumeroDeSala().getValor() + "',";
-            comandoSQL += "'" + apresentacao.getDisponibilidade().getValor() + "');";
-            this->executar();
-        } catch (...) {
-
-        }
-    }
 }
 
 bool ModelEventos::mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) {
@@ -523,6 +445,142 @@ bool ModelEventos::mostrarApresentacao(list<Apresentacao> &listaApresentacao, Co
         return false;
     }
     return false;
+}
+
+// Metodos auxiliares de Servico Eventos
+bool ModelEventos::criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) {
+    // Primeiramente verificar se o usuario nao possui mais que o limite de eventos
+    if (this->isLimiteEventos(cpf) && listaApresentacao.size() <= LIMITE_APRESENTACAO) {
+        comandoSQL = "INSERT INTO evento VALUES (";
+        comandoSQL += "'" + cpf.getValor() + "', ";
+        comandoSQL += "'" + evento.getCodigo().getValor() + "',";
+        comandoSQL += "'" + evento.getNome().getValor() + "',";
+        comandoSQL += "'" + evento.getCidade().getValor() + "',";
+        comandoSQL += "'" + evento.getEstado().getValor() + "',";
+        comandoSQL += "'" + evento.getClasse().getValor() + "',";
+        comandoSQL += "'" + evento.getFaixa().getValor() + "');";
+        // Adicionar apresentacoes depois
+        try {
+            // Executa o comando mysql
+            this->executar();
+            adicionarApresentacoes(evento.getCodigo(), listaApresentacao);
+            return true;
+        } catch (...) {
+            // Se der falha ao executar o comando
+            cout << "Falha ao criar evento" << endl;
+            return false;
+        }
+
+    } else {
+        // Como mostrar para o usuario esse erro?
+        cout << "Falha ao criar envento:Limite de eventos" << endl;
+        return false;
+    }
+}
+
+bool ModelEventos::verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino) {
+    for (auto evento : listaEventos) {
+        comandoSQL = "SELECT * FROM apresentacao WHERE data >= ";
+        comandoSQL += "'" + dataInicio.getValor() + "' AND data <= ";
+        comandoSQL += "'" + dataTermino.getValor() + "' AND codigo_evento =";
+        comandoSQL += "'" + evento.getCodigo().getValor() + "';";
+        try {
+            this->executar();
+            int tam = (listaResultados.size() / 7);
+            for (int i = 0; i < tam; i++) {
+                Apresentacao apresentacao;
+                CodigoDeApresentacao codigo;
+                Data data;
+                Horario horario;
+                Preco preco;
+                NumeroDeSala numeroDeSala;
+                Disponibilidade disponibilidade;
+            }
+        } catch (...) {
+
+        }
+    }
+
+    return false;
+}
+
+void ModelEventos::adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao) {
+    for (Apresentacao apresentacao: listaApresentacao) {
+        try {
+            comandoSQL = "INSERT INTO apresentacao VALUES (";
+            comandoSQL += "'" + codigo.getValor() + "', ";
+            comandoSQL += "'" + apresentacao.getCodigo().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getData().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getHorario().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getPreco().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getNumeroDeSala().getValor() + "',";
+            comandoSQL += "'" + apresentacao.getDisponibilidade().getValor() + "');";
+            this->executar();
+        } catch (...) {
+
+        }
+    }
+}
+
+// return: True se for menor que o limite, False se for maior que o limiete
+bool ModelEventos::isLimiteEventos(CPF cpf) {
+    // Verifica se o usuario tem um numero maior ou igual de eventos permitidos
+    comandoSQL = "SELECT COUNT(*) FROM evento WHERE cpf_usuario =";
+    comandoSQL += "'" + cpf.getValor() + "';";
+    try {
+        this->executar();
+        // Se tem menos evento que o limite
+        if (atoi(listaResultados.back().c_str()) < LIMITE_EVENTOS) {
+            listaResultados.clear();
+            return true;
+        } else {
+            listaResultados.clear();
+            return false;
+        }
+    } catch (...) {
+        return false;
+    }
+}
+
+bool ModelEventos::isUsuarioDono(CPF cpf, CodigoDeEvento codigo) {
+    comandoSQL = "SELECT (cpf_usuario) FROM evento WHERE codigo = ";
+    comandoSQL += "'" + codigo.getValor() + "';";
+    try {
+        listaResultados.clear();
+        this->executar();
+        return listaResultados.back() == cpf.getValor();
+    } catch (...) {
+        return false;
+    }
+}
+
+bool ModelEventos::jaVendeu(CodigoDeEvento codigo) {
+    list<CodigoDeApresentacao> listaCodigoApr;
+    comandoSQL = "SELECT (codigo_apresentacao) FROM apresentacao WHERE codigo_evento =";
+    comandoSQL += "'" + codigo.getValor()+ "';";
+    try {
+        listaResultados.clear();
+        this->executar();
+        CodigoDeApresentacao codigoDeApresentacao;
+        for(int i=0; i<listaResultados.size(); i++){
+            codigoDeApresentacao.setValor(listaResultados.back());
+            listaCodigoApr.push_back(codigoDeApresentacao);
+            listaResultados.pop_back();
+        }
+
+        for (auto apr : listaCodigoApr) {
+            comandoSQL = "SELECT COUNT(*) FROM ingressos WHERE codigo_apresentacao =";
+            comandoSQL += "'"+ apr.getValor() +"'";
+            listaResultados.clear();
+            this->executar();
+            if (listaResultados.back() > "0") {
+                return false;
+            }
+        }
+    } catch (...) {
+        return false;
+    }
+    return true;
 }
 
 // --------------------------------------------------------------------------

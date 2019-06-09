@@ -81,12 +81,15 @@ private:
 
     bool verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino);
 
+    bool isUsuarioDono(CPF cpf,CodigoDeEvento codigo);
+
+    bool jaVendeu(CodigoDeEvento codigo);
 public:
     bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) override;
 
     bool alterarEvento(CPF cpf, Evento evento) override;
 
-    bool descadastrarEvento(CPF cpf, Evento evento) override;
+    bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo) override;
 
     bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
 

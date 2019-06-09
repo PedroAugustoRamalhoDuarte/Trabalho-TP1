@@ -23,7 +23,7 @@ public:
 
     virtual bool alterarEvento(CPF cpf, Evento evento) = 0;
 
-    virtual bool descadastrarEvento(CPF, Evento) = 0;
+    virtual bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo) = 0;
 
     virtual bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
 
