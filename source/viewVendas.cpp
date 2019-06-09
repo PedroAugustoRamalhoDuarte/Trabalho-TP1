@@ -53,3 +53,13 @@ void viewVendas::on_btnHome_clicked()
 {
     this->close();
 }
+
+void viewVendas::on_btnComprar_clicked()
+{
+    try {
+        ui->labelCompra->setText("Comprado com sucesso!");
+    } catch (...) {
+        ui->labelCompra->setText("Erro ao comprar");
+
+    }
+}

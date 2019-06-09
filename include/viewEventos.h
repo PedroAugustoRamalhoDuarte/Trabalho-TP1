@@ -66,6 +66,10 @@ private slots:
 
     void on_tableEventos_cellClicked(int row, int column);
 
+    void on_btnPesquisar_clicked();
+
+    void on_buttonHome_clicked();
+
 private:
     Ui::viewEventos *ui;
     Evento eventoADD;

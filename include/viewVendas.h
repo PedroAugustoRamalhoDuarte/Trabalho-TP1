@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "Model.h"
 #include "Interfaces_Apresentacao.h"
-#include "../../Programas/Qt/5.12.3/gcc_64/include/QtCore/QArgument"
+//#include "../../Programas/Qt/5.12.3/gcc_64/include/QtCore/QArgument"
 
 namespace Ui {
 class viewVendas;
@@ -33,6 +33,8 @@ private slots:
     void on_btnVoltar_clicked();
 
     void on_btnHome_clicked();
+
+    void on_btnComprar_clicked();
 
 private:
     // Interface de serviço

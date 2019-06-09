@@ -183,7 +183,7 @@ void viewUsuario::on_btnRegistrar_clicked()
         ui->msg->setText("Usuário cadastrado com sucesso! Para fazer login redirecione para página de login");
     } catch (...) {
         // Mudar tratamento de erro
-        ui->msg->setText("Errou maluco");
+        ui->msg->setText("Erro ao cadastrar o usuário");
     }
 
 }

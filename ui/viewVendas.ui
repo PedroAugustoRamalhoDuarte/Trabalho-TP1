@@ -24,10 +24,10 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="page">
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>210</x>
@@ -108,7 +108,7 @@
        <string>Voltar</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>120</x>
@@ -139,6 +139,19 @@
         <widget class="QLineEdit" name="lineQuantidade"/>
        </item>
       </layout>
+     </widget>
+     <widget class="QLabel" name="labelCompra">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>260</y>
+        <width>271</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>msg de compra</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_3">

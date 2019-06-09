@@ -48,6 +48,7 @@ viewEventos::viewEventos(QWidget *parent) :
     ui->aprHelpHorario->setToolTip("O horário deve estar no formato HH:MM\n"
                                    "HH é número de 07 a 22\n"
                                    "MM é 00, 15, 30 ou 45");
+    ui->labelCreated->setText("");
 }
 
 viewEventos::~viewEventos()
@@ -143,6 +144,7 @@ void viewEventos::on_btnCriarEvento_clicked()
         eventoADD.setClasse(classe);
         eventoADD.setFaixa(faixa);
         ui->stackedWidget->setCurrentIndex(3);
+        ui->labelCreated->setText("Agora você pode começar a inserir as apresentações!");
         listApresentacao.clear();
     } catch(...){
         cout << "erro adicionar evento" << endl;
@@ -179,8 +181,10 @@ void viewEventos::on_btnAdicionarApr_clicked()
      apresentacao.setNumeroDeSala(sala);
      apresentacao.setDisponibilidade(disponibilidade);
      listApresentacao.push_back(apresentacao);
+     ui->labelCreated->setText("Apresentação criada com sucesso!");
      this->aprlineclean();
     } catch (...) {
+        ui->labelCreated->setText("Erro ao criar apresentação, tente novamente ou conclua a criação do evento!");
         cout << "Erro ao adicionar Apresentação" << endl;
     }
 }
@@ -189,8 +193,10 @@ void viewEventos::on_btnAdicionarApr_clicked()
 void viewEventos::on_btnConcluirApr_clicked()
 {
     try {
+        ui->labelCreated->setText("Evento criado com sucesso, clique em Home!");
         modelEventos->criarEvento(cpfUsuarioLogado, eventoADD, listApresentacao);
     } catch (...) {
+
         cout << "Erro ao criar Evento" << endl;
     }
 }
@@ -421,3 +427,14 @@ void viewEventos::aprlineclean(){
     ui->aprCheckPreco->setText("");
 }
 //---------------------------------------------------------------------
+
+
+void viewEventos::on_btnPesquisar_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void viewEventos::on_buttonHome_clicked()
+{
+    this->close();
+}

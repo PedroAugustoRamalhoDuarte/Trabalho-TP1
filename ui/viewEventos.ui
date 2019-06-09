@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="btnHome">
@@ -458,8 +458,8 @@
      <widget class="QPushButton" name="btnAdicionarApr">
       <property name="geometry">
        <rect>
-        <x>360</x>
-        <y>290</y>
+        <x>290</x>
+        <y>280</y>
         <width>89</width>
         <height>25</height>
        </rect>
@@ -471,8 +471,8 @@
      <widget class="QPushButton" name="btnConcluirApr">
       <property name="geometry">
        <rect>
-        <x>470</x>
-        <y>290</y>
+        <x>410</x>
+        <y>280</y>
         <width>89</width>
         <height>25</height>
        </rect>
@@ -676,6 +676,32 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QLabel" name="labelCreated">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>320</y>
+        <width>441</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>msg de criação de evento e apresentação</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="buttonHome">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>280</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Home</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="page_5">
