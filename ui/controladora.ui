@@ -56,6 +56,19 @@
      <string>Eventos</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnVendas">
+    <property name="geometry">
+     <rect>
+      <x>240</x>
+      <y>230</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Vendas</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

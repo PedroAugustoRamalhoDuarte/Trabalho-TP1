@@ -102,6 +102,8 @@ class ModelVendas : public Model, public ISVendas {
 public:
     bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) override;
 
+    void vendasDoEvento(CodigoDeEvento codigoDeEvento) override;
+
     ModelVendas();
 };
 #endif //TRABALHOTP1_MODEL_H

@@ -11,25 +11,26 @@ void Builder::build(Controladora* controladora) {
     ISAutenticacao* modelAutenticao = new ModelAutenticacao();
     ISUsuario* modelUsuario = new ModelUsuario();
     ISEventos* modelEventos = new ModelEventos();
-    //ISVendas* modelVendas = new ModelVendas();
+    ISVendas* modelVendas = new ModelVendas();
 
     // Intanciando as interfaces de apresentação
-    //IAVendas *viewsVendas = new class viewVendas() ;
-    IAEventos *viewEventos = new class viewEventos();
     IAAutenticacao *viewAutenticacao = new class viewAutenticacao();
     IAUsuario *viewUsuario  = new class viewUsuario();
+    IAEventos *viewEventos = new class viewEventos();
+    IAVendas *viewsVendas = new class viewVendas();
 
     // Setando as interfaces de serviço nas apresentações da controladora
-    viewEventos->setModelEventos(modelEventos);
     viewAutenticacao->setModelAutenticacao(modelAutenticao);
-    //viewsVendas->setModelVendas(modelVendas);
     viewUsuario->setModelUsuario(modelUsuario);
+    viewEventos->setModelEventos(modelEventos);
+    viewsVendas->setModelVendas(modelVendas);
+
 
     // Setando as interfaces de apresentação
     controladora->setViewAutenticacao(viewAutenticacao);
-    controladora->setViewEventos(viewEventos);
     controladora->setViewUsuario(viewUsuario);
-    //controladora->setViewVendas(viewsVendas);
+    controladora->setViewEventos(viewEventos);
+    controladora->setViewVendas(viewsVendas);
 
 
 }

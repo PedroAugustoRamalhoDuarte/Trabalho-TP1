@@ -37,6 +37,8 @@ private slots:
 
     void on_btnEventos_clicked();
 
+    void on_btnVendas_clicked();
+
 private:
     // Interfaces de apresentacao
     IAAutenticacao* viewAutenticacao;

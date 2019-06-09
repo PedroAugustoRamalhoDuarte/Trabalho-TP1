@@ -590,3 +590,7 @@ ModelVendas::ModelVendas() : Model() {}
 bool ModelVendas::adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) {
     return false;
 }
+
+void ModelVendas::vendasDoEvento(CodigoDeEvento codigoDeEvento) {
+
+}

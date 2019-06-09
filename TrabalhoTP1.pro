@@ -37,7 +37,8 @@ SOURCES += \
         source/Builder.cpp \
         source/View.cpp \
         source/viewAutenticacao.cpp \
-        source/viewEventos.cpp
+        source/viewEventos.cpp \
+        source/viewVendas.cpp
 
 HEADERS += \
         include/controladora.h \
@@ -48,13 +49,15 @@ HEADERS += \
         include/Builder.h \
         include/View.h \
         include/viewAutenticacao.h \
-        include/viewEventos.h
+        include/viewEventos.h \
+        include/viewVendas.h
 
 FORMS += \
         ui/controladora.ui \
         ui/viewUsuario.ui \
         ui/viewAutenticacao.ui \
-        ui/viewEventos.ui
+        ui/viewEventos.ui \
+        ui/viewVendas.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

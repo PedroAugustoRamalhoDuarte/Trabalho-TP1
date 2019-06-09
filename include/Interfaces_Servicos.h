@@ -43,6 +43,8 @@ public:
 class ISVendas {
 public:
     virtual bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) = 0;
+
+    virtual void vendasDoEvento(CodigoDeEvento codigoDeEvento) = 0;
 };
 
 #endif //TRABALHOTP1_INTERFACES_SERVICOS_H

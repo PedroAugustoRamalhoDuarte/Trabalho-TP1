@@ -9,6 +9,7 @@
 #include "viewAutenticacao.h"
 #include "viewEventos.h"
 #include "viewUsuario.h"
+#include "viewVendas.h"
 #include "Model.h"
 #include "Interfaces_Apresentacao.h"
 #include "Interfaces_Servicos.h"

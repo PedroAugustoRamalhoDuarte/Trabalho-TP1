@@ -39,8 +39,6 @@ class IAVendas {
 public:
     virtual void executar(CPF cpf) = 0;
 
-    virtual void vendasDoEvento(CodigoDeEvento codigoDeEvento) = 0;
-
     virtual void setModelVendas(ISVendas *modelVendas) = 0;
 };
 

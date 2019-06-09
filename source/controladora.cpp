@@ -53,6 +53,14 @@ void Controladora::on_btnEventos_clicked()
 
 }
 
+// Módulo de Vendas
+void Controladora::on_btnVendas_clicked()
+{
+    viewVendas->executar(*this->cpfUsuarioLogado);
+    this->flag = 1;
+    this->hide();
+}
+
 void Controladora::executar()
 {
     cout << "PASSOU EXECUTAR CONTROLADORA" << endl;
@@ -61,11 +69,13 @@ void Controladora::executar()
     if(cpfUsuarioLogado->getValor() != ""){
         ui->btnCadastro->setText("Perfil");
         ui->btnLogin->setText("Logout");
+        ui->btnVendas->setVisible(true);
     }
     // Se o usuário não estiver logado
     else {
         ui->btnCadastro->setText("Cadastre-se");
         ui->btnLogin->setText("Login");
+        ui->btnVendas->setVisible(false);
     }
     this->show();
     cout << "PASSOU SHOW EXECUTAR " << endl;
@@ -91,4 +101,5 @@ void Controladora::setViewEventos(IAEventos *viewEventos) {
 void Controladora::setViewVendas(IAVendas *viewVendas) {
     Controladora::viewVendas = viewVendas;
 }
+
 
