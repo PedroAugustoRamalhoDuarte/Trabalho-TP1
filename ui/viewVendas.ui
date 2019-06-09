@@ -24,37 +24,44 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
         <x>210</x>
-        <y>140</y>
-        <width>181</width>
-        <height>121</height>
+        <y>120</y>
+        <width>191</width>
+        <height>131</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
+       <item row="5" column="0">
+        <widget class="QPushButton" name="btnVerIngressosVendidos">
          <property name="text">
-          <string>Menu Principal de Vendas</string>
+          <string>Ver Ingressos Vendidos</string>
          </property>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="3" column="0">
         <widget class="QPushButton" name="btnComprarIngresso">
          <property name="text">
           <string>Comprar Ingresso</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QPushButton" name="btnVerIngressosVendidos">
+       <item row="6" column="0">
+        <widget class="QPushButton" name="btnHome">
          <property name="text">
-          <string>Ver Ingressos Vendidos</string>
+          <string>Home</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Menu Principal de Vendas</string>
          </property>
         </widget>
        </item>
@@ -65,8 +72,8 @@
      <widget class="QPushButton" name="btnComprar">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>210</y>
+        <x>220</x>
+        <y>220</y>
         <width>89</width>
         <height>25</height>
        </rect>
@@ -86,6 +93,19 @@
       </property>
       <property name="text">
        <string>Compra de Ingresso</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVoltar">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>220</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Voltar</string>
       </property>
      </widget>
      <widget class="QWidget" name="">
@@ -133,6 +153,19 @@
       </property>
       <property name="text">
        <string>Pagina Ingressos Vendidos</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVoltar2">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>250</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Voltar</string>
       </property>
      </widget>
     </widget>

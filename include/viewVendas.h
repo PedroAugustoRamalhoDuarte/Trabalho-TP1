@@ -23,10 +23,21 @@ public:
 
     ~viewVendas();
 
+private slots:
+    void on_btnComprarIngresso_clicked();
+
+    void on_btnVerIngressosVendidos_clicked();
+
+    void on_btnVoltar2_clicked();
+
+    void on_btnVoltar_clicked();
+
+    void on_btnHome_clicked();
+
 private:
     // Interface de serviço
     ISVendas* modelVendas;
-
+    CPF cpfUsuarioLogado;
     Ui::viewVendas *ui;
 };
 
