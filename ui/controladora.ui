@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>viewUsuario</string>
+   <string>Switch Dreams</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>

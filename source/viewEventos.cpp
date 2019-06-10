@@ -410,7 +410,7 @@ void viewEventos::eventolineclean(){
 
 void viewEventos::aprlineclean(){
     QTime time = QTime::fromString("00:00", "hh:mm");
-    QDate date = QDate::fromString("01/01/00", "dd/MM/yy");
+    QDate date = QDate::fromString("01/01/19", "dd/MM/yy");
     // Reiniciando valores das linetext
     ui->alineData->setDate(date);
     ui->alineSala->setText("");
