@@ -436,10 +436,20 @@ void viewEventos::on_btnPesquisar_clicked()
 
 void viewEventos::on_buttonHome_clicked()
 {
-    this->close();
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void viewEventos::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void viewEventos::on_btnMenu3_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void viewEventos::on_btnHome_2_clicked()
 {
     this->close();
 }
