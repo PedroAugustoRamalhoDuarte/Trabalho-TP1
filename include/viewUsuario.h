@@ -59,6 +59,7 @@ private:
     // Interface de serviço
     ISUsuario* modelUsuario;
 
+    // Cpf usuário logado passado pela controladora
     CPF cpfUsuarioLogado;
 };
 

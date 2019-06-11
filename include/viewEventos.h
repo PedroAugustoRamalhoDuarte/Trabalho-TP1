@@ -15,14 +15,16 @@ class viewEventos : public QMainWindow, public IAEventos
 
 public:
     explicit viewEventos(QWidget *parent = nullptr);
-    void executar(CPF cpf);
+
+    void executar(CPF cpf) override;
+
     ~viewEventos();
 
     void aprlineclean();
 
     void eventolineclean();
 
-    void setModelEventos(ISEventos *modelEventos) {
+    void setModelEventos(ISEventos *modelEventos) override {
         viewEventos::modelEventos = modelEventos;
     }
 
@@ -97,11 +99,20 @@ private slots:
     void on_btnVoltar_clicked();
 
 private:
+    // Atributo da janel do QT
     Ui::viewEventos *ui;
+
+    // Atributos para auxiliar na criação de eventos
     Evento eventoADD;
     list<Apresentacao> listApresentacao;
+
+    // Link para interface de serviço
     ISEventos* modelEventos;
+
+    // Cpf do usuário que está logado, passado pela controladora na excutar
     CPF cpfUsuarioLogado;
+
+    // Atributo para auxiliar a edição de eventos
     int linhaEdit;
 };
 

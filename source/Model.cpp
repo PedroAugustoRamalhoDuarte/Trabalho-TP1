@@ -9,7 +9,8 @@ list<string> Model::listaResultados = {};
 Model::Model() {
     cout << "Conectando..." << endl;
     int error = 0;
-    error = sqlite3_open("example.db", &db);
+    // Mudar quando for passar para o CodeBlocks
+    error = sqlite3_open("../TrabalhoTP1/bd/example.db", &db);
 
     if (error) {
 

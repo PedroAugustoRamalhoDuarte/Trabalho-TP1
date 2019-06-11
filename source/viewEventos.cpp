@@ -254,6 +254,43 @@ void viewEventos::on_tableEventos_cellClicked(int row, int column)
     }
 }
 
+// Método no qual cria a tablela MeusEventos
+void viewEventos::on_btnMeusEventos_clicked()
+{
+    list<Evento> listaEventos;
+    try {
+        cout << cpfUsuarioLogado.getValor() << endl;
+        modelEventos->meusEventos(listaEventos, cpfUsuarioLogado);
+    } catch (...) {
+        cout << "Erro no buscar meus eventos" << endl;
+    }
+
+
+    if (listaEventos.size() == 0 ) {
+        // Mostrar ao Usuário que não houve elementos no sistema no qual se enquadra na busca
+        cout << "Sem eventos disponiveis" << endl;
+    }
+
+    // Adicionar na tabela
+    ui->tableMeusEventos->clearContents();
+    ui->tableMeusEventos->setRowCount(listaEventos.size());
+    int i=0;
+    for (auto evento: listaEventos) {
+        ui->tableMeusEventos->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(evento.getCodigo().getValor())));
+        ui->tableMeusEventos->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(evento.getNome().getValor())));
+        ui->tableMeusEventos->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(evento.getCidade().getValor())));
+        ui->tableMeusEventos->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(evento.getEstado().getValor())));
+        ui->tableMeusEventos->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(evento.getClasse().getValor())));
+        ui->tableMeusEventos->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(evento.getFaixa().getValor())));
+        ui->tableMeusEventos->setItem(i, 6, new QTableWidgetItem("Editar"));
+        ui->tableMeusEventos->setItem(i, 7, new QTableWidgetItem("Excluir"));
+        i++;
+    }
+
+    ui->tableMeusEventos->update();
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
 // Método no qual gerencia a tabela meus eventos
 void viewEventos::on_tableMeusEventos_cellClicked(int row, int column)
 {
@@ -277,6 +314,35 @@ void viewEventos::on_tableMeusEventos_cellClicked(int row, int column)
             cout << "ERRO Meus Eventos" << endl;
         }
 
+    }
+}
+
+// Método para editar Evento
+void viewEventos::on_btnEditar_clicked()
+{
+    Evento evento;
+    CodigoDeEvento codigo;
+    NomeDeEvento nome;
+    Cidade cidade;
+    ClasseDeEvento classe;
+    FaixaEtaria faixa;
+    Estado estado;
+    try {
+        codigo.setValor(ui->tableMeusEventos->item(linhaEdit, 0)->text().toStdString());
+        nome.setValor(ui->editLineNome->text().toStdString());
+        cidade.setValor(ui->editLineCid->text().toStdString());
+        estado.setValor(ui->editLineEstado->text().toStdString());
+        classe.setValor(ui->editLineClasse->text().toStdString());
+        faixa.setValor(ui->editLineFaixa->text().toStdString());
+        evento.setCodigo(codigo);
+        evento.setNome(nome);
+        evento.setCidade(cidade);
+        evento.setEstado(estado);
+        evento.setClasse(classe);
+        evento.setFaixa(faixa);
+        modelEventos->alterarEvento(cpfUsuarioLogado, evento);
+    } catch (...) {
+        cout << "Erro ao Editar Evento" << endl;
     }
 }
 //------------------------------------------------------------------
@@ -439,70 +505,6 @@ void viewEventos::on_alineDisponibilidade_editingFinished()
         ui->aprCheckDisp->setText("x");
     }
 }
-//---------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-// Métodos para limpar view
-void viewEventos::eventolineclean(){
-    ui->clineNome->setText("");
-    ui->checkNome->setText("");
-    ui->clineFaixa->setText("");
-    ui->checkFaixa->setText("");
-    ui->clineCidade->setText("");
-    ui->checkCidade->setText("");
-    ui->clineClasse->setText("");
-    ui->checkClasse->setText("");
-    ui->clineCodigo->setText("");
-    ui->checkCodigo->setText("");
-    ui->clineEstado->setText("");
-    ui->checkEstado->setText("");
-}
-
-void viewEventos::aprlineclean(){
-    QTime time = QTime::fromString("00:00", "hh:mm");
-    QDate date = QDate::fromString("01/01/19", "dd/MM/yy");
-    // Reiniciando valores das linetext
-    ui->alineData->setDate(date);
-    ui->alineSala->setText("");
-    ui->alinePreco->setText("");
-    ui->alineCodigo->setText("");
-    ui->alineDisponibilidade->setText("");
-    ui->alineHorario->setTime(time);
-    // Reiniciando Check
-    ui->aprCheckCod->setText("");
-    ui->aprCheckHor->setText("");
-    ui->aprCheckData->setText("");
-    ui->aprCheckSala->setText("");
-    ui->aprCheckDisp->setText("");
-    ui->aprCheckPreco->setText("");
-}
-//---------------------------------------------------------------------
-
-
-void viewEventos::on_btnPesquisar_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void viewEventos::on_buttonHome_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-void viewEventos::on_pushButton_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-void viewEventos::on_btnMenu3_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void viewEventos::on_btnHome_2_clicked()
-{
-    this->close();
-}
 
 void viewEventos::on_editLineEstado_editingFinished()
 {
@@ -568,78 +570,80 @@ void viewEventos::on_editLineFaixa_editingFinished()
         ui->editCheckFaixa->setText("x");
     }
 }
+//---------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+// Métodos para limpar view
+void viewEventos::eventolineclean(){
+    ui->clineNome->setText("");
+    ui->checkNome->setText("");
+    ui->clineFaixa->setText("");
+    ui->checkFaixa->setText("");
+    ui->clineCidade->setText("");
+    ui->checkCidade->setText("");
+    ui->clineClasse->setText("");
+    ui->checkClasse->setText("");
+    ui->clineCodigo->setText("");
+    ui->checkCodigo->setText("");
+    ui->clineEstado->setText("");
+    ui->checkEstado->setText("");
+}
+
+void viewEventos::aprlineclean(){
+    QTime time = QTime::fromString("00:00", "hh:mm");
+    QDate date = QDate::fromString("01/01/19", "dd/MM/yy");
+    // Reiniciando valores das linetext
+    ui->alineData->setDate(date);
+    ui->alineSala->setText("");
+    ui->alinePreco->setText("");
+    ui->alineCodigo->setText("");
+    ui->alineDisponibilidade->setText("");
+    ui->alineHorario->setTime(time);
+    // Reiniciando Check
+    ui->aprCheckCod->setText("");
+    ui->aprCheckHor->setText("");
+    ui->aprCheckData->setText("");
+    ui->aprCheckSala->setText("");
+    ui->aprCheckDisp->setText("");
+    ui->aprCheckPreco->setText("");
+}
+//---------------------------------------------------------------------
+
+
+//-------------------------------------------------------------------
+// Métodos de navegação entre as views
+void viewEventos::on_btnPesquisar_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void viewEventos::on_buttonHome_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void viewEventos::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+void viewEventos::on_btnMenu3_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void viewEventos::on_btnHome_2_clicked()
+{
+    this->close();
+}
 
 void viewEventos::on_pushButton_3_clicked()
 {
     on_btnMeusEventos_clicked();
 }
 
-void viewEventos::on_btnMeusEventos_clicked()
-{
-    list<Evento> listaEventos;
-    try {
-        cout << cpfUsuarioLogado.getValor() << endl;
-        modelEventos->meusEventos(listaEventos, cpfUsuarioLogado);
-    } catch (...) {
-        cout << "Erro no buscar meus eventos" << endl;
-    }
-
-
-    if (listaEventos.size() == 0 ) {
-        // Mostrar ao Usuário que não houve elementos no sistema no qual se enquadra na busca
-        cout << "Sem eventos disponiveis" << endl;
-    }
-
-    // Adicionar na tabela
-    ui->tableMeusEventos->clearContents();
-    ui->tableMeusEventos->setRowCount(listaEventos.size());
-    int i=0;
-    for (auto evento: listaEventos) {
-        ui->tableMeusEventos->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(evento.getCodigo().getValor())));
-        ui->tableMeusEventos->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(evento.getNome().getValor())));
-        ui->tableMeusEventos->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(evento.getCidade().getValor())));
-        ui->tableMeusEventos->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(evento.getEstado().getValor())));
-        ui->tableMeusEventos->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(evento.getClasse().getValor())));
-        ui->tableMeusEventos->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(evento.getFaixa().getValor())));
-        ui->tableMeusEventos->setItem(i, 6, new QTableWidgetItem("Editar"));
-        ui->tableMeusEventos->setItem(i, 7, new QTableWidgetItem("Excluir"));
-        i++;
-    }
-
-    ui->tableMeusEventos->update();
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-
-void viewEventos::on_btnEditar_clicked()
-{
-    Evento evento;
-    CodigoDeEvento codigo;
-    NomeDeEvento nome;
-    Cidade cidade;
-    ClasseDeEvento classe;
-    FaixaEtaria faixa;
-    Estado estado;
-    try {
-        codigo.setValor(ui->tableMeusEventos->item(linhaEdit, 0)->text().toStdString());
-        nome.setValor(ui->editLineNome->text().toStdString());
-        cidade.setValor(ui->editLineCid->text().toStdString());
-        estado.setValor(ui->editLineEstado->text().toStdString());
-        classe.setValor(ui->editLineClasse->text().toStdString());
-        faixa.setValor(ui->editLineFaixa->text().toStdString());
-        evento.setCodigo(codigo);
-        evento.setNome(nome);
-        evento.setCidade(cidade);
-        evento.setEstado(estado);
-        evento.setClasse(classe);
-        evento.setFaixa(faixa);
-        modelEventos->alterarEvento(cpfUsuarioLogado, evento);
-    } catch (...) {
-        cout << "Erro ao Editar Evento" << endl;
-    }
-}
-
 void viewEventos::on_btnVoltar_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
+// ----------------------------------------------------------------

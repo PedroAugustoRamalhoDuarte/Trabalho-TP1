@@ -37,10 +37,14 @@ private slots:
     void on_btnComprar_clicked();
 
 private:
+    Ui::viewVendas *ui;
+
     // Interface de serviço
     ISVendas* modelVendas;
+
+    // Atributo cpf usuario logado passado pela controladora
     CPF cpfUsuarioLogado;
-    Ui::viewVendas *ui;
+
 };
 
 #endif // VIEWVENDAS_H
