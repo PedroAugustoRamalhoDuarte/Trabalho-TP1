@@ -253,6 +253,32 @@ void viewEventos::on_tableEventos_cellClicked(int row, int column)
 
     }
 }
+
+// Método no qual gerencia a tabela meus eventos
+void viewEventos::on_tableMeusEventos_cellClicked(int row, int column)
+{
+    const int COLUNA_EDITAR = 6;
+    const int COLUNA_EXCLUIR = 7;
+    if (column == COLUNA_EDITAR) {
+        linhaEdit = row;
+        ui->editLineNome->setText(ui->tableMeusEventos->item(linhaEdit, 1)->text());
+        ui->editLineCid->setText((ui->tableMeusEventos->item(linhaEdit, 2)->text()));
+        ui->editLineEstado->setText((ui->tableMeusEventos->item(linhaEdit, 3)->text()));
+        ui->editLineClasse->setText((ui->tableMeusEventos->item(linhaEdit, 4)->text()));
+        ui->editLineFaixa->setText((ui->tableMeusEventos->item(linhaEdit, 5)->text()));
+        ui->stackedWidget->setCurrentIndex(6);
+    } else if (column == COLUNA_EXCLUIR) {
+        CodigoDeEvento codigo;
+        try {
+            codigo.setValor(ui->tableMeusEventos->item(row, 0)->text().toStdString());
+            modelEventos->descadastrarEvento(cpfUsuarioLogado, codigo);
+            on_btnMeusEventos_clicked();
+        } catch (...) {
+            cout << "ERRO Meus Eventos" << endl;
+        }
+
+    }
+}
 //------------------------------------------------------------------
 
 // -----------------------------------------------------------------
@@ -584,30 +610,6 @@ void viewEventos::on_btnMeusEventos_clicked()
     ui->stackedWidget->setCurrentIndex(5);
 }
 
-void viewEventos::on_tableMeusEventos_cellClicked(int row, int column)
-{
-    const int COLUNA_EDITAR = 6;
-    const int COLUNA_EXCLUIR = 7;
-    if (column == COLUNA_EDITAR) {
-        linhaEdit = row;
-        ui->editLineNome->setText(ui->tableMeusEventos->item(linhaEdit, 1)->text());
-        ui->editLineCid->setText((ui->tableMeusEventos->item(linhaEdit, 2)->text()));
-        ui->editLineEstado->setText((ui->tableMeusEventos->item(linhaEdit, 3)->text()));
-        ui->editLineClasse->setText((ui->tableMeusEventos->item(linhaEdit, 4)->text()));
-        ui->editLineFaixa->setText((ui->tableMeusEventos->item(linhaEdit, 5)->text()));
-        ui->stackedWidget->setCurrentIndex(6);
-    } else if (column == COLUNA_EXCLUIR) {
-        CodigoDeEvento codigo;
-        try {
-            codigo.setValor(ui->tableMeusEventos->item(row, 0)->text().toStdString());
-            modelEventos->descadastrarEvento(cpfUsuarioLogado, codigo);
-            on_btnMeusEventos_clicked();
-        } catch (...) {
-            cout << "ERRO Meus Eventos" << endl;
-        }
-
-    }
-}
 
 void viewEventos::on_btnEditar_clicked()
 {
@@ -635,4 +637,9 @@ void viewEventos::on_btnEditar_clicked()
     } catch (...) {
         cout << "Erro ao Editar Evento" << endl;
     }
+}
+
+void viewEventos::on_btnVoltar_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
 }

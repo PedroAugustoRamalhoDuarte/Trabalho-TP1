@@ -94,6 +94,8 @@ private slots:
 
     void on_btnEditar_clicked();
 
+    void on_btnVoltar_clicked();
+
 private:
     Ui::viewEventos *ui;
     Evento eventoADD;

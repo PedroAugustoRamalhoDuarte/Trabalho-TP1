@@ -56,7 +56,12 @@ void viewVendas::on_btnHome_clicked()
 
 void viewVendas::on_btnComprar_clicked()
 {
+    CodigoDeApresentacao codigoDeApresentacao;
+    int quantidade;
     try {
+        codigoDeApresentacao.setValor(ui->lineCodigoApresentacao->text().toStdString());
+        quantidade = ui->lineQuantidade->text().toInt();
+        modelVendas->adquirirIngresso(cpfUsuarioLogado,codigoDeApresentacao, quantidade);
         ui->labelCompra->setText("Comprado com sucesso!");
     } catch (...) {
         ui->labelCompra->setText("Erro ao comprar");

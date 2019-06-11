@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="btnHome">
@@ -97,14 +97,14 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>310</x>
         <y>0</y>
-        <width>451</width>
+        <width>141</width>
         <height>17</height>
        </rect>
       </property>
       <property name="text">
-       <string>Página da pesquisa(Usuário não logado sera direcionado para aqui)</string>
+       <string>Pesquisa de Evento</string>
       </property>
      </widget>
      <widget class="QTableWidget" name="tableEventos">
@@ -803,14 +803,14 @@
      <widget class="QLabel" name="tituloApresentacao">
       <property name="geometry">
        <rect>
-        <x>380</x>
+        <x>310</x>
         <y>0</y>
-        <width>41</width>
-        <height>17</height>
+        <width>111</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
-       <string>Título</string>
+       <string>Apresentações</string>
       </property>
      </widget>
      <widget class="QPushButton" name="btnMenu3">
@@ -834,7 +834,7 @@
         <x>50</x>
         <y>30</y>
         <width>721</width>
-        <height>421</height>
+        <height>341</height>
        </rect>
       </property>
       <attribute name="horizontalHeaderDefaultSectionSize">
@@ -886,12 +886,25 @@
        <rect>
         <x>340</x>
         <y>0</y>
-        <width>67</width>
+        <width>101</width>
         <height>17</height>
        </rect>
       </property>
       <property name="text">
-       <string>Eventos</string>
+       <string>Meus Eventos</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnVoltar">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>400</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Voltar</string>
       </property>
      </widget>
     </widget>

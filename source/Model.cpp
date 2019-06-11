@@ -684,15 +684,16 @@ bool ModelVendas::adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int qua
     } else {
         // Compra os ingressos
         for (int i = 0; i < quantidade; i++) {
-            comandoSQL = "INSET INTO ingresso VALUES (";
+            comandoSQL = "INSERT INTO ingresso (codigo_apresentacao, cpf_usuario) VALUES (";
             comandoSQL += "'" + codigo.getValor() + "',";
             comandoSQL += "'" + cpf.getValor() + "');";
         }
-
+        this->executar();
         // Retira os ingressos comprados da disponibilidade
         comandoSQL = "UPDATE apresentacao SET disponibilidade = ";
-        comandoSQL += "'" + to_string(disponibilidade - quantidade) + "' WHERE codigo_apresentacao = ;";
+        comandoSQL += "'" + to_string(disponibilidade - quantidade) + "' WHERE codigo_apresentacao = ";
         comandoSQL += "'" + codigo.getValor() + "';";
+        this->executar();
     }
 
     return false;
