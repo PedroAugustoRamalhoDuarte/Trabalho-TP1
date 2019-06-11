@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="btnHome">
@@ -79,7 +79,7 @@
        <string>Pesquisar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_4">
+     <widget class="QPushButton" name="btnMeusEventos">
       <property name="geometry">
        <rect>
         <x>350</x>
@@ -828,10 +828,10 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page_6">
-     <widget class="QTableWidget" name="tableWidget">
+     <widget class="QTableWidget" name="tableMeusEventos">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>50</x>
         <y>30</y>
         <width>721</width>
         <height>421</height>
@@ -909,7 +909,7 @@
        <string>Editar Eventos</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="btnEditar">
       <property name="geometry">
        <rect>
         <x>430</x>
@@ -932,10 +932,10 @@
        </rect>
       </property>
       <property name="text">
-       <string>Menu</string>
+       <string>Voltar</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>260</x>

@@ -267,10 +267,11 @@ ModelEventos::ModelEventos() : Model() {}
 
 // Metodos da Interface Serviço Eventos
 bool ModelEventos::meusEventos(list<Evento> &listaEventos, CPF cpf) {
-    comandoSQL = "SELECT * FROM evento WHERE cpf_usuario =";
+    comandoSQL = "SELECT * FROM evento WHERE cpf_usuario = ";
     comandoSQL += "'" + cpf.getValor() + "';";
     try {
         listaResultados.clear();
+        this->executar();
         int tam = (listaResultados.size() / 7);
         for (int i = 0; i < tam; i++) {
             auto evento = new Evento();
@@ -333,12 +334,12 @@ bool ModelEventos::meusEventos(list<Evento> &listaEventos, CPF cpf) {
 }
 
 bool ModelEventos::alterarEvento(CPF cpf, Evento evento) {
-    comandoSQL = "UPDATE eventos SET nome =";
+    comandoSQL = "UPDATE evento SET nome = ";
     comandoSQL += "'" + evento.getNome().getValor() + "', classe = ";
-    comandoSQL += "'" + evento.getClasse().getValor() + "', faixa =";
-    comandoSQL += "'" + evento.getFaixa().getValor() + "', estado=";
-    comandoSQL += "'" + evento.getEstado().getValor() + "', cidade=";
-    comandoSQL += "'" + evento.getCidade().getValor() + "' WHEN codigo = ";
+    comandoSQL += "'" + evento.getClasse().getValor() + "', faixa_etaria = ";
+    comandoSQL += "'" + evento.getFaixa().getValor() + "', estado = ";
+    comandoSQL += "'" + evento.getEstado().getValor() + "', cidade = ";
+    comandoSQL += "'" + evento.getCidade().getValor() + "' WHERE codigo = ";
     comandoSQL += "'" + evento.getCodigo().getValor() + "';";
     try {
         this->executar();
@@ -353,12 +354,13 @@ bool ModelEventos::descadastrarEvento(CPF cpf, CodigoDeEvento codigo) {
     // Falta Logica de negocio
     if (isUsuarioDono(cpf, codigo)) {
         if (!jaVendeu(codigo)) {
-            comandoSQL = "DELETE * from evento WHERE codigo = ";
+            cout << "Antes de deletar Evento" << endl;
+            comandoSQL = "DELETE from evento WHERE codigo = ";
             comandoSQL += "'" + codigo.getValor() + "';";
             try {
                 this->executar();
                 cout << "Evento Excluido com sucesso" << endl;
-                comandoSQL = "DELETE * from apresentacao WHERE codigo_evento = ";
+                comandoSQL = "DELETE from apresentacao WHERE codigo_evento = ";
                 comandoSQL += "'" + codigo.getValor() + "';";
                 this->executar();
                 return true;
@@ -648,18 +650,19 @@ bool ModelEventos::jaVendeu(CodigoDeEvento codigo) {
         }
 
         for (auto apr : listaCodigoApr) {
-            comandoSQL = "SELECT COUNT(*) FROM ingressos WHERE codigo_apresentacao =";
+            comandoSQL = "SELECT COUNT(*) FROM ingresso WHERE codigo_apresentacao =";
             comandoSQL += "'" + apr.getValor() + "'";
             listaResultados.clear();
             this->executar();
-            if (listaResultados.back() > "0") {
-                return false;
+            cout << "Quantidade de Ingressos " << listaResultados.back() << endl;
+            if (stod(listaResultados.back()) > 0) {
+                return true;
             }
         }
     } catch (...) {
-        return false;
+        return true;
     }
-    return true;
+    return false;
 }
 
 // --------------------------------------------------------------------------

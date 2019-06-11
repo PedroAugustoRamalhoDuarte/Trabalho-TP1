@@ -67,6 +67,12 @@ viewEventos::viewEventos(QWidget *parent) :
                                    "HH é número de 07 a 22\n"
                                    "MM é 00, 15, 30 ou 45");
     ui->labelCreated->setText("");
+
+    //------------------------------------------------------------------------------------------------
+    // Setando as tabelas para a não edição
+    ui->tableEventos->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableMeusEventos->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->tableApresentacao->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 viewEventos::~viewEventos()
@@ -226,7 +232,7 @@ void viewEventos::on_tableEventos_cellClicked(int row, int column)
     list<Apresentacao> listaApresentacao;
     if (column == ULTIMA_COLUNA) {
         CodigoDeEvento codigo;
-        codigo.setValor( ui->tableEventos->itemAt(row, 0)->text().toStdString()) ;
+        codigo.setValor( ui->tableEventos->item(row, 0)->text().toStdString()) ;
         modelEventos->mostrarApresentacao(listaApresentacao, codigo);
 
         // Adicionar na tabela
@@ -539,5 +545,94 @@ void viewEventos::on_editLineFaixa_editingFinished()
 
 void viewEventos::on_pushButton_3_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    on_btnMeusEventos_clicked();
+}
+
+void viewEventos::on_btnMeusEventos_clicked()
+{
+    list<Evento> listaEventos;
+    try {
+        cout << cpfUsuarioLogado.getValor() << endl;
+        modelEventos->meusEventos(listaEventos, cpfUsuarioLogado);
+    } catch (...) {
+        cout << "Erro no buscar meus eventos" << endl;
+    }
+
+
+    if (listaEventos.size() == 0 ) {
+        // Mostrar ao Usuário que não houve elementos no sistema no qual se enquadra na busca
+        cout << "Sem eventos disponiveis" << endl;
+    }
+
+    // Adicionar na tabela
+    ui->tableMeusEventos->clearContents();
+    ui->tableMeusEventos->setRowCount(listaEventos.size());
+    int i=0;
+    for (auto evento: listaEventos) {
+        ui->tableMeusEventos->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(evento.getCodigo().getValor())));
+        ui->tableMeusEventos->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(evento.getNome().getValor())));
+        ui->tableMeusEventos->setItem(i, 2, new QTableWidgetItem(QString::fromStdString(evento.getCidade().getValor())));
+        ui->tableMeusEventos->setItem(i, 3, new QTableWidgetItem(QString::fromStdString(evento.getEstado().getValor())));
+        ui->tableMeusEventos->setItem(i, 4, new QTableWidgetItem(QString::fromStdString(evento.getClasse().getValor())));
+        ui->tableMeusEventos->setItem(i, 5, new QTableWidgetItem(QString::fromStdString(evento.getFaixa().getValor())));
+        ui->tableMeusEventos->setItem(i, 6, new QTableWidgetItem("Editar"));
+        ui->tableMeusEventos->setItem(i, 7, new QTableWidgetItem("Excluir"));
+        i++;
+    }
+
+    ui->tableMeusEventos->update();
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+void viewEventos::on_tableMeusEventos_cellClicked(int row, int column)
+{
+    const int COLUNA_EDITAR = 6;
+    const int COLUNA_EXCLUIR = 7;
+    if (column == COLUNA_EDITAR) {
+        linhaEdit = row;
+        ui->editLineNome->setText(ui->tableMeusEventos->item(linhaEdit, 1)->text());
+        ui->editLineCid->setText((ui->tableMeusEventos->item(linhaEdit, 2)->text()));
+        ui->editLineEstado->setText((ui->tableMeusEventos->item(linhaEdit, 3)->text()));
+        ui->editLineClasse->setText((ui->tableMeusEventos->item(linhaEdit, 4)->text()));
+        ui->editLineFaixa->setText((ui->tableMeusEventos->item(linhaEdit, 5)->text()));
+        ui->stackedWidget->setCurrentIndex(6);
+    } else if (column == COLUNA_EXCLUIR) {
+        CodigoDeEvento codigo;
+        try {
+            codigo.setValor(ui->tableMeusEventos->item(row, 0)->text().toStdString());
+            modelEventos->descadastrarEvento(cpfUsuarioLogado, codigo);
+            on_btnMeusEventos_clicked();
+        } catch (...) {
+            cout << "ERRO Meus Eventos" << endl;
+        }
+
+    }
+}
+
+void viewEventos::on_btnEditar_clicked()
+{
+    Evento evento;
+    CodigoDeEvento codigo;
+    NomeDeEvento nome;
+    Cidade cidade;
+    ClasseDeEvento classe;
+    FaixaEtaria faixa;
+    Estado estado;
+    try {
+        codigo.setValor(ui->tableMeusEventos->item(linhaEdit, 0)->text().toStdString());
+        nome.setValor(ui->editLineNome->text().toStdString());
+        cidade.setValor(ui->editLineCid->text().toStdString());
+        estado.setValor(ui->editLineEstado->text().toStdString());
+        classe.setValor(ui->editLineClasse->text().toStdString());
+        faixa.setValor(ui->editLineFaixa->text().toStdString());
+        evento.setCodigo(codigo);
+        evento.setNome(nome);
+        evento.setCidade(cidade);
+        evento.setEstado(estado);
+        evento.setClasse(classe);
+        evento.setFaixa(faixa);
+        modelEventos->alterarEvento(cpfUsuarioLogado, evento);
+    } catch (...) {
+        cout << "Erro ao Editar Evento" << endl;
+    }
 }

@@ -88,12 +88,19 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_btnMeusEventos_clicked();
+
+    void on_tableMeusEventos_cellClicked(int row, int column);
+
+    void on_btnEditar_clicked();
+
 private:
     Ui::viewEventos *ui;
     Evento eventoADD;
     list<Apresentacao> listApresentacao;
     ISEventos* modelEventos;
     CPF cpfUsuarioLogado;
+    int linhaEdit;
 };
 
 #endif // VIEWEVENTOS_H
