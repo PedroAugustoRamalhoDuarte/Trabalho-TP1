@@ -1,4 +1,4 @@
-    //
+//
 // Created by pedro on 14/05/19.
 //
 
@@ -21,11 +21,11 @@ Model::Model() {
     }
 }
 
-/* Criação de Tabelas */
+// Criação de Tabelas
 void Model::criarTabelaIngresso() {
     const char *sql;
     sql = "CREATE TABLE IF NOT EXISTS ingresso("
-          "codigo_ingresso VARCHAR(10)  PRIMARY KEY,"
+          "codigo_ingresso INT AUTO_INCREMENT  PRIMARY KEY,"
           "codigo_apresentacao VARCHAR(10) NOT NULL,"
           "cpf_usuario  VARCHAR(14) NOT NULL,"
           "FOREIGN KEY(codigo_apresentacao) REFERENCES apresentacao,"
@@ -103,8 +103,6 @@ void Model::criarTabelaApresentacao() {
     }
 }
 
-/***********************************************************/
-
 void Model::criarTabelas() {
     // Testar se deu erro depois
     criarTabelaUsuario();
@@ -118,7 +116,6 @@ void Model::criarTabelas() {
     sqlite3_close(db);
     db = nullptr;
 }*/
-
 
 void Model::executar() {
     status = sqlite3_exec(db, comandoSQL.c_str(), callback, nullptr, &mensagem);
@@ -235,8 +232,10 @@ bool ModelUsuario::excluirUsuario(CPF cpf) {
 // --------------------------------------------------------------------------
 // Model Servico Autenticacao
 
+// Construtor
 ModelAutenticacao::ModelAutenticacao() : Model() {}
 
+// Métodos da Interface Serviço Autenticação
 bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
     comandoSQL = "SELECT senha FROM usuario WHERE cpf =";
     comandoSQL += "'" + cpf.getValor() + "';";
@@ -263,10 +262,91 @@ bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
 // --------------------------------------------------------------------------
 // Model Servico Eventos
 
+// Construtor
 ModelEventos::ModelEventos() : Model() {}
 
+// Metodos da Interface Serviço Eventos
+bool ModelEventos::meusEventos(list<Evento> &listaEventos, CPF cpf) {
+    comandoSQL = "SELECT * FROM evento WHERE cpf_usuario =";
+    comandoSQL += "'" + cpf.getValor() + "';";
+    try {
+        listaResultados.clear();
+        int tam = (listaResultados.size() / 7);
+        for (int i = 0; i < tam; i++) {
+            auto evento = new Evento();
+            CodigoDeEvento codigo;
+            NomeDeEvento nome;
+            Cidade cidade;
+            Estado estado;
+            ClasseDeEvento classe;
+            FaixaEtaria faixa;
+
+            // Atribundo a faixa etaria ao evento
+            cout << "faixa: " << listaResultados.back() << endl;
+            faixa.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setFaixa(faixa);
+
+            // Atribuindo a classe ao evento
+            cout << "classe: " << listaResultados.back() << endl;
+            classe.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setClasse(classe);
+
+            // Atribuindo o estado ao evento
+            cout << "estado: " << listaResultados.back() << endl;
+            estado.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setEstado(estado);
+
+            // Atribuindo a cidade ao evento
+            cout << "cidade: " << listaResultados.back() << endl;
+            cidade.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setCidade(cidade);
+
+
+            // Atribuindo o nome ao evento
+            cout << "nome: " << listaResultados.back() << endl;
+            nome.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setNome(nome);
+
+            //Atribuindo o codigo ao evento
+            cout << "codigo: " << listaResultados.back() << endl;
+            codigo.setValor(listaResultados.back());
+            listaResultados.pop_back();
+            evento->setCodigo(codigo);
+
+            // Retirando o CPF, pois não é usado no Evento
+            listaResultados.pop_back();
+
+
+            listaEventos.push_back(*evento);
+
+            delete evento;
+        }
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
 bool ModelEventos::alterarEvento(CPF cpf, Evento evento) {
-    return false;
+    comandoSQL = "UPDATE eventos SET nome =";
+    comandoSQL += "'" + evento.getNome().getValor() + "', classe = ";
+    comandoSQL += "'" + evento.getClasse().getValor() + "', faixa =";
+    comandoSQL += "'" + evento.getFaixa().getValor() + "', estado=";
+    comandoSQL += "'" + evento.getEstado().getValor() + "', cidade=";
+    comandoSQL += "'" + evento.getCidade().getValor() + "' WHEN codigo = ";
+    comandoSQL += "'" + evento.getCodigo().getValor() + "';";
+    try {
+        this->executar();
+        cout << "Evento alterando com sucesso " << endl;
+        return true;
+    } catch (...) {
+        return false;
+    }
 }
 
 bool ModelEventos::descadastrarEvento(CPF cpf, CodigoDeEvento codigo) {
@@ -522,7 +602,6 @@ void ModelEventos::adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentac
     }
 }
 
-// return: True se for menor que o limite, False se for maior que o limiete
 bool ModelEventos::isLimiteEventos(CPF cpf) {
     // Verifica se o usuario tem um numero maior ou igual de eventos permitidos
     comandoSQL = "SELECT COUNT(*) FROM evento WHERE cpf_usuario =";
@@ -557,12 +636,12 @@ bool ModelEventos::isUsuarioDono(CPF cpf, CodigoDeEvento codigo) {
 bool ModelEventos::jaVendeu(CodigoDeEvento codigo) {
     list<CodigoDeApresentacao> listaCodigoApr;
     comandoSQL = "SELECT (codigo_apresentacao) FROM apresentacao WHERE codigo_evento =";
-    comandoSQL += "'" + codigo.getValor()+ "';";
+    comandoSQL += "'" + codigo.getValor() + "';";
     try {
         listaResultados.clear();
         this->executar();
         CodigoDeApresentacao codigoDeApresentacao;
-        for(int i=0; i<listaResultados.size(); i++){
+        for (int i = 0; i < listaResultados.size(); i++) {
             codigoDeApresentacao.setValor(listaResultados.back());
             listaCodigoApr.push_back(codigoDeApresentacao);
             listaResultados.pop_back();
@@ -570,7 +649,7 @@ bool ModelEventos::jaVendeu(CodigoDeEvento codigo) {
 
         for (auto apr : listaCodigoApr) {
             comandoSQL = "SELECT COUNT(*) FROM ingressos WHERE codigo_apresentacao =";
-            comandoSQL += "'"+ apr.getValor() +"'";
+            comandoSQL += "'" + apr.getValor() + "'";
             listaResultados.clear();
             this->executar();
             if (listaResultados.back() > "0") {
@@ -585,12 +664,60 @@ bool ModelEventos::jaVendeu(CodigoDeEvento codigo) {
 
 // --------------------------------------------------------------------------
 // Model Serviço Vendas
+
+// Construtor
 ModelVendas::ModelVendas() : Model() {}
 
+// Métodos da Interface de serviço de Ingressos
 bool ModelVendas::adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) {
+    // Logica para ver quantos eventos disponiveis
+    comandoSQL = "SELECT disponibilidade FROM apresentacao WHERE codigo_apresentacao =";
+    comandoSQL += "'" + codigo.getValor() + "';";
+    listaResultados.clear();
+    this->executar();
+    int disponibilidade = stod(listaResultados.back());
+    if (disponibilidade < quantidade) {
+        throw invalid_argument("Quantida Maior");
+    } else {
+        // Compra os ingressos
+        for (int i = 0; i < quantidade; i++) {
+            comandoSQL = "INSET INTO ingresso VALUES (";
+            comandoSQL += "'" + codigo.getValor() + "',";
+            comandoSQL += "'" + cpf.getValor() + "');";
+        }
+
+        // Retira os ingressos comprados da disponibilidade
+        comandoSQL = "UPDATE apresentacao SET disponibilidade = ";
+        comandoSQL += "'" + to_string(disponibilidade - quantidade) + "' WHERE codigo_apresentacao = ;";
+        comandoSQL += "'" + codigo.getValor() + "';";
+    }
+
     return false;
 }
 
 void ModelVendas::vendasDoEvento(CodigoDeEvento codigoDeEvento) {
+    /*list<CodigoDeApresentacao> listaCodigoApr;
+    comandoSQL = "SELECT (codigo_apresentacao) FROM apresentacao WHERE codigo_evento =";
+    comandoSQL += "'" + codigoDeEvento.getValor() + "';";
 
+    listaResultados.clear();
+    this->executar();
+    CodigoDeApresentacao codigoDeApresentacao;
+    for (int i = 0; i < listaResultados.size(); i++) {
+        codigoDeApresentacao.setValor(listaResultados.back());
+        listaCodigoApr.push_back(codigoDeApresentacao);
+        listaResultados.pop_back();
+    }
+
+    for (auto apr : listaCodigoApr) {
+        comandoSQL = "SELECT COUNT(*) FROM ingressos WHERE codigo_apresentacao =";
+        comandoSQL += "'" + apr.getValor() + "'";
+        listaResultados.clear();
+        this->executar();
+        if (listaResultados.back() > "0") {
+
+        }
+    }
+*/
 }
+

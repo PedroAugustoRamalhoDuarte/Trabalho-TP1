@@ -32,6 +32,24 @@ viewEventos::viewEventos(QWidget *parent) :
                                "2- Esporte\n"
                                "3- Show Nacional\n"
                                "4- Show Internacional");
+    //--------------------------------------------------------------------------------------------------------
+    ui->editHelpNome->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->editHelpNome->setToolTip("O Nome do evento deve estar no formato XXXXXXXXXXXXXXXXXXXX no qual cada X pode ser letra, dígito ou espaço");
+    ui->editHelpFaixa->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->editHelpFaixa->setToolTip("A faixa etária deve ser L, 10, 12, 14, 16 ou 18");
+    ui->editHelpCidade->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->editHelpCidade->setToolTip("A cidade deve estar no formato XXXXXXXXXXXXXXX. Cada X pode ser letra, espaço ou ponto."
+                               "Não pode existir espaços seguidos, ponto deve ser precedido por letra e pelo menos um caracter deve ser letra");
+    ui->editHelpEstado->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->editHelpEstado->setToolTip("AC, AL, AP, AM, BA, CE, DF, ES, GO, MA, MT, MS, MG, PA, PB, PR, PE, "
+                               "PI, RJ, RN, RS, RO, RR, SC, SP, SE ou TO");
+    ui->editHelpClasse->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
+    ui->editHelpClasse->setToolTip("O formato da Classe de Evento deve ser X no qual X é um dígito de 1 a 4.\n"
+                               "1- Teatro\n"
+                               "2- Esporte\n"
+                               "3- Show Nacional\n"
+                               "4- Show Internacional");
+    //--------------------------------------------------------------------------------------------------------
 
     // Código do Help para digitação dos campos de adicionar apresentação
     ui->aprHelpCodigo->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
@@ -452,4 +470,74 @@ void viewEventos::on_btnMenu3_clicked()
 void viewEventos::on_btnHome_2_clicked()
 {
     this->close();
+}
+
+void viewEventos::on_editLineEstado_editingFinished()
+{
+    Estado estado;
+    try {
+        estado.setValor(ui->editLineEstado->text().toStdString());
+        ui->editCheckEstado->setStyleSheet("color:#7d7");
+        ui->editCheckEstado->setText("✓");
+    } catch (...) {
+        ui->editCheckEstado->setStyleSheet("color:#f00");
+        ui->editCheckEstado->setText("x");
+    }
+}
+
+void viewEventos::on_editLineNome_editingFinished()
+{
+    NomeDeEvento nome;
+    try {
+        nome.setValor(ui->editLineNome->text().toStdString());
+        ui->editCheckNome->setStyleSheet("color:#7d7");
+        ui->editCheckNome->setText("✓");
+    } catch (...) {
+        ui->editCheckNome->setStyleSheet("color:#f00");
+        ui->editCheckNome->setText("x");
+    }
+}
+
+void viewEventos::on_editLineCid_editingFinished()
+{
+    Cidade cidade;
+    try {
+        cidade.setValor(ui->editLineCid->text().toStdString());
+        ui->editCheckCidade->setStyleSheet("color:#7d7");
+        ui->editCheckCidade->setText("✓");
+    } catch (...) {
+        ui->editCheckCidade->setStyleSheet("color:#f00");
+        ui->editCheckCidade->setText("x");
+    }
+}
+
+void viewEventos::on_editLineClasse_editingFinished()
+{
+    ClasseDeEvento classe;
+    try {
+        classe.setValor(ui->editLineClasse->text().toStdString());
+        ui->editCheckClasse->setStyleSheet("color:#7d7");
+        ui->editCheckClasse->setText("✓");
+    } catch (...) {
+        ui->editCheckClasse->setStyleSheet("color:#f00");
+        ui->editCheckClasse->setText("x");
+    }
+}
+
+void viewEventos::on_editLineFaixa_editingFinished()
+{
+    FaixaEtaria faixa;
+    try {
+        faixa.setValor(ui->editLineFaixa->text().toStdString());
+        ui->editCheckFaixa->setStyleSheet("color:#7d7");
+        ui->editCheckFaixa->setText("✓");
+    } catch (...) {
+        ui->editCheckFaixa->setStyleSheet("color:#f00");
+        ui->editCheckFaixa->setText("x");
+    }
+}
+
+void viewEventos::on_pushButton_3_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
 }

@@ -20,19 +20,19 @@
       <x>10</x>
       <y>10</y>
       <width>761</width>
-      <height>451</height>
+      <height>461</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QPushButton" name="btnHome">
       <property name="geometry">
        <rect>
         <x>350</x>
-        <y>280</y>
-        <width>89</width>
+        <y>320</y>
+        <width>103</width>
         <height>25</height>
        </rect>
       </property>
@@ -43,8 +43,8 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>150</y>
+        <x>330</x>
+        <y>160</y>
         <width>191</width>
         <height>17</height>
        </rect>
@@ -58,7 +58,7 @@
        <rect>
         <x>350</x>
         <y>200</y>
-        <width>89</width>
+        <width>103</width>
         <height>25</height>
        </rect>
       </property>
@@ -71,12 +71,25 @@
        <rect>
         <x>350</x>
         <y>240</y>
-        <width>89</width>
+        <width>103</width>
         <height>25</height>
        </rect>
       </property>
       <property name="text">
        <string>Pesquisar</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>280</y>
+        <width>103</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Meus Eventos</string>
       </property>
      </widget>
     </widget>
@@ -719,7 +732,7 @@
      <widget class="QLabel" name="labelCreated">
       <property name="geometry">
        <rect>
-        <x>270</x>
+        <x>290</x>
         <y>320</y>
         <width>441</width>
         <height>20</height>
@@ -753,6 +766,9 @@
         <height>331</height>
        </rect>
       </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>112</number>
+      </attribute>
       <column>
        <property name="text">
         <string>Código</string>
@@ -787,7 +803,7 @@
      <widget class="QLabel" name="tituloApresentacao">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>380</x>
         <y>0</y>
         <width>41</width>
         <height>17</height>
@@ -809,6 +825,277 @@
       <property name="text">
        <string>Voltar</string>
       </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_6">
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>721</width>
+        <height>421</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>90</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Código</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nome</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cidade</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Estado</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Classe</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>F.Etária</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Editar</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Remover</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>0</y>
+        <width>67</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Eventos</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_7">
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>80</y>
+        <width>111</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Editar Eventos</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>290</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Editar</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>290</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Menu</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>130</y>
+        <width>269</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelEditNome">
+         <property name="text">
+          <string>Nome</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLabel" name="editHelpNome">
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2">
+        <widget class="QLineEdit" name="editLineNome"/>
+       </item>
+       <item row="0" column="3">
+        <widget class="QLabel" name="editCheckNome">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelEditCidade">
+         <property name="text">
+          <string>Cidade</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLabel" name="editHelpCidade">
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="editLineCid"/>
+       </item>
+       <item row="1" column="3">
+        <widget class="QLabel" name="editCheckCidade">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelEditCidade_2">
+         <property name="text">
+          <string>Estado</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLabel" name="editHelpEstado">
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QLineEdit" name="editLineEstado"/>
+       </item>
+       <item row="2" column="3">
+        <widget class="QLabel" name="editCheckEstado">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelEditClasse">
+         <property name="text">
+          <string>Classe</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="editHelpClasse">
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLineEdit" name="editLineClasse"/>
+       </item>
+       <item row="3" column="3">
+        <widget class="QLabel" name="editCheckClasse">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelEditFaixa">
+         <property name="text">
+          <string>Faixa Etária</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLabel" name="editHelpFaixa">
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="editLineFaixa"/>
+       </item>
+       <item row="4" column="3">
+        <widget class="QLabel" name="editCheckFaixa">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>

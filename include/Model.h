@@ -84,7 +84,10 @@ private:
     bool isUsuarioDono(CPF cpf,CodigoDeEvento codigo);
 
     bool jaVendeu(CodigoDeEvento codigo);
+
 public:
+    bool meusEventos(list<Evento> &listaEventos, CPF cpf);
+
     bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) override;
 
     bool alterarEvento(CPF cpf, Evento evento) override;

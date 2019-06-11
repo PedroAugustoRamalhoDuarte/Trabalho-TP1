@@ -27,6 +27,8 @@ public:
 
     virtual bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
 
+    virtual bool meusEventos(list<Evento> &listaEventos, CPF cpf) = 0;
+
     virtual bool mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) = 0;
 };
 

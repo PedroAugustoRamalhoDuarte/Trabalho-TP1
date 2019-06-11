@@ -76,6 +76,18 @@ private slots:
 
     void on_btnHome_2_clicked();
 
+    void on_editLineEstado_editingFinished();
+
+    void on_editLineNome_editingFinished();
+
+    void on_editLineCid_editingFinished();
+
+    void on_editLineClasse_editingFinished();
+
+    void on_editLineFaixa_editingFinished();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::viewEventos *ui;
     Evento eventoADD;
