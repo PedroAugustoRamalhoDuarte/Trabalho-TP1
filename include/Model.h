@@ -103,9 +103,16 @@ public:
 
 class ModelVendas : public Model, public ISVendas {
 public:
+    void listarApresentacao(list<CodigoDeApresentacao> &listCodigosApr) override;
+
+    void listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf) override;
+
     bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) override;
 
-    void vendasDoEvento(CodigoDeEvento codigoDeEvento) override;
+    void vendasDoEvento(CodigoDeEvento codigoDeEvento,
+                                list<pair<CodigoDeApresentacao, int>> &tabelaQtdIngressos) override;
+
+    void vendasPorCpf(CodigoDeApresentacao codigoDeApresentacao, list<pair<CPF, int>> &tabelaCpfIngressos) override;
 
     ModelVendas();
 };

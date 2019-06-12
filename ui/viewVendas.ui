@@ -17,14 +17,14 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>10</y>
+      <x>140</x>
+      <y>0</y>
       <width>651</width>
       <height>441</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">
@@ -125,9 +125,6 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineCodigoApresentacao"/>
-       </item>
        <item row="1" column="0">
         <widget class="QLabel" name="label_3">
          <property name="text">
@@ -138,13 +135,16 @@
        <item row="1" column="1">
         <widget class="QLineEdit" name="lineQuantidade"/>
        </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="comboBoxApr"/>
+       </item>
       </layout>
      </widget>
      <widget class="QLabel" name="labelCompra">
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>260</y>
+        <y>280</y>
         <width>271</width>
         <height>17</height>
        </rect>
@@ -158,8 +158,8 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>50</y>
+        <x>200</x>
+        <y>20</y>
         <width>191</width>
         <height>20</height>
        </rect>
@@ -171,14 +171,103 @@
      <widget class="QPushButton" name="btnVoltar2">
       <property name="geometry">
        <rect>
-        <x>220</x>
-        <y>250</y>
+        <x>520</x>
+        <y>400</y>
         <width>89</width>
         <height>25</height>
        </rect>
       </property>
       <property name="text">
        <string>Voltar</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxEve">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>60</y>
+        <width>131</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableQtdVendida">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>100</y>
+        <width>471</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>160</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Apresentação</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ingressos Vendidos</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Informações</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>60</y>
+        <width>151</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Código de Evento</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_4">
+     <widget class="QTableWidget" name="tableCpfQte">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>70</y>
+        <width>361</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>180</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Usuário</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Quantidade de Ingressos</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>30</y>
+        <width>161</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ingressos Comprados</string>
       </property>
      </widget>
     </widget>

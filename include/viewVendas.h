@@ -36,6 +36,10 @@ private slots:
 
     void on_btnComprar_clicked();
 
+    void on_comboBoxEve_currentIndexChanged(const QString &arg1);
+
+    void on_tableQtdVendida_cellClicked(int row, int column);
+
 private:
     Ui::viewVendas *ui;
 

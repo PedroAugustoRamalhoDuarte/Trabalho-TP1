@@ -9,8 +9,11 @@
  * @copyright Waliff Cordeiro
  */
 
+#include <unordered_map>
+#include <tuple>
 #include "Dominios.h"
 #include "Entidades.h"
+#include <utility>
 
 class ISAutenticacao {
 public:
@@ -25,7 +28,8 @@ public:
 
     virtual bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo) = 0;
 
-    virtual bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
+    virtual bool
+    pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
 
     virtual bool meusEventos(list<Evento> &listaEventos, CPF cpf) = 0;
 
@@ -44,9 +48,16 @@ public:
 
 class ISVendas {
 public:
+    virtual void listarApresentacao(list<CodigoDeApresentacao> &listCodigosApr) = 0;
+
+    virtual void listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf) = 0;
+
     virtual bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) = 0;
 
-    virtual void vendasDoEvento(CodigoDeEvento codigoDeEvento) = 0;
+    virtual void
+    vendasDoEvento(CodigoDeEvento codigoDeEvento, list<pair<CodigoDeApresentacao, int>> &tabelaQtdIngressos) = 0;
+
+    virtual void vendasPorCpf(CodigoDeApresentacao codigoDeApresentacao, list<pair<CPF, int>> &tabelaCpfIngressos) = 0;
 };
 
 #endif //TRABALHOTP1_INTERFACES_SERVICOS_H

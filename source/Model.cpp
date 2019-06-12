@@ -26,9 +26,10 @@ Model::Model() {
 void Model::criarTabelaIngresso() {
     const char *sql;
     sql = "CREATE TABLE IF NOT EXISTS ingresso("
-          "codigo_ingresso INT AUTO_INCREMENT  PRIMARY KEY,"
+          "codigo_ingresso INTEGER PRIMARY KEY AUTOINCREMENT,"
           "codigo_apresentacao VARCHAR(10) NOT NULL,"
           "cpf_usuario  VARCHAR(14) NOT NULL,"
+          "quantidade INTEGER NOT NULL,"
           "FOREIGN KEY(codigo_apresentacao) REFERENCES apresentacao,"
           "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
 
@@ -131,15 +132,8 @@ void Model::executar() {
 
 int Model::callback(void *notUsed, int argc, char **argv, char **azColName) {
     int i;
-    //cout << "ARGC:" << argc << endl;
-    //cout << "ARGV:" << *argv << endl;
-    //fprintf(stderr, "%s: ", (const char *) data);
-    /*
-    for (i = 0; i < argc; i++) {
-        printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-    }
-    printf("\n");*/
-
+    if (*argv == nullptr)
+        return 0;
     for (i = 0; i < argc; i++) {
         listaResultados.push_back(argv[i]);
     }
@@ -681,15 +675,15 @@ bool ModelVendas::adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int qua
     this->executar();
     int disponibilidade = stod(listaResultados.back());
     if (disponibilidade < quantidade) {
-        throw invalid_argument("Quantida Maior");
+        return false;
     } else {
         // Compra os ingressos
-        for (int i = 0; i < quantidade; i++) {
-            comandoSQL = "INSERT INTO ingresso (codigo_apresentacao, cpf_usuario) VALUES (";
-            comandoSQL += "'" + codigo.getValor() + "',";
-            comandoSQL += "'" + cpf.getValor() + "');";
-        }
+        comandoSQL = "INSERT INTO ingresso (codigo_apresentacao, cpf_usuario, quantidade) VALUES (";
+        comandoSQL += "'" + codigo.getValor() + "',";
+        comandoSQL += "'" + cpf.getValor() + "',";
+        comandoSQL += "'" + to_string(quantidade) + "');";
         this->executar();
+
         // Retira os ingressos comprados da disponibilidade
         comandoSQL = "UPDATE apresentacao SET disponibilidade = ";
         comandoSQL += "'" + to_string(disponibilidade - quantidade) + "' WHERE codigo_apresentacao = ";
@@ -697,32 +691,87 @@ bool ModelVendas::adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int qua
         this->executar();
     }
 
-    return false;
+    return true;
 }
 
-void ModelVendas::vendasDoEvento(CodigoDeEvento codigoDeEvento) {
-    /*list<CodigoDeApresentacao> listaCodigoApr;
+void ModelVendas::vendasDoEvento(CodigoDeEvento codigoDeEvento,
+                                 list<pair<CodigoDeApresentacao, int>> &tabelaQtdIngressos) {
+
+    list<CodigoDeApresentacao> listaCodigoApr;
     comandoSQL = "SELECT (codigo_apresentacao) FROM apresentacao WHERE codigo_evento =";
     comandoSQL += "'" + codigoDeEvento.getValor() + "';";
 
     listaResultados.clear();
     this->executar();
+    cout << "ACHOU AS APRESENTACOES" << endl;
     CodigoDeApresentacao codigoDeApresentacao;
-    for (int i = 0; i < listaResultados.size(); i++) {
-        codigoDeApresentacao.setValor(listaResultados.back());
+    for (auto result : listaResultados) {
+        codigoDeApresentacao.setValor(result);
         listaCodigoApr.push_back(codigoDeApresentacao);
-        listaResultados.pop_back();
     }
 
+    cout << "ALOUCOU APRESNTACOES: " << listaCodigoApr.size() << endl;
     for (auto apr : listaCodigoApr) {
-        comandoSQL = "SELECT COUNT(*) FROM ingressos WHERE codigo_apresentacao =";
+        comandoSQL = "SELECT SUM(quantidade) FROM ingresso WHERE codigo_apresentacao =";
         comandoSQL += "'" + apr.getValor() + "'";
         listaResultados.clear();
         this->executar();
-        if (listaResultados.back() > "0") {
-
+        //cout << "CONTOU QUANTIDADE: " << listaResultados.back() << endl;
+        if (listaResultados.size() != 0) {
+            tabelaQtdIngressos.push_back({apr, stod(listaResultados.back())});
+            listaResultados.pop_back();
+        } else {
+            tabelaQtdIngressos.push_back({apr, 0});
         }
     }
-*/
+}
+
+void ModelVendas::listarApresentacao(list<CodigoDeApresentacao> &listCodigosApr) {
+    comandoSQL = "SELECT codigo_apresentacao FROM apresentacao";
+    listaResultados.clear();
+    this->executar();
+    for (auto codigo : listaResultados) {
+        CodigoDeApresentacao codigoDeApresentacao;
+        codigoDeApresentacao.setValor(codigo);
+        listCodigosApr.push_back(codigoDeApresentacao);
+    }
+}
+
+void ModelVendas::listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf) {
+    comandoSQL = "SELECT codigo FROM evento where cpf_usuario =  ";
+    comandoSQL += "'" + cpf.getValor() + "';";
+    listaResultados.clear();
+    this->executar();
+    for (auto codigo : listaResultados) {
+        CodigoDeEvento codigoDeEvento;
+        codigoDeEvento.setValor(codigo);
+        listCodigoEve.push_back(codigoDeEvento);
+    }
+}
+
+void ModelVendas::vendasPorCpf(CodigoDeApresentacao codigoDeApresentacao, list<pair<CPF, int>> &tabelaCpfIngressos) {
+    CPF cpf;
+    string qte;
+    comandoSQL = "SELECT cpf_usuario, quantidade FROM ingresso WHERE codigo_apresentacao = ";
+    comandoSQL += "'" + codigoDeApresentacao.getValor() + "';";
+    listaResultados.clear();
+    cout << "GALERINHA" << endl;
+    this->executar();
+    auto tam = listaResultados.size();
+    cout<< "o tamanho é: "<<tam<<endl;
+    for (int i = 0; i < tam; i++) {
+
+        if (i % 2 == 1) {
+            cout<<listaResultados.back()<<endl;
+            cpf.setValor(listaResultados.back());
+            tabelaCpfIngressos.push_back({cpf, stod(qte)});
+            cout<<"------------------------------------------";
+            cout<<tabelaCpfIngressos.back().first.getValor()<<endl;
+            cout<<tabelaCpfIngressos.back().second<<endl;
+        } else {
+            qte = listaResultados.back();
+        }
+        listaResultados.pop_back();
+    }
 }
 
