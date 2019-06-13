@@ -6,7 +6,6 @@
 #include "include/controladora.h"
 #include <QApplication>
 #include <QPushButton>
-#include "./include/View.h"
 #include "include/Builder.h"
 
 int main(int argc, char *argv[])

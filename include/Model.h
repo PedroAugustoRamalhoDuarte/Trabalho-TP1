@@ -13,13 +13,13 @@
 class Model {
 private:
     // Ponteiro para o bd
-    sqlite3* db;
+    sqlite3 *db;
 
     // Status do BD
     int status;
 
     // Mensagem de erro
-    char* mensagem;
+    char *mensagem;
 
     // Criacao de tabelas
 
@@ -32,7 +32,7 @@ private:
     void criarTabelaApresentacao();
 
     // Funcao para Querys no database
-    static int callback(void* notUsed, int argc, char** argv, char** azColName);
+    static int callback(void *notUsed, int argc, char **argv, char **azColName);
 
 protected:
     // Informação proveniente das querys
@@ -51,69 +51,4 @@ public:
 };
 
 
-class ModelUsuario : public Model, public ISUsuario {
-public:
-    bool cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) override;
-
-    bool mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) override;
-
-    bool excluirUsuario(CPF cpf) override;
-
-    ModelUsuario();
-};
-
-class ModelAutenticacao : public Model, public  ISAutenticacao {
-public:
-    bool autenticar(CPF cpf, Senha senha) override;
-
-    ModelAutenticacao();
-};
-
-class ModelEventos : public Model, public ISEventos {
-private:
-    const static int LIMITE_EVENTOS = 10;
-    const static int LIMITE_APRESENTACAO = 10;
-
-    // Retorna True caso não possa mais criar eventos
-    bool isLimiteEventos(CPF cpf);
-
-    void adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao);
-
-    bool verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino);
-
-    bool isUsuarioDono(CPF cpf,CodigoDeEvento codigo);
-
-    bool jaVendeu(CodigoDeEvento codigo);
-
-public:
-    bool meusEventos(list<Evento> &listaEventos, CPF cpf);
-
-    bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) override;
-
-    bool alterarEvento(CPF cpf, Evento evento) override;
-
-    bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo) override;
-
-    bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
-
-    ModelEventos();
-
-    bool mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) override;
-};
-
-class ModelVendas : public Model, public ISVendas {
-public:
-    void listarApresentacao(list<CodigoDeApresentacao> &listCodigosApr) override;
-
-    void listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf) override;
-
-    bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade) override;
-
-    void vendasDoEvento(CodigoDeEvento codigoDeEvento,
-                                list<pair<CodigoDeApresentacao, int>> &tabelaQtdIngressos) override;
-
-    void vendasPorCpf(CodigoDeApresentacao codigoDeApresentacao, list<pair<CPF, int>> &tabelaCpfIngressos) override;
-
-    ModelVendas();
-};
 #endif //TRABALHOTP1_MODEL_H

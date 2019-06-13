@@ -63,7 +63,7 @@ void viewUsuario::executar(CPF &cpf){
 viewUsuario::~viewUsuario()
 {
     // Encerra a conexao do banco de dados(alterar local depois)
-    delete (ModelUsuario*)(modelUsuario);
+    //delete (ModelUsuario*)(modelUsuario);
     delete ui;
 }
 

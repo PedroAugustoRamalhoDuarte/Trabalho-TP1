@@ -11,6 +11,10 @@
 #include "viewUsuario.h"
 #include "viewVendas.h"
 #include "Model.h"
+#include "ModelVendas.h"
+#include "ModelUsuario.h"
+#include "ModelAutenticacao.h"
+#include "ModelEventos.h"
 #include "Interfaces_Apresentacao.h"
 #include "Interfaces_Servicos.h"
 

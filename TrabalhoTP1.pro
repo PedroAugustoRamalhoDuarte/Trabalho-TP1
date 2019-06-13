@@ -34,20 +34,26 @@ SOURCES += \
         source/Entidades.cpp \
         source/Dominios.cpp \
         source/Model.cpp \
+        source/ModelUsuario.cpp \
+        source/ModelVendas.cpp \
+        source/ModelAutenticacao.cpp \
+        source/ModelEventos.cpp \
         source/Builder.cpp \
-        source/View.cpp \
         source/viewAutenticacao.cpp \
         source/viewEventos.cpp \
         source/viewVendas.cpp
 
 HEADERS += \
         include/controladora.h \
-        include/viewUsuario.h \
         include/Entidades.h \
         include/Dominios.h \
         include/Model.h \
+        include/ModelUsuario.h \
+        include/ModelAutenticacao.h \
+        include/ModelVendas.h \
+        include/ModelEventos.h \
         include/Builder.h \
-        include/View.h \
+        include/viewUsuario.h \
         include/viewAutenticacao.h \
         include/viewEventos.h \
         include/viewVendas.h
