@@ -8,7 +8,7 @@ Controladora::Controladora(QWidget *parent) :
     //ui->stackedWidget->setCurrentIndex(0);
 
     // Inicializando variaveis do usuario
-    this->flag = 0;
+    this->isNotInMenu = 0;
     this->cpfUsuarioLogado = new CPF();
     // Teste
 
@@ -25,7 +25,7 @@ void Controladora::on_btnLogin_clicked() {
     } else {
         // Login
         viewAutenticacao->executar(this->cpfUsuarioLogado);
-        this->flag = 1;
+        this->isNotInMenu = 1;
         this->hide();
     }
 }
@@ -33,14 +33,14 @@ void Controladora::on_btnLogin_clicked() {
 // Módulo de Usuários
 void Controladora::on_btnCadastro_clicked() {
     viewUsuario->executar(*this->cpfUsuarioLogado);
-    this->flag = 1;
+    this->isNotInMenu = 1;
     this->hide();
 }
 
 // Módulo de Eventos
 void Controladora::on_btnEventos_clicked() {
     viewEventos->executar(*this->cpfUsuarioLogado);
-    this->flag = 1;
+    this->isNotInMenu = 1;
     this->hide();
 
 }
@@ -48,7 +48,7 @@ void Controladora::on_btnEventos_clicked() {
 // Módulo de Vendas
 void Controladora::on_btnVendas_clicked() {
     viewVendas->executar(*this->cpfUsuarioLogado);
-    this->flag = 1;
+    this->isNotInMenu = 1;
     this->hide();
 }
 

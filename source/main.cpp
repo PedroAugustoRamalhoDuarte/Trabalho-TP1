@@ -12,32 +12,24 @@ int main(int argc, char *argv[])
 {
     auto model = new Model();
     model->criarTabelas();
+
     CPF cpf;
     QApplication a(argc, argv);
 
     Controladora control;
     Builder builder;
     builder.build(&control);
-    //control.executar();
     int result;
     while (1){
         control.executar();
         result = a.exec();
-        cout << "CONTROL FLAG:";
-        cout <<  control.flag << endl;
-        //cout << result << endl;
-        cout << "LOOP PRINCIPAL" << endl;
-        if (result == 0 && control.flag == 1){
-            control.flag = 0;
-            //cout<<"test"<<endl;
-            //cout<<control.flag<<endl;
+        if (result == 0 && control.isNotInMenu == 1){
+            control.isNotInMenu = 0;
         }
-        else if(control.flag == 0 && result == 0){
-            //cout<<"break";
+        else if(control.isNotInMenu == 0 && result == 0){
             break;
         }
-        else if (control.flag==0){
-            //cout<<"break";
+        else if (control.isNotInMenu==0){
             break;
         }
     }

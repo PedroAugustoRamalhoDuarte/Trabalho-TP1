@@ -72,7 +72,7 @@ void Model::criarTabelaApresentacao() {
 }
 
 void Model::criarTabelas() {
-    // Testar se deu erro depois
+    cout << "Criando As Tabelas" << endl;
     criarTabelaUsuario();
     criarTabelaEvento();
     criarTabelaApresentacao();

@@ -16,7 +16,7 @@ class Controladora : public QMainWindow
     Q_OBJECT
 
 public:
-    int flag = 0;
+    int isNotInMenu = 0;
 
     void executar();
 

@@ -18,7 +18,8 @@ que o mesmo pode utilizar a funcionalidade é passado via parâmetro o objeto CP
 Formulário para login
 
 ```
-bool executar(CPF&) Erro
+bool executar(CPF&)
+
 void setModelAutenticacao(ISAutenticacao *modelAutenticacao)
 ```
 ## Apresentação de Usuário
@@ -28,13 +29,14 @@ Mostrar informações do usuário/ Forms para cadastro
 ```
 void executar(CPF &cpf);
 
-void setModelUsuario(ISUsuario *modelUsuario) ;
+void setModelUsuario(ISUsuario *modelUsuario)
 ```
 ## Apresentação de Eventos
 
 Um usuário que fez ou não login pode ver os eventos
 ```
 void executar(CPF cpf) Erro
+
 void setModelEventos(ISEventos *modelEventos)
 ```
 
@@ -45,6 +47,7 @@ Lista as compras já feitas pelo o usuário
 
 ```
 void executar(CPF cpf) Erro
+
 void setModelVendas(ISVendas *modelVendas)
 ```
 
@@ -55,11 +58,11 @@ Para se cadastrar, precisa informar CPF, senha e os seguintes dados sobre o seu 
 de segurança e data de validade.
 
 ```
-    void cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito);
+void cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito);
 
-    void mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito);
+void mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito);
 
-    bool excluirUsuario(CPF cpf);
+bool excluirUsuario(CPF cpf);
 ```
 ## Serviço de Autenticação
 
@@ -79,17 +82,17 @@ Qualquer usuário do sistema pode obter dados sobre os eventos programados. Para
 seguintes dados quando de uma consulta: datas de início e término de período, nome da cidade e sigla do estado no qual
 ocorrerá o evento.
 ```
-    bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao);
+bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao);
 
-    void alterarEvento(CPF cpf, Evento evento);
+void alterarEvento(CPF cpf, Evento evento);
 
-    bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo);
+bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo);
 
-    void pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado);
+void pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado);
 
-    void meusEventos(list<Evento> &listaEventos, CPF cpf);
+void meusEventos(list<Evento> &listaEventos, CPF cpf);
 
-    void mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento);
+void mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento);
 ```
 
 
@@ -100,15 +103,15 @@ Para adquirir ingressos, o usuário deve informar o código da
 apresentação e a quantidade de ingressos desejada.
 
 ```
-    void listarApresentacao(list<CodigoDeApresentacao> &listCodigosApr);
+void listarApresentacao(list<CodigoDeApresentacao> &listCodigosApr);
 
-    void listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf);
+void listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf);
 
-    bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade);
+bool adquirirIngresso(CPF cpf, CodigoDeApresentacao codigo, int quantidade);
 
-    void vendasDoEvento(CodigoDeEvento codigoDeEvento, list<pair<CodigoDeApresentacao, int>> &tabelaQtdIngressos);
+void vendasDoEvento(CodigoDeEvento codigoDeEvento, list<pair<CodigoDeApresentacao, int>> &tabelaQtdIngressos);
 
-    void vendasPorCpf(CodigoDeApresentacao codigoDeApresentacao, list<pair<CPF, int>> &tabelaCpfIngressos);
+void vendasPorCpf(CodigoDeApresentacao codigoDeApresentacao, list<pair<CPF, int>> &tabelaCpfIngressos);
 ```
 
 
