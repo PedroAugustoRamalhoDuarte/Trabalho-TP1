@@ -124,20 +124,16 @@ void viewVendas::on_comboBoxEve_currentIndexChanged(const QString &arg1)
 
 void viewVendas::on_tableQtdVendida_cellClicked(int row, int column)
 {
-    cout<<"checkpoint0" << endl;
     const int INFORMACAO = 2;
     CodigoDeApresentacao codigo;
     list<pair<CPF, int>> listRegistro;
     if (column == INFORMACAO){
         try {
-            cout<< "checkpoin1" << endl;
             codigo.setValor(ui->tableQtdVendida->item(row, 0)->text().toStdString());
-            cout<<"checkpoint2" << endl;
-            modelVendas->vendasPorCpf(codigo,listRegistro);
+            modelVendas->vendasPorCpf(codigo, listRegistro);
             ui->tableCpfQte->clearContents();
             ui->tableCpfQte->setRowCount((listRegistro).size());
             int i=0;
-            cout<<listRegistro.size()<<endl;
             for (auto reg: listRegistro) {
                 ui->tableCpfQte->setItem(i, 0, new QTableWidgetItem(QString::fromStdString(reg.first.getValor())));
                 ui->tableCpfQte->setItem(i, 1, new QTableWidgetItem(QString::fromStdString(to_string(reg.second))));

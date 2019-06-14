@@ -24,85 +24,51 @@ Model::Model() {
 
 // Criação de Tabelas
 void Model::criarTabelaIngresso() {
-    const char *sql;
-    sql = "CREATE TABLE IF NOT EXISTS ingresso("
-          "codigo_ingresso INTEGER PRIMARY KEY AUTOINCREMENT,"
-          "codigo_apresentacao VARCHAR(10) NOT NULL,"
-          "cpf_usuario  VARCHAR(14) NOT NULL,"
-          "quantidade INTEGER NOT NULL,"
-          "FOREIGN KEY(codigo_apresentacao) REFERENCES apresentacao,"
-          "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
-
-    status = sqlite3_exec(db, sql, nullptr, nullptr, nullptr);
-
-    if (status != SQLITE_OK) {
-        cout << "Falha ao criar tabela ingresso" << endl;
-    } else {
-        cout << "tabela ingresso criada com sucesso" << endl;
-    }
+    comandoSQL = "CREATE TABLE IF NOT EXISTS ingresso("
+                 "codigo_ingresso INTEGER PRIMARY KEY AUTOINCREMENT,"
+                 "codigo_apresentacao VARCHAR(10) NOT NULL,"
+                 "cpf_usuario  VARCHAR(14) NOT NULL,"
+                 "quantidade INTEGER NOT NULL,"
+                 "FOREIGN KEY(codigo_apresentacao) REFERENCES apresentacao,"
+                 "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
+    this->executar();
 }
 
 void Model::criarTabelaUsuario() {
-    const char *sql;
-
-    sql = "CREATE TABLE IF NOT EXISTS usuario("
-          "cpf VARCHAR(14) PRIMARY KEY,"
-          "senha VARCHAR(12) NOT NULL,"
-          "codigo_cartao VARCHAR(10) NOT NULL,"
-          "numero_cartao VARCHAR(16) NOT NULL,"
-          "data_validade VARCHAR(5) NOT NULL);";
-
-    status = sqlite3_exec(db, sql, nullptr, nullptr, nullptr);
-
-    if (status != SQLITE_OK) {
-        cout << "Falha ao criar tabela usuarios" << endl;
-    } else {
-        cout << "Tabela usuario criada com sucesso" << endl;
-    }
+    comandoSQL = "CREATE TABLE IF NOT EXISTS usuario("
+                 "cpf VARCHAR(14) PRIMARY KEY,"
+                 "senha VARCHAR(12) NOT NULL,"
+                 "codigo_cartao VARCHAR(10) NOT NULL,"
+                 "numero_cartao VARCHAR(16) NOT NULL,"
+                 "data_validade VARCHAR(5) NOT NULL);";
+    this->executar();
 }
 
 void Model::criarTabelaEvento() {
-    const char *sql;
-
-    sql = "CREATE TABLE IF NOT EXISTS evento("
-          "cpf_usuario VARCHAR(14) NOT NULL,"
-          "codigo VARCHAR(10) PRIMARY KEY,"
-          "nome VARCHAR(20) NOT NULL,"
-          "cidade VARCHAR(15) NOT NULL,"
-          "estado VARCHAR(2) NOT NULL,"
-          "classe VARCHAR(1) NOT NULL,"
-          "faixa_etaria VARCHAR(2) NOT NULL,"
-          "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
-
-    status = sqlite3_exec(db, sql, nullptr, nullptr, nullptr);
-
-    if (status != SQLITE_OK) {
-        cout << "Falha ao criar tabela evento" << endl;
-    } else {
-        cout << "Tabela evento criada com sucesso" << endl;
-    }
+    comandoSQL = "CREATE TABLE IF NOT EXISTS evento("
+                 "cpf_usuario VARCHAR(14) NOT NULL,"
+                 "codigo VARCHAR(10) PRIMARY KEY,"
+                 "nome VARCHAR(20) NOT NULL,"
+                 "cidade VARCHAR(15) NOT NULL,"
+                 "estado VARCHAR(2) NOT NULL,"
+                 "classe VARCHAR(1) NOT NULL,"
+                 "faixa_etaria VARCHAR(2) NOT NULL,"
+                 "FOREIGN KEY(cpf_usuario) REFERENCES usuario);";
+    this->executar();
 }
 
 void Model::criarTabelaApresentacao() {
-    const char *sql;
+    comandoSQL = "CREATE TABLE IF NOT EXISTS apresentacao("
+                 "codigo_evento VARCHAR(10) REFERENCES evento NOT NULL,"
+                 "codigo_apresentacao VARCHAR(10) PRIMARY KEY,"
+                 "data VARCHAR(8) NOT NULL,"
+                 "horario VARCHAR(15) NOT NULL,"
+                 "preco VARCHAR(10) NOT NULL,"
+                 "sala VARCHAR(10) NOT NULL,"
+                 "disponibilidade VARCHAR(10) NOT NULL,"
+                 "FOREIGN KEY(codigo_evento) REFERENCES evento);";
 
-    sql = "CREATE TABLE IF NOT EXISTS apresentacao("
-          "codigo_evento VARCHAR(10) REFERENCES evento NOT NULL,"
-          "codigo_apresentacao VARCHAR(10) PRIMARY KEY,"
-          "data VARCHAR(8) NOT NULL,"
-          "horario VARCHAR(15) NOT NULL,"
-          "preco VARCHAR(10) NOT NULL,"
-          "sala VARCHAR(10) NOT NULL,"
-          "disponibilidade VARCHAR(10) NOT NULL,"
-          "FOREIGN KEY(codigo_evento) REFERENCES evento);";
-
-    status = sqlite3_exec(db, sql, nullptr, nullptr, nullptr);
-
-    if (status != SQLITE_OK) {
-        cout << "Falha ao criar tabela apresentacao" << endl;
-    } else {
-        cout << "Tabela apresentacao criada com sucesso" << endl;
-    }
+    this->executar();
 }
 
 void Model::criarTabelas() {
@@ -125,7 +91,6 @@ void Model::executar() {
         if (*mensagem)
             cout << mensagem;
         //  free(mensagem);
-        cout << "ERRO SQL" << endl;
         throw invalid_argument("Erro na execucao do comando SQL");
     }
 }

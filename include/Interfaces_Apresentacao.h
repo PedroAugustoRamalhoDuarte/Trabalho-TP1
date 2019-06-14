@@ -15,7 +15,7 @@
 class IAAutenticacao {
 public:
 
-    virtual bool executar(CPF* cpf) = 0;
+    virtual void executar(CPF *cpf) = 0;
 
     virtual void setModelAutenticacao(ISAutenticacao *modelAutenticacao) = 0;
 };

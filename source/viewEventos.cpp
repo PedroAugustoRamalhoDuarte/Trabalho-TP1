@@ -250,7 +250,6 @@ void viewEventos::on_tableEventos_cellClicked(int row, int column)
         }
         ui->tableApresentacao->update();
         ui->stackedWidget->setCurrentIndex(4);
-
     }
 }
 
@@ -259,12 +258,10 @@ void viewEventos::on_btnMeusEventos_clicked()
 {
     list<Evento> listaEventos;
     try {
-        cout << cpfUsuarioLogado.getValor() << endl;
         modelEventos->meusEventos(listaEventos, cpfUsuarioLogado);
     } catch (...) {
         cout << "Erro no buscar meus eventos" << endl;
     }
-
 
     if (listaEventos.size() == 0 ) {
         // Mostrar ao Usuário que não houve elementos no sistema no qual se enquadra na busca
@@ -308,10 +305,13 @@ void viewEventos::on_tableMeusEventos_cellClicked(int row, int column)
         CodigoDeEvento codigo;
         try {
             codigo.setValor(ui->tableMeusEventos->item(row, 0)->text().toStdString());
-            modelEventos->descadastrarEvento(cpfUsuarioLogado, codigo);
+            if(modelEventos->descadastrarEvento(cpfUsuarioLogado, codigo))
+                cout << "Evento Descadastrado com sucesso" << endl;
+            else
+                cout << "Erro ao descadastrar evento(Já foi comprado ingresso)";
             on_btnMeusEventos_clicked();
         } catch (...) {
-            cout << "ERRO Meus Eventos" << endl;
+            cout << "ERRO Meus Eventos(BD)" << endl;
         }
 
     }

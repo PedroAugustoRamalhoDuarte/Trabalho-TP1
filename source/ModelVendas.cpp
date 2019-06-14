@@ -43,21 +43,17 @@ void ModelVendas::vendasDoEvento(CodigoDeEvento codigoDeEvento,
 
     listaResultados.clear();
     this->executar();
-    cout << "ACHOU AS APRESENTACOES" << endl;
     CodigoDeApresentacao codigoDeApresentacao;
     for (auto result : listaResultados) {
         codigoDeApresentacao.setValor(result);
         listaCodigoApr.push_back(codigoDeApresentacao);
     }
-
-    cout << "ALOUCOU APRESNTACOES: " << listaCodigoApr.size() << endl;
     for (auto apr : listaCodigoApr) {
         comandoSQL = "SELECT SUM(quantidade) FROM ingresso WHERE codigo_apresentacao =";
         comandoSQL += "'" + apr.getValor() + "'";
         listaResultados.clear();
         this->executar();
-        //cout << "CONTOU QUANTIDADE: " << listaResultados.back() << endl;
-        if (listaResultados.size() != 0) {
+        if (!listaResultados.empty()) {
             tabelaQtdIngressos.push_back({apr, stod(listaResultados.back())});
             listaResultados.pop_back();
         } else {
@@ -77,6 +73,7 @@ void ModelVendas::listarApresentacao(list<CodigoDeApresentacao> &listCodigosApr)
     }
 }
 
+
 void ModelVendas::listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf) {
     comandoSQL = "SELECT codigo FROM evento where cpf_usuario =  ";
     comandoSQL += "'" + cpf.getValor() + "';";
@@ -89,25 +86,19 @@ void ModelVendas::listarEventos(list<CodigoDeEvento> &listCodigoEve, CPF cpf) {
     }
 }
 
+
 void ModelVendas::vendasPorCpf(CodigoDeApresentacao codigoDeApresentacao, list<pair<CPF, int>> &tabelaCpfIngressos) {
     CPF cpf;
     string qte;
     comandoSQL = "SELECT cpf_usuario, quantidade FROM ingresso WHERE codigo_apresentacao = ";
     comandoSQL += "'" + codigoDeApresentacao.getValor() + "';";
     listaResultados.clear();
-    cout << "GALERINHA" << endl;
     this->executar();
     auto tam = listaResultados.size();
-    cout<< "o tamanho é: "<<tam<<endl;
     for (int i = 0; i < tam; i++) {
-
         if (i % 2 == 1) {
-            cout<<listaResultados.back()<<endl;
             cpf.setValor(listaResultados.back());
             tabelaCpfIngressos.push_back({cpf, stod(qte)});
-            cout<<"------------------------------------------";
-            cout<<tabelaCpfIngressos.back().first.getValor()<<endl;
-            cout<<tabelaCpfIngressos.back().second<<endl;
         } else {
             qte = listaResultados.back();
         }

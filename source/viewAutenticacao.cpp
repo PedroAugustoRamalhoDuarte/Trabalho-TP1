@@ -21,11 +21,10 @@ viewAutenticacao::~viewAutenticacao()
     delete ui;
 }
 
-bool viewAutenticacao::executar(CPF* cpf) {
+void viewAutenticacao::executar(CPF* cpf) {
     viewAutenticacao::lineclean();
     this->cpfUsuarioLogado = cpf;
     this->show();
-    return false;
 }
 
 void viewAutenticacao::lineclean(){
@@ -34,6 +33,7 @@ void viewAutenticacao::lineclean(){
     ui->labelErro->setText("");
 }
 
+// Botão Login
 void viewAutenticacao::on_Login_clicked()
 {
     CPF cpf;
@@ -52,27 +52,6 @@ void viewAutenticacao::on_Login_clicked()
     }
 }
 
-void viewAutenticacao::on_lineCpf_editingFinished()
-{
-    CPF cpf;
-    try {
-        cpf.setValor(ui->lineCpf->text().toStdString());
-    } catch (...) {
-
-    }
-
-}
-
-void viewAutenticacao::on_lineSenha_editingFinished()
-{
-    Senha senha;
-    try {
-        senha.setValor(ui->lineSenha->text().toStdString());
-    } catch (...) {
-
-    }
-}
-
 // Redirecionar para página principal
 void viewAutenticacao::on_Home_clicked()
 {
@@ -86,4 +65,27 @@ void viewAutenticacao::on_showPassword_clicked()
         ui->lineSenha->setEchoMode(QLineEdit::Password);
     else
         ui->lineSenha->setEchoMode(QLineEdit::Normal);
+}
+
+// Métodos de verificação de formato
+void viewAutenticacao::on_lineCpf_editingFinished()
+{
+    CPF cpf;
+    try {
+        cpf.setValor(ui->lineCpf->text().toStdString());
+    } catch (...) {
+
+    }
+
+}
+
+
+void viewAutenticacao::on_lineSenha_editingFinished()
+{
+    Senha senha;
+    try {
+        senha.setValor(ui->lineSenha->text().toStdString());
+    } catch (...) {
+
+    }
 }

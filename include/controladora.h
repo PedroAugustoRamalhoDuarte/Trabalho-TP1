@@ -19,6 +19,7 @@ public:
     int flag = 0;
 
     void executar();
+
     explicit Controladora(QWidget *parent = nullptr);
     ~Controladora();
 
@@ -49,9 +50,8 @@ private:
     // View da controladora principal
     Ui::Controladora *ui;
 
-    // Variaveis de usuario
+    // Cpf do usuário logado
     CPF* cpfUsuarioLogado;
-    bool isUsuarioLogado;
 
 };
 

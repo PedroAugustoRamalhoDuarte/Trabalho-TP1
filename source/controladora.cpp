@@ -2,14 +2,12 @@
 #include "ui_controladora.h"
 
 Controladora::Controladora(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::Controladora)
-{
+        QMainWindow(parent),
+        ui(new Ui::Controladora) {
     ui->setupUi(this);
     //ui->stackedWidget->setCurrentIndex(0);
 
     // Inicializando variaveis do usuario
-    this->isUsuarioLogado = false;
     this->flag = 0;
     this->cpfUsuarioLogado = new CPF();
     // Teste
@@ -18,8 +16,7 @@ Controladora::Controladora(QWidget *parent) :
 }
 
 // Módulo Autenticação
-void Controladora::on_btnLogin_clicked()
-{
+void Controladora::on_btnLogin_clicked() {
     if (ui->btnLogin->text() == "Logout") {
         // Logout
         delete cpfUsuarioLogado;
@@ -27,26 +24,21 @@ void Controladora::on_btnLogin_clicked()
         this->executar();
     } else {
         // Login
-        if (viewAutenticacao->executar(this->cpfUsuarioLogado))
-            this->isUsuarioLogado = true;
-        else
-            this->isUsuarioLogado = false;
+        viewAutenticacao->executar(this->cpfUsuarioLogado);
         this->flag = 1;
         this->hide();
     }
 }
 
 // Módulo de Usuários
-void Controladora::on_btnCadastro_clicked()
-{
+void Controladora::on_btnCadastro_clicked() {
     viewUsuario->executar(*this->cpfUsuarioLogado);
     this->flag = 1;
     this->hide();
 }
 
 // Módulo de Eventos
-void Controladora::on_btnEventos_clicked()
-{
+void Controladora::on_btnEventos_clicked() {
     viewEventos->executar(*this->cpfUsuarioLogado);
     this->flag = 1;
     this->hide();
@@ -54,24 +46,22 @@ void Controladora::on_btnEventos_clicked()
 }
 
 // Módulo de Vendas
-void Controladora::on_btnVendas_clicked()
-{
+void Controladora::on_btnVendas_clicked() {
     viewVendas->executar(*this->cpfUsuarioLogado);
     this->flag = 1;
     this->hide();
 }
 
-void Controladora::executar()
-{
+void Controladora::executar() {
     cout << "PASSOU EXECUTAR CONTROLADORA" << endl;
-    //cout << isUsuarioLogado << endl;
+
     // Se o usuário estiver logado
-    if(cpfUsuarioLogado->getValor() != ""){
+    if (cpfUsuarioLogado->getValor() != "") {
         ui->btnCadastro->setText("Perfil");
         ui->btnLogin->setText("Logout");
         ui->btnVendas->setVisible(true);
     }
-    // Se o usuário não estiver logado
+        // Se o usuário não estiver logado
     else {
         ui->btnCadastro->setText("Cadastre-se");
         ui->btnLogin->setText("Login");
@@ -81,8 +71,7 @@ void Controladora::executar()
     cout << "PASSOU SHOW EXECUTAR " << endl;
 }
 
-Controladora::~Controladora()
-{
+Controladora::~Controladora() {
     delete ui;
 }
 

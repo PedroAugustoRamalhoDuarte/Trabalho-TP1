@@ -19,7 +19,7 @@ public:
 
     void executar(CPF cpf) override;
 
-    void setModelVendas(ISVendas *modelVendas);
+    void setModelVendas(ISVendas *modelVendas) override;
 
     ~viewVendas();
 

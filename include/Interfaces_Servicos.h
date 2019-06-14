@@ -24,16 +24,16 @@ class ISEventos {
 public:
     virtual bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) = 0;
 
-    virtual bool alterarEvento(CPF cpf, Evento evento) = 0;
+    virtual void alterarEvento(CPF cpf, Evento evento) = 0;
 
     virtual bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo) = 0;
 
-    virtual bool
+    virtual void
     pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) = 0;
 
-    virtual bool meusEventos(list<Evento> &listaEventos, CPF cpf) = 0;
+    virtual void meusEventos(list<Evento> &listaEventos, CPF cpf) = 0;
 
-    virtual bool mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) = 0;
+    virtual void mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) = 0;
 };
 
 class ISUsuario {

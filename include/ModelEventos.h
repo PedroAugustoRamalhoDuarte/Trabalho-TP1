@@ -27,17 +27,17 @@ private:
 public:
     ModelEventos();
 
-    bool meusEventos(list<Evento> &listaEventos, CPF cpf) override;
+    void meusEventos(list<Evento> &listaEventos, CPF cpf) override;
 
     bool criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaApresentacao) override;
 
-    bool alterarEvento(CPF cpf, Evento evento) override;
+    void alterarEvento(CPF cpf, Evento evento) override;
 
     bool descadastrarEvento(CPF cpf, CodigoDeEvento codigo) override;
 
-    bool pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
+    void pesquisarEventos(list<Evento> &listaEventos, Data dataInicio, Data dataTermino, Cidade cidade, Estado estado) override;
 
-    bool mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) override;
+    void mostrarApresentacao(list<Apresentacao> &listaApresentacao, CodigoDeEvento codigoDeEvento) override;
 };
 
 #endif //TRABALHOTP1_MODELEVENTOS_H

@@ -62,8 +62,6 @@ bool ModelUsuario::excluirUsuario(CPF cpf) {
     if (!possuiEvento(cpf)) {
         comandoSQL = "DELETE FROM usuario WHERE cpf = ";
         comandoSQL += "'" + cpf.getValor() + "';";
-        cout << "Excluindo Usuario : ";
-        cout << cpf.getValor() << endl;
         this->executar();
         return true;
     } else {
