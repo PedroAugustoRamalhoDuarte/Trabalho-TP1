@@ -11,7 +11,6 @@ viewAutenticacao::viewAutenticacao(QWidget *parent) :
 
     // Incializando variaveis para suporte na autenticação
     this->cpfUsuarioLogado = new CPF();
-    this->userLogedIn = false;
 }
 
 viewAutenticacao::~viewAutenticacao()
@@ -26,14 +25,13 @@ bool viewAutenticacao::executar(CPF* cpf) {
     viewAutenticacao::lineclean();
     this->cpfUsuarioLogado = cpf;
     this->show();
-    if (userLogedIn)
-        return true;
     return false;
 }
 
 void viewAutenticacao::lineclean(){
     ui->lineCpf->setText("");
     ui->lineSenha->setText("");
+    ui->labelErro->setText("");
 }
 
 void viewAutenticacao::on_Login_clicked()
@@ -43,22 +41,15 @@ void viewAutenticacao::on_Login_clicked()
     try {
         cpf.setValor(ui->lineCpf->text().toStdString());
         senha.setValor(ui->lineSenha->text().toStdString());
-        cout << "AntesDeAutenticar" << endl;
         if (modelAutenticacao->autenticar(cpf, senha)){
-            cout << "AntesDeAtribuirCPF(btnLogin)" << endl;
             *this->cpfUsuarioLogado = cpf;
-            cout << "DepoisDeAtribuirCPF(btnLogin)" << endl;
-            userLogedIn = true;
             this->close();
-
         } else {
-            cout << "Erro ao fazer login " << endl;
+            ui->labelErro->setText("Cpf e Senha não coincidem");
         }
     } catch (...) {
-        cout << "Erro no formato" << endl;
+        ui->labelErro->setText("Erro no formato do CPF ou Senha");
     }
-
-
 }
 
 void viewAutenticacao::on_lineCpf_editingFinished()
@@ -88,7 +79,7 @@ void viewAutenticacao::on_Home_clicked()
     this->close();
 }
 
-
+// Lógica para botão mostrar senha
 void viewAutenticacao::on_showPassword_clicked()
 {
     if(!ui->showPassword->isChecked())

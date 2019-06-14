@@ -1,10 +1,6 @@
-//
-// Created by pedro on 15/05/19.
-//
-
 #include "../include/viewUsuario.h"
-//#include "../cmake-build-debug/helloworld_autogen/include/ui_viewUsuario.h"
 #include "ui_viewUsuario.h"
+
 viewUsuario::viewUsuario(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::viewUsuario)
@@ -29,6 +25,7 @@ viewUsuario::viewUsuario(QWidget *parent) :
     ui->helpCodigo->setToolTip("O Código conter os 3 digitos de segurança");
     ui->helpValidade->setPixmap(pix.scaled(35,35,Qt::KeepAspectRatio));
     ui->helpValidade->setToolTip("A data deve estar no formato MM/AA, no qual MM é o mês e AA o ano");
+
     //Escondendo os caracteres da senha
     ui->linesenha->setEchoMode(QLineEdit::Password);
 }
@@ -147,22 +144,6 @@ void viewUsuario::on_checkBox_clicked()
 
 //------------------------------------------------------
 // Botões
-void viewUsuario::on_btnMostrar_clicked()
-{
-    auto *usuario = new Usuario();
-    auto *cartao = new CartaoDeCredito();
-    try {
-        modelUsuario->mostrarUsuario(this->cpfUsuarioLogado, usuario, cartao);
-        ui->labelSetCPF->setText(QString::fromStdString(usuario->getCpf().getValor()));
-        ui->labelSetCartao->setText(QString::fromStdString(cartao->getNumero().getValor()));
-        ui->labelSetCodigo->setText(QString::fromStdString(cartao->getCodigoDeSeguranca().getValor()));
-        ui->labelSetValidade->setText(QString::fromStdString(cartao->getDataDeValidade().getValor()));
-    } catch (...) {
-        cout << "Erro ao mostrar Usuario";
-    }
-    delete usuario;
-    delete cartao;
-}
 
 void viewUsuario::on_btnRegistrar_clicked()
 {
@@ -182,7 +163,6 @@ void viewUsuario::on_btnRegistrar_clicked()
         modelUsuario->cadastrarUsuario(*usuario, *cartao);
         ui->msg->setText("Usuário cadastrado com sucesso! Para fazer login redirecione para página de login");
     } catch (...) {
-        // Mudar tratamento de erro
         ui->msg->setText("Erro ao cadastrar o usuário");
     }
 
@@ -193,7 +173,30 @@ void viewUsuario::on_btnHome_clicked()
     this->close();
 }
 
+void viewUsuario::on_buttonDelete_clicked()
+{
+    try {
+        if (modelUsuario->excluirUsuario(cpfUsuarioLogado))
+            this->close();
+        else
+            ui->labelMsgPerfil->setText("Erro ao excluir (O usuário possui eventos cadastrados)");
+    } catch (...) {
+        ui->labelMsgPerfil->setText("Erro ao excluir (Erro na base de dados)");
+    }
+}
+
+void viewUsuario::on_btnHome_2_clicked()
+{
+    this->close();
+}
+
+void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
+    viewUsuario::modelUsuario = modelUsuario;
+}
+
+// Método para limpar os campos
 void viewUsuario::lineclean(){
+    ui->labelMsgPerfil->setText("");
     ui->msg->setText("");
     ui->linecpf->setText("");
     ui->linedata->setText("");
@@ -205,24 +208,4 @@ void viewUsuario::lineclean(){
     ui->labelCheckCodigo->setText("");
     ui->labelCheckData->setText("");
     ui->labelCheckSenha->setText("");
-}
-
-void viewUsuario::on_buttonDelete_clicked()
-{
-    CPF cpf;
-    try {
-        cpf.setValor(ui->linecpf->text().toStdString());
-        modelUsuario->excluirUsuario(cpf);
-    } catch (...) {
-        cout << "Erro ao excluir Usuario" << endl;
-    }
-}
-
-void viewUsuario::setModelUsuario(ISUsuario *modelUsuario) {
-    viewUsuario::modelUsuario = modelUsuario;
-}
-
-void viewUsuario::on_btnHome_2_clicked()
-{
-    this->close();
 }

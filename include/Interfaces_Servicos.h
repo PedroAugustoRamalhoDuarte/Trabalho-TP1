@@ -38,9 +38,9 @@ public:
 
 class ISUsuario {
 public:
-    virtual bool cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) = 0;
+    virtual void cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) = 0;
 
-    virtual bool mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) = 0;
+    virtual void mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) = 0;
 
     virtual bool excluirUsuario(CPF cpf) = 0;
 };

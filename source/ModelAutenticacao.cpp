@@ -10,22 +10,16 @@ ModelAutenticacao::ModelAutenticacao() : Model() {}
 bool ModelAutenticacao::autenticar(CPF cpf, Senha senha) {
     comandoSQL = "SELECT senha FROM usuario WHERE cpf =";
     comandoSQL += "'" + cpf.getValor() + "';";
-    cout << "Autenticando Usuario";
-    cout << cpf.getValor() << endl;
-    try {
-        // Verificar se as senhas coincidem
-        this->executar();
-        if (listaResultados.back() == senha.getValor()) {
-            listaResultados.clear();
-            cout << "autenticou";
-            return true;
-        } else {
-            listaResultados.clear();
-            cout << "nao autenticou";
-            return false;
-        }
 
-    } catch (...) {
+    listaResultados.clear();
+
+    // Verificar se as senhas coincidem
+    this->executar();
+    if (listaResultados.back() == senha.getValor()) {
+        listaResultados.clear();
+        return true;
+    } else {
+        listaResultados.clear();
         return false;
     }
 }

@@ -5,6 +5,7 @@
 #include "Interfaces_Apresentacao.h"
 #include "Interfaces_Servicos.h"
 #include "Model.h"
+
 namespace Ui {
 class viewAutenticacao;
 }
@@ -16,13 +17,11 @@ class viewAutenticacao : public QMainWindow, public IAAutenticacao
 public:
     bool executar(CPF* cpf) override;
 
-    void lineclean();
-
     explicit viewAutenticacao(QWidget *parent = nullptr);
 
     ~viewAutenticacao();
 
-    void setModelAutenticacao(ISAutenticacao *modelAutenticacao) {
+    void setModelAutenticacao(ISAutenticacao *modelAutenticacao) override{
         viewAutenticacao::modelAutenticacao = modelAutenticacao;
     }
 
@@ -40,11 +39,14 @@ private slots:
 private:
     Ui::viewAutenticacao *ui;
 
+    // Ligação da camada de serviço
     ISAutenticacao* modelAutenticacao;
 
+    // CPF recebido pela controladora
     CPF* cpfUsuarioLogado;
 
-    bool userLogedIn;
+    // Limpa a view
+    void lineclean();
 };
 
 #endif // VIEWAUTENTICACAO_H

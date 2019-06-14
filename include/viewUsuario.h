@@ -44,8 +44,6 @@ private slots:
             // Botoões
             void on_buttonDelete_clicked();
 
-            void on_btnMostrar_clicked();
-
             void on_btnRegistrar_clicked();
 
             void on_btnHome_clicked();

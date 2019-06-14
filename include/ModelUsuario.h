@@ -9,10 +9,13 @@
 #include "Model.h"
 
 class ModelUsuario : public Model, public ISUsuario {
-public:
-    bool cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) override;
+private:
+    bool possuiEvento(CPF cpf);
 
-    bool mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) override;
+public:
+    void cadastrarUsuario(Usuario usuario, CartaoDeCredito cartaoDeCredito) override;
+
+    void mostrarUsuario(CPF cpf, Usuario *usuario, CartaoDeCredito *cartaoDeCredito) override;
 
     bool excluirUsuario(CPF cpf) override;
 
