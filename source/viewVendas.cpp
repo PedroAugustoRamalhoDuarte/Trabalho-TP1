@@ -11,6 +11,7 @@ viewVendas::viewVendas(QWidget *parent) :
     // Setando as tabelas para não edição
     ui->tableCpfQte->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableQtdVendida->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->labelCompra->setText("");
 }
 
 viewVendas::~viewVendas()
