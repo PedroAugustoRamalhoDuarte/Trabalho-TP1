@@ -40,6 +40,8 @@ private slots:
 
     void on_tableQtdVendida_cellClicked(int row, int column);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::viewVendas *ui;
 

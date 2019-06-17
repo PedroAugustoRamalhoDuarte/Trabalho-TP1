@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="page">
      <widget class="QWidget" name="layoutWidget">
@@ -237,7 +237,7 @@
      <widget class="QTableWidget" name="tableCpfQte">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>80</x>
         <y>70</y>
         <width>361</width>
         <height>331</height>
@@ -260,7 +260,7 @@
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
-        <x>270</x>
+        <x>180</x>
         <y>30</y>
         <width>161</width>
         <height>20</height>
@@ -268,6 +268,19 @@
       </property>
       <property name="text">
        <string>Ingressos Comprados</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>410</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Voltar</string>
       </property>
      </widget>
     </widget>

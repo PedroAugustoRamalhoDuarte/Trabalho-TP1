@@ -149,3 +149,8 @@ void viewVendas::on_tableQtdVendida_cellClicked(int row, int column)
         cout << "CLICKOU ERRADO MALUCO" << endl;
     }
 }
+
+void viewVendas::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
