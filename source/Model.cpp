@@ -7,18 +7,12 @@
 list<string> Model::listaResultados = {};
 
 Model::Model() {
-    cout << "Conectando..." << endl;
     int error = 0;
     // Mudar quando for passar para o CodeBlocks
     error = sqlite3_open("../TrabalhoTP1/bd/example.db", &db);
 
     if (error) {
-
         cout << "DB Open Error: " << sqlite3_errmsg(db) << endl;
-
-    } else {
-
-        cout << "Opened Database Successfully!" << endl;
     }
 }
 
@@ -79,11 +73,11 @@ void Model::criarTabelas() {
     criarTabelaIngresso();
 }
 
-/*Model::~Model() {
+Model::~Model() {
     cout << "Closing DataBase... " << endl;
     sqlite3_close(db);
     db = nullptr;
-}*/
+}
 
 void Model::executar() {
     status = sqlite3_exec(db, comandoSQL.c_str(), callback, nullptr, &mensagem);

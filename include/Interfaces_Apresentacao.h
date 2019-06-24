@@ -30,7 +30,7 @@ public:
 
 class IAUsuario {
 public:
-    virtual void executar(CPF &cpf) = 0;
+    virtual void executar(CPF *cpf) = 0;
 
     virtual void setModelUsuario(ISUsuario *modelUsuario) = 0;
 };

@@ -47,7 +47,7 @@ public:
 
     Model();
 
-    //virtual ~Model();
+    virtual ~Model();
 };
 
 

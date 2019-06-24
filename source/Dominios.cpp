@@ -363,6 +363,10 @@ void CPF::validar(string entrada) {
     }
 }
 
+void CPF::resetCPF(){
+    this->valor = "";
+}
+
 void DataDeValidade::validar(string entrada) {
     string mes, ano;
     mes.resize(2); ano.resize(2);

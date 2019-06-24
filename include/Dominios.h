@@ -435,7 +435,9 @@ private:
     * @throws invalid_argument se a entrada não for do formato do código ou se o CPF não for válido
     */
     void validar(string entrada) override;
+public:
 
+    void resetCPF();
 };
 
 /** @brief Classe que manipula a data de validade do sistema.

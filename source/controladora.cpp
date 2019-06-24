@@ -5,14 +5,10 @@ Controladora::Controladora(QWidget *parent) :
         QMainWindow(parent),
         ui(new Ui::Controladora) {
     ui->setupUi(this);
-    //ui->stackedWidget->setCurrentIndex(0);
 
     // Inicializando variaveis do usuario
     this->isNotInMenu = 0;
     this->cpfUsuarioLogado = new CPF();
-    // Teste
-
-
 }
 
 // Módulo Autenticação
@@ -32,7 +28,7 @@ void Controladora::on_btnLogin_clicked() {
 
 // Módulo de Usuários
 void Controladora::on_btnCadastro_clicked() {
-    viewUsuario->executar(*this->cpfUsuarioLogado);
+    viewUsuario->executar(this->cpfUsuarioLogado);
     this->isNotInMenu = 1;
     this->hide();
 }
@@ -53,8 +49,6 @@ void Controladora::on_btnVendas_clicked() {
 }
 
 void Controladora::executar() {
-    cout << "PASSOU EXECUTAR CONTROLADORA" << endl;
-
     // Se o usuário estiver logado
     if (cpfUsuarioLogado->getValor() != "") {
         ui->btnCadastro->setText("Perfil");
@@ -68,7 +62,6 @@ void Controladora::executar() {
         ui->btnVendas->setVisible(false);
     }
     this->show();
-    cout << "PASSOU SHOW EXECUTAR " << endl;
 }
 
 Controladora::~Controladora() {

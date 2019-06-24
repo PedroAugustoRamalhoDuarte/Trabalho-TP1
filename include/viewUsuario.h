@@ -18,7 +18,7 @@ class viewUsuario : public QMainWindow, public IAUsuario
 public:
     explicit viewUsuario(QWidget *paren0t = nullptr);
 
-    void executar(CPF &cpf);
+    void executar(CPF *cpf);
 
     void lineclean();
 
@@ -58,7 +58,7 @@ private:
     ISUsuario* modelUsuario;
 
     // Cpf usuário logado passado pela controladora
-    CPF cpfUsuarioLogado;
+    CPF* cpfUsuarioLogado;
 };
 
 #endif // MAINWINDOW_H

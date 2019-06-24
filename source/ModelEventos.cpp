@@ -239,28 +239,6 @@ bool ModelEventos::criarEvento(CPF cpf, Evento evento, list<Apresentacao> listaA
 }
 
 // Métodos Auxiliares
-bool ModelEventos::verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino) {
-    for (auto evento : listaEventos) {
-        comandoSQL = "SELECT * FROM apresentacao WHERE data >= ";
-        comandoSQL += "'" + dataInicio.getValor() + "' AND data <= ";
-        comandoSQL += "'" + dataTermino.getValor() + "' AND codigo_evento =";
-        comandoSQL += "'" + evento.getCodigo().getValor() + "';";
-        this->executar();
-        int tam = (listaResultados.size() / 7);
-        for (int i = 0; i < tam; i++) {
-            Apresentacao apresentacao;
-            CodigoDeApresentacao codigo;
-            Data data;
-            Horario horario;
-            Preco preco;
-            NumeroDeSala numeroDeSala;
-            Disponibilidade disponibilidade;
-        }
-    }
-
-    return false;
-}
-
 void ModelEventos::adicionarApresentacoes(CodigoDeEvento codigo, list<Apresentacao> listaApresentacao) {
     for (Apresentacao apresentacao: listaApresentacao) {
         comandoSQL = "INSERT INTO apresentacao VALUES (";
@@ -299,6 +277,30 @@ bool ModelEventos::isUsuarioDono(CPF cpf, CodigoDeEvento codigo) {
     this->executar();
     return listaResultados.back() == cpf.getValor();
 }
+
+
+bool ModelEventos::verificaDataApresentacao(list<Evento> &listaEventos, Data dataInicio, Data dataTermino) {
+    for (auto evento : listaEventos) {
+        comandoSQL = "SELECT * FROM apresentacao WHERE data >= ";
+        comandoSQL += "'" + dataInicio.getValor() + "' AND data <= ";
+        comandoSQL += "'" + dataTermino.getValor() + "' AND codigo_evento =";
+        comandoSQL += "'" + evento.getCodigo().getValor() + "';";
+        this->executar();
+        int tam = (listaResultados.size() / 7);
+        for (int i = 0; i < tam; i++) {
+            Apresentacao apresentacao;
+            CodigoDeApresentacao codigo;
+            Data data;
+            Horario horario;
+            Preco preco;
+            NumeroDeSala numeroDeSala;
+            Disponibilidade disponibilidade;
+        }
+    }
+
+    return false;
+}
+
 
 bool ModelEventos::jaVendeu(CodigoDeEvento codigo) {
     list<CodigoDeApresentacao> listaCodigoApr;

@@ -30,17 +30,17 @@ viewUsuario::viewUsuario(QWidget *parent) :
     ui->linesenha->setEchoMode(QLineEdit::Password);
 }
 
-void viewUsuario::executar(CPF &cpf){
+void viewUsuario::executar(CPF *cpf){
     // Limpando os dados de cadastro
     viewUsuario::lineclean();
     this->cpfUsuarioLogado = cpf;
-    if (cpf.getValor() == "") {
+    if (cpf->getValor() == "") {
         ui->stackedWidget->setCurrentIndex(0);
     } else {
         auto *usuario = new Usuario();
         auto *cartao = new CartaoDeCredito();
         try {
-            modelUsuario->mostrarUsuario(this->cpfUsuarioLogado, usuario, cartao);
+            modelUsuario->mostrarUsuario(*this->cpfUsuarioLogado, usuario, cartao);
             ui->labelSetCPF->setText(QString::fromStdString(usuario->getCpf().getValor()));
             ui->labelSetCartao->setText(QString::fromStdString(cartao->getNumero().getValor()));
             ui->labelSetCodigo->setText(QString::fromStdString(cartao->getCodigoDeSeguranca().getValor()));
@@ -176,8 +176,11 @@ void viewUsuario::on_btnHome_clicked()
 void viewUsuario::on_buttonDelete_clicked()
 {
     try {
-        if (modelUsuario->excluirUsuario(cpfUsuarioLogado))
+        if (modelUsuario->excluirUsuario(*cpfUsuarioLogado)){
+            // Seta o cpf "", para dar Logout
+            cpfUsuarioLogado->resetCPF();
             this->close();
+            }
         else
             ui->labelMsgPerfil->setText("Erro ao excluir (O usuário possui eventos cadastrados)");
     } catch (...) {
